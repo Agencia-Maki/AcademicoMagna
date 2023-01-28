@@ -26,6 +26,13 @@
 !/tmp/storage/.keep
 
 /public/assets
+/public/uploads
+
+.vscode
+.vscode/*
+
+.env
+
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
