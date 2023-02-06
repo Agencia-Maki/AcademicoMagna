@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AcademicoMagna</title>
+    <title>Aula | Magna</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="cursos en línea, Magna, aprendizaje en línea, formación en línea, educación a distancia">
+    <meta name="description" content="Únete a Magna, la plataforma líder en cursos en línea. Aprende de expertos en una amplia gama de temas y desarrolla tus habilidades en línea. ¡Comienza tu formación hoy mismo!">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.min.js"> </script>
   </head>
 
   <body>

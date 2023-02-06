@@ -1,69 +1,280 @@
-<div>
-  <div class="c-app c-dark-theme flex-row align-items-center">
-    <div class="container">
-      <div class="justify-content-center row">
-        <div class="col-md-8">
-          <div class="card-group">
-            <div class="p-4 card">
-              <div class="card-body">
-                <% if resource_name.to_s == "professor" %>
-                  <span style="color: #1cdaae">Panel de Profesores</span>
-                <% elsif resource_name.to_s == "student" %>
-                  <span style="color: #1cdaae">Panel de Alumnos</span>
-                <% elsif resource_name.to_s == "admin" %>
-                  <span style="color: #1cdaae">Panel Administrativo</span>
-                <% end %>
-                
-                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                  <h1>Iniciar Sesion</h1>
-                  <p class="text-muted">Ingrese sus credenciales</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                         class="c-icon" role="img">
-                        <path fill="var(--ci-primary-color, currentColor)"
-                              d="M411.6,343.656l-72.823-47.334,27.455-50.334A80.23,80.23,0,0,0,376,207.681V128a112,112,0,0,0-224,0v79.681a80.236,80.236,0,0,0,9.768,38.308l27.455,50.333L116.4,343.656A79.725,79.725,0,0,0,80,410.732V496H448V410.732A79.727,79.727,0,0,0,411.6,343.656ZM416,464H112V410.732a47.836,47.836,0,0,1,21.841-40.246l97.66-63.479-41.64-76.341A48.146,48.146,0,0,1,184,207.681V128a80,80,0,0,1,160,0v79.681a48.146,48.146,0,0,1-5.861,22.985L296.5,307.007l97.662,63.479h0A47.836,47.836,0,0,1,416,410.732Z"
-                              class="ci-primary"></path>
-                      </svg></div>
-                    </div>
-                    <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "DNI o email o codigo" %>
-                  </div>
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                         class="c-icon" role="img">
-                        <path fill="var(--ci-primary-color, currentColor)"
-                              d="M384,200V144a128,128,0,0,0-256,0v56H88V328c0,92.635,75.364,168,168,168s168-75.365,168-168V200ZM160,144a96,96,0,0,1,192,0v56H160ZM392,328c0,74.99-61.01,136-136,136s-136-61.01-136-136V232H392Z"
-                              class="ci-primary"></path>
-                      </svg></div>
-                    </div>
-                    <%= f.password_field :password, class: "form-control", placeholder: "Contraseña", autocomplete: "current-password" %>
-                  </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <%= f.submit "Ingresar", class: "px-4 btn btn-primary" %>
-                    </div>
-                    <div class="text-right col-6">
-                      <%= render "devise/shared/links" %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-            <div class="text-white bg-primary py-5 d-md-down-none card" style="width: 44%;">
-              <div class="text-center card-body">
-                <div>
-                  <h2>MAGNA</h2>
-                  <p class="text_dark">Institución de Especialización Profesional, sistema desarrollado por la Agencia MAKI.</p>
-                  <a href="http://agenciamaki.com/" target="_blank">
-                    <button class="mt-3 btn btn-primary" type="button" tabindex="-1">IR A AGENCIAMAKI.COM</button>
-                  </a>
-                </div>
-              </div>
-            </div>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+
+<style> 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+  }
+
+  .izquierda {
+    width: 65vw;
+    height: 100vh;
+    /* background-color: red; */
+  }
+
+  .derecha {
+    width: 35vw;
+    height: 100vh;
+    /* background-color: blue; */
+  }
+
+  /* FORM STYLE */
+  .login-form-bd {
+    /* background: #ffffff ; */
+    background: #181924;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-container {
+    width: 25vw;
+    height: 60vh;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    background: #181924;
+    padding: 80px 40px;
+    border-radius: 25px;
+    /* box-shadow: 1px 1px 1px 1px #1cdaae; */
+    box-shadow: 3px 4px 20px rgb(28, 218, 174, 0.3);
+  }
+
+  .form-container h1 {
+    text-align: center;
+    margin-bottom: 44px;
+    margin-top: -30px;
+    color: #ffff;
+    font-weight: normal;
+    font-size: 32px;
+  }
+
+  .form-container a {
+    text-decoration: none;
+    color: #1cdaae;
+  }
+
+  .login-btn {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background: #1cdaae;
+    padding: 10px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #0d0f42;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .login-btn:focus {
+    outline: 0;
+  }
+
+  .login-btn:active {
+    transform: scale(0.98);
+  }
+
+  .text {
+    margin-top: 15px;
+  }
+
+  .form-control {
+    position: relative;
+    margin: 30px 0 30px;
+  }
+
+  .form-control input {
+    background: transparent;
+    color: #1cdaae;
+    border: 0;
+    border-bottom: 1px #fff solid;
+    display: block;
+    width: 100%;
+    padding: 40px 0 0 0;
+    font-size: 18px;
+  }
+
+  .form-control input:focus {
+    outline: 0;
+    border-bottom-color: #1cdaae;
+  }
+
+  .form-control label {
+    position: absolute;
+    top: 15px;
+    left: 10;
+  }
+
+  .form-control label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.53, 0.246, 0.265, 1.66);
+  }
+
+  .form-control input:focus + label span,
+  .form-control input:valid + label span {
+    color: #c2c25a;
+    transform: translateY(-30px);
+  }
+
+  .cualquiera {
+    /* background-color: red; */
+    height: 70vh;
+  }
+
+  .multiple-items {
+    background-color: #1b1a1a;
+    height: 30vh;
+    /* display: flex; */
+  }
+
+  .slick-track{
+    margin-top: 1vh;
+    height: 28vh;
+  }
+
+  .item-slick {
+    /* height: 20vh; */
+    margin-bottom: 1vh;
+    margin: 0 10px 0 10px;
+    /* background-color: blue; */
+  }
+
+  .item-slick img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+  }
+
+  .item-slick img:hover {
+    cursor: pointer;
+    background: #1cdaae;
+    box-shadow: 0 0 10px 2px #1cdaae;
+  }
+
+  .image_cover_login {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .logo_only_small_screen {
+    display: none;
+    margin-inline: auto;
+    margin-top: 10vh;
+    margin-bottom: -10vh;
+  }
+
+  @media screen and (max-width: 600px) {
+    .izquierda {
+      display: none;
+    }
+    .derecha {
+      width: 100vw;
+    }
+    .form-container {
+      width: 90%;
+    }
+    .logo_only_small_screen {
+      display: block;
+      width: 80%;
+      object-fit: cover;
+    }
+  }
+</style>
+
+<div class="izquierda">
+  <div class="cualquiera">
+    <%= image_tag('login_crm_cover.jpg', :class => "image_cover_login") %>
+  </div>
+
+  <div class="multiple-items">
+  </div>
+</div>
+
+<div class="derecha">    
+  <div class="login-form-bd">
+    <%= image_tag('logo-horizontal.png', :class => "logo_only_small_screen") %>
+    <div class="form-wrapper">
+      <div class="form-container">
+        <h1> INICIO DE SESIÓN</h1>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-control">
+            <% if resource_name.to_s == "professor" %>
+              <span style="color: #1cdaae">Panel de Profesores</span>
+            <% elsif resource_name.to_s == "student" %>
+              <span style="color: #1cdaae">Panel de Alumnos</span>
+            <% elsif resource_name.to_s == "admin" %>
+              <span style="color: #1cdaae">Panel Administrativo</span>
+            <% end %>
+            <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "DNI o email o codigo" %>
           </div>
-        </div>
+
+          <div class="form-control">
+            <%= f.password_field :password, class: "form-control", placeholder: "Contraseña", autocomplete: "current-password" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Ingresar", :class => "login-btn" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %> 
       </div>
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script  >
+  $(document).ready(function(){
+    $.ajax({
+    url: "https://crm.magna.edu.pe/upcoming_courses",
+    type: "GET",
+    success: function(data) {
+      var courses = "";
+      for (var i = 0; i < data.courses.length; i++) {
+        courses += "<div class='item-slick'>" +
+                    // "<h3 class='courseTitle'>" + data.courses[i].name + "</h3>" +
+                    "<img class='courseImage' width='100%' src='https://crm.magna.edu.pe" + data.courses[i].cover.url + "' alt='" + data.courses[i].name + "'>" +
+                    "</div>";
+      }
+      $(".multiple-items").html(courses);
+      $(".multiple-items").slick({
+        arrows: false,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        centerMode: true,
+        centerPadding: "150px",
+        autoplay: true,
+        autoplaySpeed: 2000,  
+        adaptiveHeight: true,
+        speed: 1000,
+      });
+    }
+  });
+})
+</script>
