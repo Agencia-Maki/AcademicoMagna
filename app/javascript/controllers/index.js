@@ -4,5 +4,14 @@
 
 import { application } from "./application"
 
+import AdminController from "./admin_controller"
+application.register("admin", AdminController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ProfessorController from "./professor_controller"
+application.register("professor", ProfessorController)
+
+import StudentController from "./student_controller"
+application.register("student", StudentController)
