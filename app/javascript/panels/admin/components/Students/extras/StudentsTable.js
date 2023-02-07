@@ -93,7 +93,7 @@ const StudentsTable = (props) => {
                 <Link
                   className="m-1 btn btn-warning btn-sm"
                   to={{
-                    pathname: `/profesores/editar/${item.id}`
+                    pathname: `/alumnos/editar/${item.id}`
                   }}
                 >
                   <FontAwesomeIcon icon={faPen} size="lg" inverse />

@@ -13,30 +13,32 @@ import {
 } from '@coreui/react-pro'
 
 import useCrud from '../../../../hooks/useCrud'
-import { normalizeDate, normalizeDocument } from '../../../../helpers/normalizes'
+import { normalizeDate, normalizeStatus, normalizeDocument } from '../../../../helpers/normalizes'
 
 const initialState = {
   first_name: '',
   last_name: '',
-  dni: '',
+  document_type: '',
+  document_number: '',
   email: '',
   gender: 'no_specified',
   phone: '',
   avatar: {},
+  status: '',
   created_at: ''
 }
 
-const ShowProfessor = () => {
-  const [professor, setProfessor] = useState(initialState)
-  const { id_professor } = useParams()
-  const { getModel } = useCrud('/panel/admin/professors/' + id_professor, '/profesores')
+const ShowStudent = (props) => {
+  const [student, setStudent] = useState(initialState)
+  const { id_student } = useParams()
+  const { getModel } = useCrud('/panel/admin/students/' + id_student, '/alumnos')
 
-  const handleSetProfessor = async () => {
-    await getModel(setProfessor);
+  const handleSetStudent = async () => {
+    await getModel(setStudent);
   }
 
   useEffect(() => {
-    handleSetProfessor()
+    handleSetStudent()
   }, [])
 
   return (
@@ -45,23 +47,23 @@ const ShowProfessor = () => {
         <CCol md={4} sm={12} >
           <CCard>
             <CCardHeader>
-              Perfil de Docente
+              Perfil de Alumno
             </CCardHeader>
             <CCardBody>
-              <CImage rounded thumbnail align="center" src={professor.avatar.url} />
+              <CImage rounded thumbnail align="center" src={student.avatar.url} />
             </CCardBody>
 
             <CCardFooter>
               <Link 
                 className="btn btn-sm btn-warning float-end"
-                to={'/profesores/editar/' + id_professor } 
+                to={'/alumnos/editar/' + id_student } 
               >
-                Editar Docente
+                Editar Alumno
               </Link>
 
               <Link 
                 className="btn btn-sm btn-info float-start"
-                to={'/profesores/' } 
+                to={'/alumnos' } 
               >
                 Regresar
               </Link>
@@ -69,10 +71,10 @@ const ShowProfessor = () => {
           </CCard>
         </CCol>
 
-        <CCol md={8} sm={12}>
+        <CCol md={8} sm={12} >
           <CCard>
             <CCardHeader>
-              Perfil de Docente
+              Perfil de Alumno
             </CCardHeader>
             <CCardBody>
               <CForm 
@@ -86,7 +88,7 @@ const ShowProfessor = () => {
                     <strong>Nombres y Apellidos</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold" >{professor.first_name} {professor.last_name}</strong>
+                    <strong className="text-bold" >{ student.first_name } { student.last_name }</strong>
                   </CCol>
                 </CRow>
 
@@ -98,7 +100,7 @@ const ShowProfessor = () => {
                     <strong>Tipo de Documento</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold" >{ normalizeDocument(professor.document_type) }</strong>
+                    <strong className="text-bold" >{ normalizeDocument(student.document_type) }</strong>
                   </CCol>
                 </CRow>
 
@@ -110,7 +112,7 @@ const ShowProfessor = () => {
                     <strong>Numero de Documento</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold" >{ professor.document_number }</strong>
+                    <strong className="text-bold" >{ student.document_number }</strong>
                   </CCol>
                 </CRow>
 
@@ -122,7 +124,7 @@ const ShowProfessor = () => {
                     <strong>Codigo Institucional</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold" >{professor.code}</strong>
+                    <strong className="text-bold" >{ student.code }</strong>
                   </CCol>
                 </CRow>
 
@@ -134,7 +136,7 @@ const ShowProfessor = () => {
                     <strong>Telefono de Contacto</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold" >{professor.phone === null ? 'Sin registrar' : professor.phone}</strong>
+                    <strong className="text-bold" >{ student.phone === null ? 'Sin registrar' : student.phone }</strong>
                   </CCol>
                 </CRow>
 
@@ -146,7 +148,7 @@ const ShowProfessor = () => {
                     <strong>Correo Electronico</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold">{professor.email}</strong>
+                    <strong className="text-bold">{ student.email }</strong>
                   </CCol>
                 </CRow>
 
@@ -158,7 +160,19 @@ const ShowProfessor = () => {
                     <strong>Fecha de Registro</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <strong className="text-bold">{normalizeDate(professor.created_at)}</strong>
+                    <strong className="text-bold">{ normalizeDate(student.created_at) }</strong>
+                  </CCol>
+                </CRow>
+
+                <CRow 
+                  className="border-top border-bottom border-left border-right p-3"
+                  row
+                >
+                  <CCol md="4">
+                    <strong>Estado de Matricula</strong>
+                  </CCol>
+                  <CCol xs="12" md="6">
+                    <strong className="text-bold">{ normalizeStatus(student.status) }</strong>
                   </CCol>
                 </CRow>
 
@@ -171,4 +185,5 @@ const ShowProfessor = () => {
   )
 }
 
-export default ShowProfessor
+
+export default ShowStudent
