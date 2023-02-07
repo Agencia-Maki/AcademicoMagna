@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import {
   CCard,
-  CCardImg,
   CCardBody,
-  CCardText,
   CCardHeader,
   CCardFooter,
   CCol,
   CRow,
-  CForm, CFormGroup
-} from "@coreui/react"
+  CForm,
+  CImage
+} from '@coreui/react-pro'
 
 import useCrud from '../../../../hooks/useCrud'
 import { normalizeDate, normalizeDocument } from '../../../../helpers/normalizes'
@@ -29,7 +28,7 @@ const initialState = {
 
 const ShowProfessor = (props) => {
   const [professor, setProfessor] = useState(initialState)
-  const id_professor = props.match.params.id
+  const { id_professor } = useParams()
   const { getModel } = useCrud('/panel/admin/professors/' + id_professor, '/profesores')
 
   const handleSetProfessor = async () => {
@@ -49,19 +48,19 @@ const ShowProfessor = (props) => {
               Perfil de Docente
             </CCardHeader>
             <CCardBody>
-              <CCardImg orientation="top" src={professor.avatar.url} />
+              <CImage rounded thumbnail align="center" src={professor.avatar.url} />
             </CCardBody>
 
             <CCardFooter>
               <Link 
-                className="btn btn-sm btn-warning float-right"
+                className="btn btn-sm btn-warning float-end"
                 to={'/profesores/editar/' + id_professor } 
               >
                 Editar Docente
               </Link>
 
               <Link 
-                className="btn btn-sm btn-info float-left"
+                className="btn btn-sm btn-info float-start"
                 to={'/profesores/' } 
               >
                 Regresar
@@ -79,89 +78,89 @@ const ShowProfessor = (props) => {
               <CForm 
                 className="p-3"
               >
-                <CFormGroup 
+                <CRow 
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Nombres y Apellidos</CCardText>
+                    <strong>Nombres y Apellidos</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold" >{professor.first_name} {professor.last_name}</CCardText>
+                    <strong className="text-bold" >{professor.first_name} {professor.last_name}</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                <CFormGroup
+                <CRow
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Tipo de Documento</CCardText>
+                    <strong>Tipo de Documento</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold" >{ normalizeDocument(professor.document_type) }</CCardText>
+                    <strong className="text-bold" >{ normalizeDocument(professor.document_type) }</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                <CFormGroup
+                <CRow
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Numero de Documento</CCardText>
+                    <strong>Numero de Documento</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold" >{ professor.document_number }</CCardText>
+                    <strong className="text-bold" >{ professor.document_number }</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                <CFormGroup 
+                <CRow 
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Codigo Institucional</CCardText>
+                    <strong>Codigo Institucional</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold" >{professor.code}</CCardText>
+                    <strong className="text-bold" >{professor.code}</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                 <CFormGroup 
+                 <CRow 
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Telefono de Contacto</CCardText>
+                    <strong>Telefono de Contacto</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold" >{professor.phone === null ? 'Sin registrar' : professor.phone}</CCardText>
+                    <strong className="text-bold" >{professor.phone === null ? 'Sin registrar' : professor.phone}</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                 <CFormGroup 
+                 <CRow 
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Correo Electronico</CCardText>
+                    <strong>Correo Electronico</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold">{professor.email}</CCardText>
+                    <strong className="text-bold">{professor.email}</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                <CFormGroup 
+                <CRow 
                   className="border-top border-bottom border-left border-right p-3"
                   row
                 >
                   <CCol md="4">
-                    <CCardText>Fecha de Registro</CCardText>
+                    <strong>Fecha de Registro</strong>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CCardText className="text-bold">{normalizeDate(professor.created_at)}</CCardText>
+                    <strong className="text-bold">{normalizeDate(professor.created_at)}</strong>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
               </CForm>              
             </CCardBody>

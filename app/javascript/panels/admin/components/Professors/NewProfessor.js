@@ -10,7 +10,6 @@ import {
   CCol,
   CRow,
   CButton,
-  
   CForm, CFormLabel, CFormInput, CFormSelect, CFormText, CFormCheck
 } from '@coreui/react-pro'
 

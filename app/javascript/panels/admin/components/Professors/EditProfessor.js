@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useCrud from '../../../../hooks/useCrud'
 import useChange from '../../../../hooks/useChange'
+
 import {
   CCard,
   CCardBody,
@@ -10,9 +11,8 @@ import {
   CCol,
   CRow,
   CButton,
-  CForm, CFormGroup, CLabel, CInput, CSelect, CFormText, CInputRadio
-} from "@coreui/react"
-import CIcon from '@coreui/icons-react'
+  CForm, CFormLabel, CFormInput, CFormSelect, CFormText, CFormCheck
+} from '@coreui/react-pro'
 
 const initialState = {
   first_name: '',
@@ -31,9 +31,9 @@ const documentTypeOptions = [
   { value: 'passport', label: 'Pasaporte' }
 ]
 
-const EditProfessor = (props) => {
+const EditProfessor = () => {
   const [professor, setProfessor] = useState(initialState)
-  const id_professor = props.match.params.id
+  const { id_professor } = useParams()
 
   const { getModel, updateModel } = useCrud('/panel/admin/professors/' + id_professor, '/profesores')
   const { data, handleChange } = useChange(professor)
@@ -46,7 +46,7 @@ const EditProfessor = (props) => {
   useEffect(() => {
     handleSetProfessor()
   }, [])
-  
+
   return (
     <div>
       <CRow>
@@ -57,86 +57,78 @@ const EditProfessor = (props) => {
             </CCardHeader>
             <CCardBody>
               <CForm>
-                <CFormGroup row>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="first_name">Nombres</CLabel>
+                    <CFormLabel htmlFor="first_name">Nombres</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="first_name" name="first_name" className="form-horizontal" value={first_name} onChange={handleChange} />
-                    <CFormText>Es necesario ingresar los nombres completos.</CFormText>
+                    <CFormInput id="first_name" name="first_name" placeholder="Nombres completos" className="form-horizontal" value={first_name} onChange={handleChange} />
+                    <CFormText className="text-info" >Es necesario ingresar los nombres completos.</CFormText>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row>
+                </CRow>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="last_name">Apellidos</CLabel>
+                    <CFormLabel htmlFor="last_name">Apellidos</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="last_name" name="last_name" className="form-horizontal" value={last_name} onChange={handleChange} />
-                    <CFormText>Es necesario ingresar los apellidos completos.</CFormText>
+                    <CFormInput id="last_name" name="last_name" placeholder="Apellidos completos" value={last_name} onChange={handleChange} />
+                    <CFormText className="text-info" >Es necesario ingresar los apellidos completos.</CFormText>
                   </CCol>
-                </CFormGroup>
-                
-                <CFormGroup row>
+                </CRow>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="document_type">Tipo de Documento</CLabel>
+                    <CFormLabel htmlFor="document_type">Tipo de Documento</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect custom name="document_type" id="document_type" value={document_type} onChange={handleChange}>
+                    <CFormSelect custom name="document_type" id="document_type" value={document_type} onChange={handleChange}>
+                      <option value=""> Selecciona un tipo de documento </option>
                       {documentTypeOptions.map((documentType, index) => (
                         <option key={index} value={documentType.value}  >{documentType.label}</option>
                       ))
                       }
-                    </CSelect>
+                    </CFormSelect>
                   </CCol>
-                </CFormGroup>
+                </CRow>
 
-                <CFormGroup row>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="document_number">Nro de Documento</CLabel>
+                    <CFormLabel htmlFor="document_number">Nro de Documento</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="document_number" name="document_number" placeholder="Numero de documento" value={document_number} onChange={handleChange} />
-                    <CFormText>Es necesario ingresar el documento de identidad.</CFormText>
+                    <CFormInput id="document_number" name="document_number" placeholder="Ingrese el numero de documento" value={document_number} onChange={handleChange} />
+                    <CFormText className="text-info" >Es necesario ingresar el documento de identidad.</CFormText>
                   </CCol>
-                </CFormGroup>
-
-                <CFormGroup row>
+                </CRow>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="email">E-mail</CLabel>
+                    <CFormLabel htmlFor="email">E-mail</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput type="email" id="email" name="email" placeholder="Correo electronico" value={email} onChange={handleChange} />
-                    <CFormText className="help-block">Ingrese un correo electronico valido</CFormText>
+                    <CFormInput type="email" id="email" name="email" placeholder="Correo electronico" value={email} onChange={handleChange} />
+                    <CFormText className="text-info" >Ingrese un correo electronico valido</CFormText>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row>
+                </CRow>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel htmlFor="phone">Telefono / Celular</CLabel>
+                    <CFormLabel htmlFor="phone">Telefono / Celular</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="phone" name="phone" placeholder="Numero de contacto" value={phone} onChange={handleChange} />
-                    <CFormText>Ingrese un numero de telefono o celular de contacto .</CFormText>
+                    <CFormInput id="phone" name="phone" placeholder="Numero de contacto" value={phone} onChange={handleChange} required />
+                    <CFormText className="text-info" >Ingrese un numero de telefono o celular de contacto .</CFormText>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row>
+                </CRow>
+                <CRow className="mt-3">
                   <CCol md="3">
-                    <CLabel>Genero</CLabel>
+                    <CFormLabel>Genero</CFormLabel>
                   </CCol>
                   <CCol md="9" >
-                    <CFormGroup variant="custom-radio" inline>
-                      <CInputRadio custom id="male" name="gender" value="male" checked={gender === "male"} onChange={handleChange} />
-                      <CLabel variant="custom-checkbox" htmlFor="male">Masculino</CLabel>
-                    </CFormGroup>
-                    <CFormGroup variant="custom-radio" inline>
-                      <CInputRadio custom id="female" name="gender" value="female" checked={gender === "female"} onChange={handleChange} />
-                      <CLabel variant="custom-checkbox" htmlFor="female">Femenino</CLabel>
-                    </CFormGroup>
-                    <CFormGroup variant="custom-radio" inline>
-                      <CInputRadio custom id="no_specified" name="gender" value="no_specified" checked={gender === "no_specified"} onChange={handleChange} />
-                      <CLabel variant="custom-checkbox" htmlFor="no_specified">Sin Especificar</CLabel>
-                    </CFormGroup>
+                    <CRow variant="custom-radio" inline>
+                      <CFormCheck inline type="radio" name="gender" id="inlineCheckbox1" value="male" label="Masculino" checked={gender === "male"} onChange={handleChange} />
+                      <CFormCheck inline type="radio" name="gender" id="inlineCheckbox2" value="female" label="Femenino" checked={gender === "female"} onChange={handleChange} />
+                      <CFormCheck inline type="radio" name="gender" id="inlineCheckbox3" value="no_specified" label="Sin Especificar" checked={gender === "no_specified"} onChange={handleChange} />
+                    </CRow>
                   </CCol>
-                </CFormGroup>
+                </CRow>
               </CForm>
             </CCardBody>
           </CCard>
@@ -154,13 +146,12 @@ const EditProfessor = (props) => {
                 type="submit"
                 size="sm"
                 color="success"
-                onClick={()=>updateModel(data)}
-              >
-                <CIcon name="cil-scrubber" />
+                onClick={() => updateModel(data)}
+                className="float-end"
+              >                
                 Guardar
               </CButton>
-              <Link to="/profesores" className="btn btn-danger btn-sm ml-2">
-                <CIcon name="cil-ban" />
+              <Link to="/profesores" className="btn btn-danger btn-sm me-2 float-end">                
                 Cancelar
               </Link>
             </CCardFooter>
