@@ -20,13 +20,14 @@ const Professors = () => {
 
 
   const columns = [
-    { key: 'index', label: '#' },
-    { key: 'full_name', label: 'Nombres Completo' },
-    { key: 'document_type', label: 'Tipo de Documento' },
-    { key: 'document_number', label: 'Numero de Documento' },
+    { key: 'index', label: '#', filter: false, sorter: false },
+    { key: 'avatar', label: 'Foto', filter: false, sorter: false },
+    { key: 'full_name', label: 'Nombres Completo'  },
+    { key: 'document_type', label: 'Tipo de Documento', filter: false, sorter: false, _style: { width: '1%' }},
+    { key: 'document_number', label: 'Numero de Documento', _style: { width: '2%' } },
     { key: 'email', label: 'Correo' },
-    { key: 'phone', label: 'Telefono' },
-    { key: 'actions', label: 'Acciones' },
+    { key: 'phone', label: 'Telefono', _style: { width: '2%' } },
+    { key: 'actions', label: 'Acciones', filter: false, sorter: false },
   ]
 
   const [professorList, setProfessorList] = useState([])

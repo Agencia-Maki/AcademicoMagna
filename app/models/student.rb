@@ -35,7 +35,7 @@ class Student < ApplicationRecord
   end
 
   def send_welcome_email
-    StudentMailer.with(self).welcome_email.deliver_now
+    StudentMailer.with(self).welcome_email.deliver_later
   end
 
   private

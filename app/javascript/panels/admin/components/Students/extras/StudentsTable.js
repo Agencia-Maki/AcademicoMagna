@@ -32,7 +32,7 @@ const StudentsTable = (props) => {
         footer
         items={data}
         columns={columns}
-        // columnFilter
+        columnFilter
         tableFilter
         tableFilterLabel="Buscar:"
         tableFilterPlaceholder="Ingrese un valor..."
@@ -49,15 +49,24 @@ const StudentsTable = (props) => {
 
 
         scopedColumns={{
+          avatar: (item) => (
+            <td className="text-center">
+              <div className="avatar avatar-md">
+                <img src={item.avatar.medium.url} className="avatar-img" alt={item.full_name} />
+                <span className="c-avatar-status bg-success"></span>
+              </div>
+            </td>
+          ),
+
           document_type: (item) => (
-            <td>
+            <td className="text-center">
               {getBadgeDocumentType(item.document_type)}
             </td>
           ),
 
           full_name: (item) => (
             <td>
-              <div>{ item.full_name }</div>
+              <div>{item.full_name}</div>
               <div className="small text-danger">
                 <span> Alumno </span> | Registrado: {normalizeDate(item.created_at)}
               </div>
@@ -70,7 +79,7 @@ const StudentsTable = (props) => {
                 <Link
                   className="m-1 btn btn-info btn-sm"
                   to={{
-                    pathname: `/profesores/ver/${item.id}`,
+                    pathname: `/alumnos/ver/${item.id}`,
                     state: {
                       editStatus: false
                     },
