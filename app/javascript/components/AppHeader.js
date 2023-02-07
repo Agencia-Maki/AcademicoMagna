@@ -21,8 +21,6 @@ import {
   AppHeaderDropdownTasks,
 } from './header/index'
 
-import { logo } from '../assets/brand/logo'
-
 const AppHeader = (props) => {
   const { currentUser } = props
   const dispatch = useDispatch()
@@ -46,7 +44,7 @@ const AppHeader = (props) => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
+          <img src="https://raw.githubusercontent.com/jluisdeveloper/magna_images/main/CRM/logo.png" height={35} alt="Logo" />
         </CHeaderBrand>
         {/* <CForm className="d-flex">
           <CInputGroup>

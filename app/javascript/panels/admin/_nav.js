@@ -1,46 +1,11 @@
-// import administrador from './custom_navs/administrador'
-
-// const current_user_rol = JSON.parse(localStorage.getItem('current_user')).roleable_type
-
-// const _nav = [
-// ]
-
-// // console.log(current_user_rol)
-
-// if (current_user_rol === undefined) {
-//   // _nav.push(asesor_comercial)
-// }else {
-//   switch (current_user_rol) {
-//     case "System":
-//       _nav.push(...root)
-//       break
-//     case "Admin":
-//       _nav.push(...administrador)
-//       break
-//     case "Teacher":
-//       _nav.push(...administrador)
-//       break
-//     case "Student":
-//       _nav.push(...administrador)
-//       break
-//     default:
-//       break
-//   }
-// }
-
-// export default _nav
-
-
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faGaugeHigh, 
   faFileSignature, 
-  faUserAstronaut, 
-  faMeteor,
-  faUsersViewfinder,
-  faHeadSideVirus,
-  faPeopleGroup
+  faPersonChalkboard,
+  faUserGraduate,
+  faLaptopFile
   } from '@fortawesome/free-solid-svg-icons'
 
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react-pro'
@@ -64,25 +29,25 @@ const _nav =  [
     component: CNavItem,
     name: 'Programas',
     to: '/programas',
-    icon: <FontAwesomeIcon icon={faGaugeHigh} inverse className="me-4 ms-1" size='lg'/>,
+    icon: <FontAwesomeIcon icon={faLaptopFile} inverse className="me-4 ms-1" size='lg'/>,
   },
   {
     component: CNavItem,
     name: 'Profesores',
     to: '/profesores',
-    icon: <FontAwesomeIcon icon={faGaugeHigh} inverse className="me-4 ms-1" size='lg'/>,
+    icon: <FontAwesomeIcon icon={faPersonChalkboard} inverse className="me-4 ms-1" size='lg'/>,
   },
   {
     component: CNavItem,
     name: 'Alumnos',
     to: '/alumnos',
-    icon: <FontAwesomeIcon icon={faGaugeHigh} inverse className="me-4 ms-1" size='lg'/>,
+    icon: <FontAwesomeIcon icon={faUserGraduate} inverse className="me-4 ms-1" size='lg'/>,
   },
   {
     component: CNavItem,
     name: 'Matriculas',
     to: '/matriculas',
-    icon: <FontAwesomeIcon icon={faGaugeHigh} inverse className="me-4 ms-1" size='lg'/>,
+    icon: <FontAwesomeIcon icon={faFileSignature} inverse className="me-4 ms-1" size='lg'/>,
   },
   {
     component: CNavTitle,

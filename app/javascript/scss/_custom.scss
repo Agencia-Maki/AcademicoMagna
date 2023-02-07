@@ -47,3 +47,35 @@
     display: none;
   }
 }
+.header {
+  @media only screen and (max-width: 600px) {
+    background-color: #222635;
+    button {
+      color: #FFF;
+    }
+  }
+}
+
+// .aside-right-custom::-webkit-scrollbar  {
+//   overflow-y: scroll;
+//   scrollbar-color: rebeccapurple green;
+// }
+
+
+.aside-right-custom::-webkit-scrollbar {
+  width: 12px;
+}
+
+.aside-right-custom::-webkit-scrollbar-track {
+  background: #25293a;
+}
+
+.aside-right-custom::-webkit-scrollbar-thumb {
+  background-color: #02f4b8;
+  border-radius: 20px;
+  border: 3px solid #25293a;
+}
+
+.border-start-magna {
+  border-left-color: #02f4b8!important;
+}

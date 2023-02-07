@@ -23,15 +23,14 @@ class Panel::Admin::InscriptionsController < ApplicationController
   end
 
   def get_all_by_courses
-    @courses = Course.all.order(created_at: :desc).page(params[:page])
+    @courses = Course.all.order(created_at: :desc)
     render json: @courses.map { |course| {
-      id: course.id,
-      name: course.name,
-      professor: course.professor,
-      students: course.students,
-      current_page: @courses.current_page,
-      total_pages: @courses.total_pages,
-      per_pages: @courses.limit_value
+        id: course.id,
+        name: course.name,
+        professor: course.professor,
+        students_count: course.students.count,
+        status: course.status,
+        category: course.course_category.name
       }
     }
   end

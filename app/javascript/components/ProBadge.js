@@ -6,13 +6,13 @@ const ProBadge = (props) => {
   let { children, ...attributes } = { ...props }
   return (
     <CBadge
-      href="https://coreui.io/pro/react/"
+      href="https://agenciamaki.com/"
       color="danger-gradient"
       target="_blank"
       rel="noreferrer noopener"
       {...attributes}
     >
-      {children ? children : 'CoreUI PRO Plugin'}
+      {children ? children : 'Maki Plugin'}
     </CBadge>
   )
 }

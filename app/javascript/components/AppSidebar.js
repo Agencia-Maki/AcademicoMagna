@@ -1,14 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react-pro'
-import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
-
-import { logoNegative } from '../assets/brand/logo-negative'
-import { sygnet } from '../assets/brand/sygnet'
-
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
@@ -32,8 +26,8 @@ const AppSidebar = (props) => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <img className="sidebar-brand-full" src="https://raw.githubusercontent.com/jluisdeveloper/magna_images/main/CRM/logo.png" height={35} />
+        <img className="sidebar-brand-narrow" src="https://raw.githubusercontent.com/jluisdeveloper/magna_images/main/CRM/isotipo.png" height={35} />
         <CSidebarToggler
           onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
         />

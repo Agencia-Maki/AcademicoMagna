@@ -8,7 +8,7 @@ const AppFooter = () => {
         <a href="#" target="_blank" rel="noopener noreferrer">
         Académico
         </a>
-        <span className="ms-1">&copy; { new Date().getFullYear() } Hefziba.</span>
+        <span className="ms-1">&copy; { new Date().getFullYear() } Magna.</span>
       </div>
       <div className="ms-auto">
         <span className="me-1">Desarrollado por la </span>
