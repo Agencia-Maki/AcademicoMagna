@@ -27,9 +27,15 @@ class Student < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "formato no valido" }
   validate :check_full_name
 
+  after_create :send_welcome_email
+
 
   def login 
     @login || self.document_number || self.email || self.code
+  end
+
+  def send_welcome_email
+    StudentMailer.with(self).welcome_email.deliver_now
   end
 
   private

@@ -33,6 +33,24 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.active_storage.service = :local
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              ENV["SMTP_SERVER_ADDRESS"],
+    port:                 ENV["SMTP_SERVER_PORT"],
+    domain:               ENV["SMTP_SERVER_DOMAIN"],
+    user_name:            ENV["SMTP_ACCOUNT_ADDRESS"],
+    password:             ENV["SMTP_ACCOUNT_PASSWORD"],
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 
+  }
+
+  config.active_job.queue_adapter = :sidekiq
+  config.action_mailer.perform_deliveries = true
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 

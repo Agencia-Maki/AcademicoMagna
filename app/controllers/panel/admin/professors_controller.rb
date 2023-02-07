@@ -43,8 +43,8 @@ class Panel::Admin::ProfessorsController < ApplicationController
     @professor.code = yearNow + monthNow + "-DOC-" + params[:document_number] + "-MGN"
     @professor.phone = params[:phone]
     @professor.avatar = params[:avatar]
-    if @professor.save
-      ProfessorMailer.with(@professor).welcome_email.deliver_later
+
+    if @professor.save      
       render json: {
         message: "Profesor registrado con exito",
         status: :ok

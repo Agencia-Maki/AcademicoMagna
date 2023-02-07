@@ -46,8 +46,7 @@ class Panel::Admin::StudentsController < ApplicationController
 
     # byebug
     # puts @student.save?
-    if @student.save
-      StudentMailer.with(@student).welcome_email.deliver_later
+    if @student.save      
       render json: {
         message: "Alumno registrado con exito",
         status: :ok
