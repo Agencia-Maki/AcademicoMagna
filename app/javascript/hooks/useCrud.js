@@ -24,10 +24,10 @@ const useCrud = (url, url_back='') => {
     })
   }
 
-    const getModelData = async(url_to = url) => {
-      const response = await axios.get(url_to)
-      return response.data
-    }
+  const getModelData = async(url_to = url) => {
+    const response = await axios.get(url_to)
+    return response.data
+  }
 
   /*    METODOS PARA RETORNAR Y USAR EN LOS CRUDS    */
 
@@ -96,6 +96,14 @@ const useCrud = (url, url_back='') => {
     })
   }
 
+  const insertModelData = async(_data, url_to = url) => {
+    const response = await axios.post(url_to, _data)
+    if (response.status === 200) {
+      setToast(response.data)
+    }
+    return response.data
+  }
+
   const updateModel = async(dataModel, url_to = url) => {
     await axios.put(url_to, dataModel ).then(response => {
       url_back !== '' ? navigate(url_back) : getIndex()
@@ -116,7 +124,7 @@ const useCrud = (url, url_back='') => {
 
   // 11 JULIO 2022
 
-  return { modelIndex, getModel, getModelData, getModelPage, deleteModel, deleteModelWhitUrl, insertModel, updateModel, updateModelByID, setToast, message }
+  return { modelIndex, getModel, getModelData, insertModelData, getModelPage, deleteModel, deleteModelWhitUrl, insertModel, updateModel, updateModelByID, setToast, message }
 
 }
 

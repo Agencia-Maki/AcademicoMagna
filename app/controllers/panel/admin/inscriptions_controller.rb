@@ -49,7 +49,6 @@ class Panel::Admin::InscriptionsController < ApplicationController
   end
 
   def delete_inscription_by_student
-    # byebug
     inscription = Inscription.find_by(student_id: params[:student_id], course_id: params[:course_id])
     inscription.destroy
     render json: {
@@ -81,6 +80,23 @@ class Panel::Admin::InscriptionsController < ApplicationController
       }
     end
   end
+
+  ################################################################################################################################
+  #                                                INSCRIPTIONS BY STUDENT IN BLOCK                                              #
+  ################################################################################################################################
+
+  def create_inscriptions_in_block
+    params[:student_ids].each do |user|
+      Inscription.create(course_id: (params[:course_id]).to_i, student_id: user, date_inscription: Time.now) if Inscription.where(course_id: (params[:course_id]).to_i, student_id: user).blank?
+    end
+    render json: {
+      message: "Alumno(s) matriculado(s) con exito",
+      status: :ok
+    }, status: :ok
+  end
+
+
+
 
   # def update
   #   @course.update(inscription_params)

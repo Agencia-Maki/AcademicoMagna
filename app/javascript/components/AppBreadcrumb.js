@@ -32,19 +32,22 @@ const AppBreadcrumb = (props) => {
   const breadcrumbs = getBreadcrumbs(currentLocation)
 
   return (
-    <CBreadcrumb className="m-0 ms-2">
-      <CBreadcrumbItem href="/#/">MAGNA</CBreadcrumbItem>
-      {breadcrumbs.map((breadcrumb, index) => {
-        return (
-          <li
-            className={`breadcrumb-item ${breadcrumb.active ? 'active' : ''}`}
-            key={index}            
-          >
-            <Link to={breadcrumb.pathname}>{breadcrumb.name}</Link>
-          </li>
-        )
-      })}
-    </CBreadcrumb>
+    <>
+      <h3 className="text-info"> { getRouteName(currentLocation, routes) } </h3>
+      <CBreadcrumb className="m-0 ms-2 mb-2">
+        <CBreadcrumbItem href="/#/">MAGNA</CBreadcrumbItem>
+        {breadcrumbs.map((breadcrumb, index) => {
+          return (
+            <li
+              className={`breadcrumb-item ${breadcrumb.active ? 'active' : ''}`}
+              key={index}
+            >
+              <Link to={breadcrumb.pathname}>{breadcrumb.name}</Link>
+            </li>
+          )
+        })}
+      </CBreadcrumb>
+    </>
   )
 }
 

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
           get '/inscriptions/course/:course_id', to: 'inscriptions#detail_by_course'
           get '/inscriptions/course/:course_id/students', to: 'inscriptions#get_students_by_course'
           delete '/inscriptions/course/:course_id/students/:student_id/delete_inscription', to: 'inscriptions#delete_inscription_by_student'  ## CAMBIAR A DELETE
+          post '/inscriptions/course/:course_id/in_block', to: 'inscriptions#create_inscriptions_in_block'
           resources :inscriptions
         end
         
