@@ -2,13 +2,19 @@ class Panel::Admin::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :update, :destroy]
 
   def index
-    @courses = Course.all.order(created_at: :desc).page(params[:page])
+    @courses = Course.all.order(created_at: :desc)
     render json: {
-      data: @courses,
-      current_page: @courses.current_page,
-      total_pages: @courses.total_pages,
-      per_pages: @courses.limit_value
-    }, status: :ok
+      data: @courses.map { |course| {
+          id: course.id,
+          name: course.name,
+          professor: course.professor.first_name + " " + course.professor.last_name,
+          start_date: course.start_date,
+          end_date: course.end_date,
+          category: course.course_category.name,
+          status: course.status,
+        }
+      }, status: :ok
+    }
   end
 
   def get_all

@@ -7,19 +7,16 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEye,
-  faFileSignature
+  faListCheck,
+  faPen,
+  faSliders
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeCourseState } from '../../../../../helpers/auxiliarFuncionts'
 
-const TableCourseInscriptions = (props) => {
+const TablePrograms = (props) => {
   const { data, columns } = props
-  const { setShowDetail, setCurrentCourse, handleShowModalBlockInscription } = props
-
-  const handleShowDetail = (item) => {
-    setShowDetail(true)
-    setCurrentCourse(item)
-  }
+  // const { setShowDetail, setCurrentCourse, handleShowModalBlockInscription } = props
 
   return (
     <>
@@ -65,14 +62,26 @@ const TableCourseInscriptions = (props) => {
           ),
           actions: (item) => (
             <td>
-              <CTooltip content="Ver detalles de Matricula">
-                <CButton color="info" size="sm" className="m-1" onClick={() => handleShowDetail(item)}>
+              <CTooltip content="Ver detalles del Programa">
+                <CButton color="info" size="sm" className="m-1">
                   <FontAwesomeIcon icon={faEye} inverse />
                 </CButton>
               </CTooltip>
-              <CTooltip content="Matricular Alumno(s)">
-                <CButton color="success" size="sm" className="m-1" onClick={() => handleShowModalBlockInscription(item)}>
-                  <FontAwesomeIcon icon={faFileSignature} inverse />
+              <CTooltip content="Editar Programa">
+                <CButton color="warning" size="sm" className="m-1">
+                  <FontAwesomeIcon icon={faPen} inverse />
+                </CButton>
+              </CTooltip>
+
+              <CTooltip content="Gestionar Módulos">
+                <CButton color="success" size="sm" className="m-1">
+                  <FontAwesomeIcon icon={faSliders} inverse />
+                </CButton>
+              </CTooltip>
+
+              <CTooltip content="Gestionar Evaluaciones">
+                <CButton color="primary" size="sm" className="m-1">
+                  <FontAwesomeIcon icon={faListCheck} inverse />
                 </CButton>
               </CTooltip>
             </td>
@@ -83,4 +92,4 @@ const TableCourseInscriptions = (props) => {
   )
 }
 
-export default TableCourseInscriptions
+export default TablePrograms

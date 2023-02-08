@@ -63,7 +63,6 @@ const Inscriptions = () => {
 
   return (
     <>
-      { console.log(inscriptions) }
       <CRow>
         <CCol lg={12}>
           <CCard>
