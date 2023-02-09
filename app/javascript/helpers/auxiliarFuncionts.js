@@ -28,19 +28,19 @@ export const getBadgeDocumentType = (_document_type) => {
 export const getBadgeCourseState = (_course_state) => {
   if (_course_state === 'on_hold') {
     return (
-      <CTooltip content="Documento Nacional de Identidad"> 
+      <CTooltip content="En espera para empezar"> 
         <span class="badge bg-warning-gradient">En Espera</span> 
       </CTooltip>
     )
   } else if (_course_state === 'in_progress') {
     return (
-      <CTooltip content="Carnet de Extranjería"> 
+      <CTooltip content="Programa dictandose ahora"> 
         <span class="badge bg-success-gradient">En Curso</span> 
       </CTooltip>
     )
   } else if (_course_state === 'completed') {
     return (
-      <CTooltip content="Pasaporte"> 
+      <CTooltip content="Programa Finalizado"> 
         <span class="badge bg-danger-gradient">Finalizado</span> 
       </CTooltip>
     )

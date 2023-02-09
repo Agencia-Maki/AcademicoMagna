@@ -32,9 +32,6 @@ const columns = [
 ]
 
 const Programs = () => {
-  const [professors, setProfessors] = useState([])
-  const [categories, setCategories] = useState([])
-
   const { 
           getModelData: getCourses,
           getModelData: getProfessors,
@@ -55,13 +52,7 @@ const Programs = () => {
           duration_month: `${calculateDuration(course.start_date, course.end_date)} meses`,
         }
       })
-    )
-
-    const professorDataQuery = await getProfessors("/panel/admin/all_professors")
-    setProfessors(professorDataQuery)
-
-    const categoryDataQuery = await getCategories("/panel/admin/course_categories")
-    setCategories(categoryDataQuery)    
+    )      
   }
 
   useEffect(() => {
@@ -82,18 +73,12 @@ const Programs = () => {
         <CCol lg={12}>
           <CCard>
             <CCardHeader>
-              Panel de Programas
+              <strong>Panel de Programas</strong>
             </CCardHeader>
             <CCardBody>
               <Link
                 className="btn btn-sm btn-success mb-3 float-end"
-                to={{
-                  pathname: `/programas/nuevo`,
-                  state: {
-                    professors: professors,
-                    categories: categories
-                  },
-                }}
+                to={{ pathname: `/programas/nuevo` }}
               >                
                 Registrar Nuevo Programa
               </Link>
