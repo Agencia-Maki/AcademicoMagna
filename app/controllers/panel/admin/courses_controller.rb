@@ -23,7 +23,7 @@ class Panel::Admin::CoursesController < ApplicationController
   end
 
   def show
-    render json: @course
+    render json: @course.as_json(include: [:professor, :course_category]), status: :ok
   end
 
   def new
@@ -38,6 +38,8 @@ class Panel::Admin::CoursesController < ApplicationController
     @course.end_date = params[:end_date]
     @course.status = params[:status]
     @course.cover = params[:cover]
+    @course.show_magna_class_link = params[:show_magna_class_link]
+    @course.magna_class_link = params[:magna_class_link]    
     @course.professor_id = params[:professor_id]
     @course.course_category_id = params[:course_category_id]
     @course.conference_link = params[:conference_link]
@@ -104,7 +106,7 @@ class Panel::Admin::CoursesController < ApplicationController
     end
 
     def course_params
-      course_attributes = %i[name description start_date end_date status cover conference_link professor_id course_category_id]
+      course_attributes = %i[name description start_date end_date status cover conference_link professor_id course_category_id show_magna_class_link magna_class_link]
       params.require(:course).permit(course_attributes)
     end
 end

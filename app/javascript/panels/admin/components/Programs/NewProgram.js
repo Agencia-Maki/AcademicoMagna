@@ -25,7 +25,9 @@ const initialState = {
   description: '',
   start_date: '',
   end_date: '',
-  conference_link: ''
+  conference_link: '',
+  magna_class_link: '',
+  show_magna_class_link: "show"
 }
 
 const singleImage = {
@@ -40,7 +42,7 @@ const NewProgram = () => {
     getModelData: getProfessors,
     getModelData: getCategories } = useCrud('/panel/admin/courses', '/programas')
   const { data, handleChange, handleChangeFile } = useChange(initialState)
-  const { professor_id, course_category_id, description, name, conference_link } = data
+  const { professor_id, course_category_id, description, name, conference_link, magna_class_link } = data
 
   const [date, setDate] = useState([new Date(), new Date()]);
   const [professors, setProfessors] = useState([])
@@ -71,6 +73,7 @@ const NewProgram = () => {
     formData.append('start_date', formatYmd(date[0]))
     formData.append('end_date', formatYmd(date[1]))
     formData.append('conference_link', data.conference_link)
+    formData.append('magna_class_link', data.magna_class_link)
     formData.append('cover', cover)
 
     await insertModel(formData)
@@ -138,6 +141,15 @@ const NewProgram = () => {
                             )) : ''
                           }
                         </CFormSelect>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mt-3">
+                      <CCol md="3">
+                        <CFormLabel htmlFor="magna_class_link">Clase Magna</CFormLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CFormInput id="magna_class_link" name="magna_class_link" placeholder="Link de la clase Magna (gratuita)" className="form-horizontal" value={magna_class_link} onChange={handleChange} />
+                        <CFormText>Ingresa el link de la clase Magna (Extra).</CFormText>
                       </CCol>
                     </CRow>
                     <CRow className="mt-3">

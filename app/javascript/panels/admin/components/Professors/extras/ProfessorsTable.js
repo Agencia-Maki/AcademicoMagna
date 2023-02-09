@@ -12,7 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeDocumentType } from '../../../../../helpers/auxiliarFuncionts'
-import { normalizeName, normalizeDate } from '../../../../../helpers/normalizes'
+import { normalizeDate } from '../../../../../helpers/normalizes'
 
 const ProfessorsTable = (props) => {
   const { data, columns } = props

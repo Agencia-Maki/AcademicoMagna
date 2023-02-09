@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   CTooltip,
   CSmartTable,
@@ -16,7 +17,6 @@ import { getBadgeCourseState } from '../../../../../helpers/auxiliarFuncionts'
 
 const TablePrograms = (props) => {
   const { data, columns } = props
-  // const { setShowDetail, setCurrentCourse, handleShowModalBlockInscription } = props
 
   return (
     <>
@@ -63,9 +63,14 @@ const TablePrograms = (props) => {
           actions: (item) => (
             <td>
               <CTooltip content="Ver detalles del Programa">
-                <CButton color="info" size="sm" className="m-1">
+                <Link
+                  className="m-1 btn btn-info btn-sm"
+                  to={{
+                    pathname: `/programas/ver/${item.id}`
+                  }}
+                >
                   <FontAwesomeIcon icon={faEye} inverse />
-                </CButton>
+                </Link>
               </CTooltip>
               <CTooltip content="Editar Programa">
                 <CButton color="warning" size="sm" className="m-1">

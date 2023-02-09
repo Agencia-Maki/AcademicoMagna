@@ -7,6 +7,8 @@ class CreateCourses < ActiveRecord::Migration[7.0]
       t.datetime :end_date
       t.integer :status
       t.string :cover
+      t.string :magna_class_link
+      t.integer :show_magna_class_link
       t.string :conference_link
       t.references :professor, null: :true, foreign_key: true
       t.references :course_category, null: false, foreign_key: true

@@ -9,6 +9,7 @@ class Course < ApplicationRecord
   accepts_nested_attributes_for :chapters, allow_destroy: true
   
   before_create :set_initial_status
+  before_create :set_initial_class_link
   mount_uploader :cover, CoverUploader
   paginates_per 10
 
@@ -19,11 +20,16 @@ class Course < ApplicationRecord
   validate :check_start_date
   validate :check_end_date
 
-  enum status: [:in_progress, :completed, :on_hold, :cancelled]  
+  enum status: [:in_progress, :completed, :on_hold, :cancelled]
+  enum show_magna_class_link: [:show, :hide]
 
   private
     def set_initial_status
       self.status = :on_hold
+    end
+
+    def set_initial_class_link
+      self.show_magna_class_link = :show
     end
 
     def check_name
