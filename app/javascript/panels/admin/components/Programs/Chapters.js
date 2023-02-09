@@ -20,7 +20,7 @@ import useCrud from '../../../../hooks/useCrud'
 import { normalizeDate } from '../../../../helpers/normalizes'
 
 import Lessons from './components/Lessons'
-// import Materials from './extras/Materials'
+import Materials from './components/Materials'
 
 const prototypeChapter = {
   name: '',
@@ -302,13 +302,13 @@ const Chapters = () => {
         /> : null
       }
 
-      {/* {showMaterials ?
+      {showMaterials ?
         <Materials
           chapter={chapter}
           materials={materials}
           setShowLessons={setShowMaterials}
         /> : null
-      } */}
+      }
     </CCol >
   )
 }
