@@ -56,6 +56,15 @@ class Panel::Admin::CoursesController < ApplicationController
     end
   end
 
+  def clone_course
+    courseClone = Course.new
+    courseClone.clone_all_data(params[:course_to_clone_id], params[:name])
+    render json: {
+      message: "Programa clonado con exito",
+      status: :ok
+    }, status: :ok
+  end
+
   def update
     curso = Course.find(params[:id])
     curso.name = params[:name]

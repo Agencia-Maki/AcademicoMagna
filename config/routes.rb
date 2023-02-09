@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
           get '/all_courses', to: 'courses#get_all'
           get '/courses/:course_id/chapters', to: 'chapters#index_by_course'    #panel/courses/5/chapters/
+
+          post '/courses/:course_id/clone', to: 'courses#clone_course'
           
           resources :exams, only: [:create, :show, :update, :destroy]
           get '/exams/:id/scores', to: 'exams#show_scores'

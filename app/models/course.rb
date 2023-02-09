@@ -23,6 +23,37 @@ class Course < ApplicationRecord
   enum status: [:in_progress, :completed, :on_hold, :cancelled]
   enum show_magna_class_link: [:show, :hide]
 
+
+  def clone_all_data(course_reference_id, name)
+    course_reference = Course.find(course_reference_id)
+    self.name = name
+    self.description = course_reference.description
+    self.start_date = course_reference.start_date
+    self.end_date = course_reference.end_date
+    self.status = course_reference.status
+    self.cover = course_reference.cover
+    self.show_magna_class_link = course_reference.show_magna_class_link
+    self.magna_class_link = course_reference.magna_class_link
+    self.professor_id = course_reference.professor_id
+    self.course_category_id = course_reference.course_category_id
+    self.conference_link = course_reference.conference_link
+
+
+    course_reference.chapters.each do |original_chapter|
+      new_chapter = original_chapter.dup
+      self.chapters << new_chapter
+    
+      original_chapter.lessons.each do |original_lesson|
+        new_lesson = original_lesson.dup
+        new_lesson.link_video = nil
+        new_chapter.lessons << new_lesson
+      end
+    end
+
+    self.save!
+  end
+
+
   private
     def set_initial_status
       self.status = :on_hold

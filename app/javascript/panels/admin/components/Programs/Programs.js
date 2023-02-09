@@ -10,14 +10,13 @@ import {
   CButton,
   CBadge
 } from '@coreui/react-pro'
-
-
-import CourseCategories from './components/CourseCategories'
-
 import useCrud from '../../../../hooks/useCrud'
 import { normalizeDate } from '../../../../helpers/normalizes'
 
+import CourseCategories from './components/CourseCategories'
+
 import TablePrograms from './extras/TablePrograms'
+import ModalCloneCourse from './extras/ModalCloneCourse'
 
 const columns = [
   { key: 'index', label: '#', filter: false, sorter: false },
@@ -38,6 +37,8 @@ const Programs = () => {
         } = useCrud("/panel/admin/all_courses")
   const [courseList, setCourseList] = useState([])
   const [categories, setCategories] = useState([])
+  const [showCloneCourseModal, setShowCloneCourseModal] = useState(false)
+
   const loadData = async() => {
     const courseDataQuery = await getCourses("/panel/admin/courses")
     setCourseList(
@@ -60,10 +61,6 @@ const Programs = () => {
     setCategories(categoriesDataQuery)
   }
 
-  useEffect(() => {
-    loadData()
-  }, [])
-
   const calculateDuration = (start_date, end_date) => {
     let start = new Date(start_date)
     let end = new Date(end_date)
@@ -71,6 +68,14 @@ const Programs = () => {
     let diffDays = diff / (1000 * 3600 * 24 * 30)
     return Math.round(diffDays) + 1
   }
+
+  const handleCloneCourse = (course) => {
+    setShowCloneCourseModal(true)
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [])
 
   return (
     <>
@@ -88,104 +93,14 @@ const Programs = () => {
                 Registrar Nuevo Programa
               </Link>
 
-              {/* <table className="table table-hover table-outline mb-0 d-none d-sm-table">
-                <thead className="thead-light">
-                  <tr>
-                    <th className=""> # </th>
-                    <th className=""> Nombre </th>
-                    <th className=""> Docente </th>
-                    <th className=""> Fecha de Inicio </th>
-                    <th className=""> Fecha de Fin </th>
-                    <th className=""> Duracion (Meses) </th>
-                    <th className=""> Categoría </th>
-                    <th className=""> Estado </th>
-                    <th className=""> Acciones </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    modelIndex.data && modelIndex.data.length > 0 ?
-                      modelIndex.data.map((program, index) => (
-                        <tr key={program.id}>
-                          <td> {(index + 1) + (pagesPrototype.page - 1) * pagesPrototype.perPages} </td>
-                          <td className=""> {program.name} </td>
-                          <td className=""> {getDataProfessor(program.professor_id)} </td>
-                          <td className=""> {normalizeDate(program.start_date)} </td>
-                          <td className=""> {normalizeDate(program.end_date)} </td>
-                          <td className=""> {calculateDuration(program.start_date, program.end_date)}</td>
-                          <td className=""> {getDataCategory(program.course_category_id)}</td>
-                          <td className=""> {normalizeStatus(program.status)} </td>
-                          <td className="">
-
-                            <CTooltip content="Detalles del Programa" placement="top-start">
-                              <Link
-                                className="m-1 btn btn-info btn-sm"
-                                to={{
-                                  pathname: `/programas/ver/${program.id}`,
-                                  state: {
-                                    editStatus: false
-                                  },
-                                }}
-                              >
-                                tocar
-                              </Link>
-                            </CTooltip>
-
-                            <CTooltip content="Editar Programa" placement="top-start">
-                              <Link
-                                className="m-1 btn btn-warning btn-sm"
-                                to={{
-                                  pathname: `/programas/editar/${program.id}`,
-                                  state: {
-                                    professors: professors,
-                                    categories: categories
-                                  },
-                                }}
-                              >
-                                pen
-                              </Link>
-                            </CTooltip>
-
-                            <CTooltip content="Gestionar Modulos" placement="top-start">
-                              <Link
-                                className="m-1 btn btn-success btn-sm"
-                                to={{
-                                  pathname: `/programas/${program.id}/modulos`,
-                                  state: {
-                                    editStatus: false,
-                                    program: program
-                                  },
-                                }}
-                              >
-                                equalizer
-                              </Link>
-                            </CTooltip>
-
-                            <CTooltip content="Gestionar Evaluaciones" placement="top-start">
-                              <Link
-                                className="m-1 btn btn-primary btn-sm"
-                                to={{
-                                  pathname: `/programas/${program.id}/evaluaciones`,
-                                  state: {
-                                    editStatus: false,
-                                    program: program
-                                  },
-                                }}
-                              >
-                               task
-                              </Link>
-                            </CTooltip>
-                          </td>
-                        </tr>
-                      )) :
-                      <tr>
-                        <td>
-                          No hay registros para mostrar
-                        </td>
-                      </tr>
-                  }
-                </tbody>
-              </table> */}
+              <CButton
+                size='sm'
+                color='warning'
+                className='mb-3 float-end me-3'
+                onClick={() => handleCloneCourse()}
+              >                
+                Clonar Programa
+              </CButton>
 
               <TablePrograms 
                 columns={columns}
@@ -199,6 +114,13 @@ const Programs = () => {
       <CourseCategories 
         categories={categories}
         refreshCategoriesList={refreshCategoriesList}
+      />
+
+      <ModalCloneCourse 
+        courses={courseList}
+        setShowModal={setShowCloneCourseModal}
+        showModal={showCloneCourseModal}
+        refreshData={loadData}
       />
     </ >
   )
