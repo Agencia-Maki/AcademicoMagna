@@ -15,6 +15,7 @@ const EditStudent = React.lazy(() => import('./components/Students/EditStudent')
 const Programs = React.lazy(() => import('./components/Programs/Programs'))
 const NewProgram = React.lazy(() => import('./components/Programs/NewProgram'))
 const ShowProgram = React.lazy(() => import('./components/Programs/ShowProgram'))
+const EditProgram = React.lazy(() => import('./components/Programs/EditProgram'))
 
 
 const Inscriptions = React.lazy(() => import('./components/Inscriptions/Inscriptions'))
@@ -36,8 +37,7 @@ const routes = [
   { path: '/programas', exact: true, name: 'Programas', element: Programs },  
   { path: '/programas/nuevo', exact: true, name: 'Nuevo', element: NewProgram },
   { path: '/programas/ver/:id_program', exact: true, name: 'Ver', element: ShowProgram },
-
-  { path: '/programas/editar/:id_program', exact: true, name: 'Editar', element: Dashboard },
+  { path: '/programas/editar/:id_program', exact: true, name: 'Editar', element: EditProgram },
   { path: '/programas/:id/modulos', exact: true, name: 'Modulos', element: Dashboard },
 
   { path: '/matriculas', exact: true, name: 'Matrículas', element: Inscriptions }

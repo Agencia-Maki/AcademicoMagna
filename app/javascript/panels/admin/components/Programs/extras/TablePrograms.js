@@ -72,10 +72,16 @@ const TablePrograms = (props) => {
                   <FontAwesomeIcon icon={faEye} inverse />
                 </Link>
               </CTooltip>
+
               <CTooltip content="Editar Programa">
-                <CButton color="warning" size="sm" className="m-1">
+                <Link
+                  className="m-1 btn btn-warning btn-sm"
+                  to={{
+                    pathname: `/programas/editar/${item.id}`
+                  }}
+                >
                   <FontAwesomeIcon icon={faPen} inverse />
-                </CButton>
+                </Link>
               </CTooltip>
 
               <CTooltip content="Gestionar Módulos">

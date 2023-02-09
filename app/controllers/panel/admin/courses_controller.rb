@@ -70,6 +70,7 @@ class Panel::Admin::CoursesController < ApplicationController
     curso.professor_id = params[:professor_id]
     curso.course_category_id = params[:course_category_id]
     curso.conference_link = params[:conference_link]
+    curso.magna_class_link = params[:magna_class_link]
 
     if curso.save
       render json: {
