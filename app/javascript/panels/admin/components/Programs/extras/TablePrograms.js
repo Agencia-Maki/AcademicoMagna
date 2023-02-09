@@ -85,9 +85,14 @@ const TablePrograms = (props) => {
               </CTooltip>
 
               <CTooltip content="Gestionar Módulos">
-                <CButton color="success" size="sm" className="m-1">
+                <Link
+                  className="m-1 btn btn-success btn-sm"
+                  to={{
+                    pathname: `/programas/${item.id}/modulos`
+                  }}
+                >
                   <FontAwesomeIcon icon={faSliders} inverse />
-                </CButton>
+                </Link>
               </CTooltip>
 
               <CTooltip content="Gestionar Evaluaciones">
