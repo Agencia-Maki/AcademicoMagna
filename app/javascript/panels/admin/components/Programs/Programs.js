@@ -12,10 +12,10 @@ import {
 } from '@coreui/react-pro'
 
 
-// import CourseCategories from './CourseCategories'
+import CourseCategories from './components/CourseCategories'
 
 import useCrud from '../../../../hooks/useCrud'
-import { normalizeName, normalizeDate } from '../../../../helpers/normalizes'
+import { normalizeDate } from '../../../../helpers/normalizes'
 
 import TablePrograms from './extras/TablePrograms'
 
@@ -34,14 +34,12 @@ const columns = [
 const Programs = () => {
   const { 
           getModelData: getCourses,
-          getModelData: getProfessors,
           getModelData: getCategories,
         } = useCrud("/panel/admin/all_courses")
   const [courseList, setCourseList] = useState([])
-
+  const [categories, setCategories] = useState([])
   const loadData = async() => {
     const courseDataQuery = await getCourses("/panel/admin/courses")
-
     setCourseList(
       courseDataQuery.data.map ((course, index) => {
         return {
@@ -52,7 +50,14 @@ const Programs = () => {
           duration_month: `${calculateDuration(course.start_date, course.end_date)} meses`,
         }
       })
-    )      
+    )
+    const categoriesDataQuery = await getCategories("/panel/admin/course_categories")
+    setCategories(categoriesDataQuery)
+  }
+
+  const refreshCategoriesList = async() => {
+    const categoriesDataQuery = await getCategories("/panel/admin/course_categories")
+    setCategories(categoriesDataQuery)
   }
 
   useEffect(() => {
@@ -190,7 +195,11 @@ const Programs = () => {
           </CCard>
         </CCol>
       </CRow>
-      {/* <CourseCategories /> */}
+      
+      <CourseCategories 
+        categories={categories}
+        refreshCategoriesList={refreshCategoriesList}
+      />
     </ >
   )
 }
