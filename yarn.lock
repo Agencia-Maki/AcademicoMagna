@@ -390,6 +390,18 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/lodash.memoize@^4.1.7":
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.memoize/-/lodash.memoize-4.1.7.tgz#aff94ab32813c557cbc1104e127030e3d60a3b27"
+  integrity sha512-lGN7WeO4vO6sICVpf041Q7BX/9k1Y24Zo3FY0aUezr1QlKznpjzsDk3T3wvH8ofYzoK0QupN9TWcFAFZlyPwQQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.191"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
+  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
+
 "@types/node@*":
   version "18.11.19"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.19.tgz#35e26df9ec441ab99d73e99e9aca82935eea216d"
@@ -447,7 +459,7 @@
   resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz#b6725d5f4af24ace33b36fafd295136e75509f43"
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
-"@wojtekmaj/date-utils@^1.0.2", "@wojtekmaj/date-utils@^1.0.3":
+"@wojtekmaj/date-utils@^1.0.0", "@wojtekmaj/date-utils@^1.0.2", "@wojtekmaj/date-utils@^1.0.3", "@wojtekmaj/date-utils@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.1.2.tgz#e22d3b6fe4559cd4b47e439b9f9fc51d1bc1fa64"
   integrity sha512-06PQad/6pyYDjInBW2ih4Oy30EAg0mtXTCz+b/fGwzN2JB2X2Zsa4QtHl4I8M+IaCKN8bwj61OW3XAWxh+D9hA==
@@ -1197,6 +1209,14 @@ get-user-locale@^1.2.0:
   dependencies:
     lodash.memoize "^4.1.1"
 
+get-user-locale@^2.0.0:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-2.1.3.tgz#26898ecb732821e047d77dc1ff5709d5d1df3f4a"
+  integrity sha512-2mvzWs9z6qKjw8uvuo2ivpBKg5nHdTe4BERpv+A2POAcfEFaaTkagFKKG9A2tAQjn6NfTVO5V1pTqQbA6AGyog==
+  dependencies:
+    "@types/lodash.memoize" "^4.1.7"
+    lodash.memoize "^4.1.1"
+
 glob-parent@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-6.0.2.tgz#6d237d99083950c79290f24c7642a3de9a28f9e3"
@@ -1752,6 +1772,17 @@ react-chartjs-2@^4.3.1:
   resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-4.3.1.tgz#9941e7397fb963f28bb557addb401e9ff96c6681"
   integrity sha512-5i3mjP6tU7QSn0jvb8I4hudTzHJqS8l00ORJnVwI2sYu0ihpj83Lv2YzfxunfxTZkscKvZu2F2w9LkwNBhj6xA==
 
+react-clock@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-clock/-/react-clock-4.1.0.tgz#e48313d90e1ba2b8a6167804dc58a6a9cea8945b"
+  integrity sha512-1BxIDxH8PcEBEUZDIXXS2njK5Gb84U5egTKXZDimF4aKO1bq+/bdX+chMNouLmaOSYB1of3DriLb0WhLOr8lAA==
+  dependencies:
+    "@types/react" "*"
+    "@wojtekmaj/date-utils" "^1.1.2"
+    clsx "^1.2.1"
+    get-user-locale "^2.0.0"
+    prop-types "^15.6.0"
+
 react-country-flag@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-country-flag/-/react-country-flag-3.0.2.tgz#54c37abe2c87251e95b0f40bb4c09b000f4669e7"
@@ -1781,6 +1812,22 @@ react-date-picker@^9.2.0:
     react-calendar "^4.0.0"
     react-fit "^1.4.0"
     update-input-width "^1.2.2"
+
+react-datetime-picker@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-datetime-picker/-/react-datetime-picker-4.2.0.tgz#747b86013fa59ce6f9d201317f0df486a343769a"
+  integrity sha512-5K7s4yVpG7e/Y3HspF2iHdaa2OYymqnoV2aUho5J6fQOtVfkOEkMJOwSG4PbSHisq0Xz3CXgOjn88X0GscZoAw==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.3"
+    clsx "^1.2.1"
+    get-user-locale "^1.2.0"
+    make-event-props "^1.1.0"
+    prop-types "^15.6.0"
+    react-calendar "^4.0.0"
+    react-clock "^4.0.0"
+    react-date-picker "^9.2.0"
+    react-fit "^1.4.0"
+    react-time-picker "^5.2.0"
 
 react-dialog-confirm@^1.1.0:
   version "1.1.0"
@@ -1873,6 +1920,20 @@ react-router@6.8.0:
   integrity sha512-760bk7y3QwabduExtudhWbd88IBbuD1YfwzpuDUAlJUJ7laIIcqhMvdhSVh1Fur1PE8cGl84L0dxhR3/gvHF7A==
   dependencies:
     "@remix-run/router" "1.3.1"
+
+react-time-picker@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-5.2.0.tgz#e2c49a2b852b63009627084d674705d262f1b7f8"
+  integrity sha512-lM3gISzmPWsG3pZ+D2P/QNF0lrRW9qwpv9mejvwOAlVCuwX7O3nXDHE7gShi/aAd6i9YdU53r3gtDdYg2k+IRQ==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.0"
+    clsx "^1.2.1"
+    get-user-locale "^1.2.0"
+    make-event-props "^1.1.0"
+    prop-types "^15.6.0"
+    react-clock "^4.0.0"
+    react-fit "^1.4.0"
+    update-input-width "^1.2.2"
 
 react-timer-hook@^3.0.5:
   version "3.0.5"

@@ -18,6 +18,11 @@ const ShowProgram = React.lazy(() => import('./components/Programs/ShowProgram')
 const EditProgram = React.lazy(() => import('./components/Programs/EditProgram'))
 const CourseChapters = React.lazy(() => import('./components/Programs/Chapters'))
 
+const Exams = React.lazy(() => import('./components/Exams/Exams'))
+const NewExam = React.lazy(() => import('./components/Exams/NewExam'))
+const EditExam = React.lazy(() => import('./components/Exams/EditExam'))
+const ShowScores = React.lazy(() => import('./components/Exams/ShowScores'))
+
 const Inscriptions = React.lazy(() => import('./components/Inscriptions/Inscriptions'))
 
 const routes = [
@@ -39,6 +44,11 @@ const routes = [
   { path: '/programas/ver/:id_program', exact: true, name: 'Ver', element: ShowProgram },
   { path: '/programas/editar/:id_program', exact: true, name: 'Editar', element: EditProgram },
   { path: '/programas/:id_program/modulos', exact: true, name: 'Modulos', element: CourseChapters },
+
+  { path: '/programas/:id_program/evaluaciones', exact: true, name: 'Evaluaciones', element: Exams },
+  { path: '/programas/:id_program/evaluaciones/nuevo', exact: true, name: 'Nuevo', element: NewExam },
+  { path: '/programas/:id_program/evaluaciones/:exam_id/editar', exact: true, name: 'Editar', element: EditExam },
+  { path: '/programas/:course_id/evaluaciones/:exam_id/notas', exact: true, name: 'Notas', element: ShowScores },
 
   { path: '/matriculas', exact: true, name: 'Matrículas', element: Inscriptions }
 

@@ -96,9 +96,14 @@ const TablePrograms = (props) => {
               </CTooltip>
 
               <CTooltip content="Gestionar Evaluaciones">
-                <CButton color="primary" size="sm" className="m-1">
+                <Link
+                  className="m-1 btn btn-primary btn-sm"
+                  to={{
+                    pathname: `/programas/${item.id}/evaluaciones`
+                  }}
+                >
                   <FontAwesomeIcon icon={faListCheck} inverse />
-                </CButton>
+                </Link>
               </CTooltip>
             </td>
           )

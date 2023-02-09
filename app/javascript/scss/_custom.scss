@@ -79,3 +79,137 @@
 .border-start-magna {
   border-left-color: #02f4b8!important;
 }
+
+
+
+/*************************************************************************************************************/
+
+.ql-editor.ql-blank::before { 
+  color: #FFF !important;
+}
+
+.ql-formats {
+  background-color: #FFF !important;
+}
+
+.text_dark {
+  color: #282933;
+}
+
+.text-bold {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.badge_custom {
+  padding: 5px;
+  font-size: 11px;
+}
+
+.img-100-size {
+  width: 100%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.title-course-card {
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    text-decoration: underline;
+    color: #03f3bb;
+  }
+}
+
+.react-daterange-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: center;
+  border: thin solid gray;
+  padding: 4px;
+}
+
+.react-daterange-picker__inputGroup__input {
+  border: 1px solid #03f3bb;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 12px;
+  color: #181924;
+  background-color: #fff;
+  &:focus {
+    border: 1px solid #03f3bb;
+  }
+}
+
+.react-daterange-picker__range-divider {
+  color: #181924;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.react-daterange-picker__clear-button, .react-daterange-picker__button {
+  svg {
+    stroke: #03f3bb !important;
+  }
+}
+
+.react-date-picker__inputGroup__divider, .react-daterange-picker__inputGroup__leadingZero{
+  color: #181924;
+}
+
+// DATETIME PICKER
+
+.react-datetime-picker__inputGroup__leadingZero {
+  color: #181924;
+}
+
+.react-datetime-picker__inputGroup__input {
+  color: #181924;
+}
+
+.react-datetime-picker {
+  width: 100%;
+}
+
+.react-datetime-picker__inputGroup {
+  padding: 6px 2px !important;
+}
+
+.react-datetime-picker__inputGroup__amPm{
+  background-color: #03f3bb !important;
+}
+
+.react-datetime-picker__clock {
+  background-color: #03f3bb !important;
+}
+
+.react-clock__mark__body {
+  background-color: #03f3bb !important;
+}
+
+.react-clock__hand__body {
+  background-color: #03f3bb !important;
+}
+
+.react-clock__face__inner {
+  background-color: #FFF !important;
+}
+
+.react-datetime-picker__button {
+  svg {
+    stroke: #181924 !important;
+  }
+}
+
+.ytp-title-text {
+  display: none;
+}
+
+.margin_negative_stats_course {
+  margin-bottom: -30px;
+  color:#181924 !important;
+}

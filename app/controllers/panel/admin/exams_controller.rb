@@ -13,6 +13,7 @@ class Panel::Admin::ExamsController < ApplicationController
 
   def create
     if params[:type_exam] == 'manual'
+      # byebug
       @exam = Exam.new()
       @exam.type_exam = params[:type_exam]
       @exam.name = params[:name]

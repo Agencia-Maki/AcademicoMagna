@@ -36,7 +36,7 @@ class MaterialUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png doc docx xls xlsx xlsm xlt ppt pptx pps pot pdf)
+    %w(jpg jpeg gif png doc docx xls xlsx xlsm xlt ppt pptx pps pot pdf zip rar)
   end
 
   # Override the filename of the uploaded files:
