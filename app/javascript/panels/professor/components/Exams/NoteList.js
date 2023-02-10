@@ -1,12 +1,14 @@
 import React, { useEffect, useState, createRef } from 'react'
 import Pdf from "react-to-pdf"
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import {
   CCardBody,
   CCardHeader,
   CButton,
   CTooltip,
+  CRow,
+  CCol
 } from '@coreui/react-pro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -19,9 +21,7 @@ const NoteList = () => {
   const { program_id } = useParams()
   const ref = createRef();
   const options = {
-    orientation: 'landscape',
-    // unit: 'in'
-    // format: [4,2]
+    orientation: 'landscape'
   };
 
   const getData = async () => {
@@ -49,7 +49,6 @@ const NoteList = () => {
     return result;
   }
 
-
   useEffect(() => {
     getData()
     getListStudents()
@@ -57,13 +56,20 @@ const NoteList = () => {
 
   return (
     <>
-      <Pdf targetRef={ref} filename="code-example.pdf" options={options} x={.5} y={.5} scale={0.7}>
-        {({ toPdf }) => <CTooltip content="Descargar consolidado de notas" placement="top-start">
-          <CButton color="primary" className="mb-3" onClick={toPdf}>
-            <FontAwesomeIcon icon={faCloudDownload} size="lg" inverse />
-          </CButton>
-        </CTooltip>}
-      </Pdf>
+      <CRow>
+        <CCol>
+          <Pdf targetRef={ref} filename="code-example.pdf" options={options} x={.5} y={.5} scale={0.7}>
+            {({ toPdf }) => <CTooltip content="Descargar consolidado de notas" placement="top-start">
+              <CButton color="primary" className="mb-3 float-end" size="sm" onClick={toPdf}>
+                <FontAwesomeIcon icon={faCloudDownload} size="lg" inverse />
+              </CButton>
+            </CTooltip>}
+          </Pdf>
+          <Link className="btn btn-danger mb-3 float-start btn-sm" to={`/programas/${program_id}/evaluaciones`}>
+            Regresar atras
+          </Link>
+        </CCol>
+      </CRow>
 
 
       {<div className='card' ref={ref}>
