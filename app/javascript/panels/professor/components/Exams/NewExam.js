@@ -11,8 +11,8 @@ import {
 } from '@coreui/react-pro'
 
 
-import ExamAuto from './extras/ExamAuto'
-import ExamManual from './extras/ExamManual'
+import ExamAuto from './components/ExamAuto'
+import ExamManual from './components/ExamManual'
 
 const initialPrototype = {
   course_id: 0,

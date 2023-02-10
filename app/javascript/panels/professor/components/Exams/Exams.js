@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import useCrud from '../../../../hooks/useCrud'
 
-import Table from './extras/Table';
+import Table from './components/Table';
 
 const Exams = () => {
   const { getModelData: getExams, getModelData: getCourse,
