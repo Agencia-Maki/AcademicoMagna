@@ -56,6 +56,14 @@
   }
 }
 
+.button-magna-color {
+  background-color: #02f4b8;
+  color: #222635;
+  &:hover {
+    background-color: #02f4b8;
+  }
+}
+
 // .aside-right-custom::-webkit-scrollbar  {
 //   overflow-y: scroll;
 //   scrollbar-color: rebeccapurple green;
@@ -117,6 +125,7 @@
 .title-course-card {
   font-size: 1rem;
   font-weight: bold;
+  text-decoration: none !important;
   transition: all 0.3s ease-in-out;
   &:hover {
     text-decoration: underline;
@@ -212,4 +221,12 @@
 .margin_negative_stats_course {
   margin-bottom: -30px;
   color:#181924 !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.card-box-shadow {
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
 }

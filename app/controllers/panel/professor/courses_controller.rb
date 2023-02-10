@@ -11,18 +11,18 @@ class Panel::Professor::CoursesController < ApplicationController
           start_date: course.start_date,
           end_date: course.end_date, 
           status: course.status,
-          cover: course.cover,          
-          students: course.students,
-          category: course.course_category,
-          chapters: course.chapters.map { |chapter| {   
-            id: chapter.id,
-            name: chapter.name,
-            start_date: chapter.start_date,
-            end_date: chapter.end_date,
-            materials: chapter.materials,
-            lessons: chapter.lessons
-            }
-          }
+          cover: course.cover        
+          # students: course.students,
+          # category: course.course_category,
+          # chapters: course.chapters.map { |chapter| {   
+          #   id: chapter.id,
+          #   name: chapter.name,
+          #   start_date: chapter.start_date,
+          #   end_date: chapter.end_date,
+          #   materials: chapter.materials,
+          #   lessons: chapter.lessons
+          #   }
+          # }
         }
       }
     }, status: :ok
