@@ -7,7 +7,6 @@ import './styles/showCourse.scss'
 import {
   CCol,
   CRow,
-  CTabs,
   CNav,
   CNavItem,
   CNavLink,

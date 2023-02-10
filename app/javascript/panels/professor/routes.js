@@ -2,13 +2,13 @@ import React from 'react';
 
 const Courses = React.lazy(() => import('./components/Courses/Courses'))
 const ShowCourse = React.lazy(() => import('./components/Courses/ShowCourse'))
-
+const Exams = React.lazy(() => import('./components/Exams/Exams'))
 
 const routes = [
   { path: '/', exact: true, name: 'Magna', element: Courses },
   { path: '/programas', exact: true, name: 'Mis Programas', element: Courses },
   { path: '/programas/ver/:program_id', exact: true, name: 'Ver Programa', element: ShowCourse },
-  { path: '/programas/:id/evaluaciones/', exact: true, name: 'Evaluaciones', element: Courses },
+  { path: '/programas/:program_id/evaluaciones/', exact: true, name: 'Evaluaciones', element: Exams },
   
   { path: '/programas/:id/evaluaciones/nuevo', exact: true, name: 'Nueva Evaluación', element: Courses },
   { path: '/programas/:id/evaluaciones/:id/editar', exact: true, name: 'Editar', element: Courses },
