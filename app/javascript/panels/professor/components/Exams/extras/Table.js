@@ -15,6 +15,7 @@ import {
 import DateTimePicker from 'react-datetime-picker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faCheckToSlot,
   faClock,
   faEye,
   faPen,
@@ -59,7 +60,7 @@ const Table = (props) => {
         <CTooltip content="Empezar a calificar las entregas" placement="top-start">
           <Link to={`/programas/${course.id}/evaluaciones/${_exam.id}/entregas`}>
             <CButton className="m-1 btn btn-primary btn-sm">
-              Task
+              <FontAwesomeIcon icon={faCheckToSlot} size='lg' inverse />
             </CButton>
           </Link>
         </CTooltip>
@@ -71,7 +72,7 @@ const Table = (props) => {
             className="m-1 btn btn-primary btn-sm"
             onClick={() => props.handleCalificateExam(_exam)}
           >
-            Task
+            <FontAwesomeIcon icon={faCheckToSlot} size='lg' inverse />
           </CButton>
         </CTooltip>
       )
@@ -184,7 +185,7 @@ const Table = (props) => {
                                 className="m-1 btn btn-warning btn-sm"
                                 onClick={() => handleOpenModal(true, exam)}
                               >
-                                <FontAwesomeIcon icon={faClock} size='lg' inverse />
+                                <FontAwesomeIcon icon={faClock} size='lg' />
                               </CButton>
                             </CTooltip>}
                           </td>
