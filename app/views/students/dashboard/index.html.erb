@@ -1,3 +1,10 @@
-<h1>
-  estas en el alumno
-</h1>
+<% if current_student %>
+  <script>
+    localStorage.setItem("current_user", JSON.stringify(<%= current_student.to_json.html_safe %>) );
+    localStorage.setItem("current_rol", "student" );
+  </script>
+<% end %>
+
+<%= content_tag(:div, "", id:"app", data: {
+  controller: "student"
+})%>

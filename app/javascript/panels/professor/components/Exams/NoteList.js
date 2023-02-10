@@ -92,7 +92,7 @@ const NoteList = () => {
             <tbody>
               {
 
-                students !== {} && students && students.map((student, index_i) => {
+                  students && students.map((student, index_i) => {
                   return (
                     <tr key={index_i}>
                       <td> {student.student_name} </td>
