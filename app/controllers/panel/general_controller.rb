@@ -6,9 +6,9 @@ class Panel::GeneralController < ApplicationController
       data: califications.map { |calification| {
           id: calification.id,
           student: calification.student.first_name + " " + calification.student.last_name,
-          score: calification.exam_score.score,
+          score: calification.exam_score.nil? ? 0 : calification.exam_score.score,
           percent: calification.percent,
-          comment: calification.exam_score.feedback,
+          comment: calification.exam_score.nil? ? "" : calification.exam_score.feedback,
           created_at: calification.created_at
         }
       }, status: :ok
@@ -22,9 +22,9 @@ class Panel::GeneralController < ApplicationController
       data: {
           id: calification.id,
           student: calification.student.first_name + " " + calification.student.last_name,
-          score: calification.exam_score.score,
+          score: calification.exam_score.nil? ? 0 : calification.exam_score.score,
           percent: calification.percent,
-          comment: calification.exam_score.feedback,
+          comment: calification.exam_score.nil? ? "" : calification.exam_score.feedback,
           created_at: calification.created_at,
           file: calification.file,
           type_exam: exam.type_exam,

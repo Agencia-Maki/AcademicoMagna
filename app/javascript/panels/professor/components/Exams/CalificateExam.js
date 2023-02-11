@@ -3,6 +3,9 @@ import { saveAs } from "file-saver"
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import SweetAlert2 from 'react-sweetalert2'
+
+import { useParams } from 'react-router-dom'
+
 import { passCsrfToken } from '../../../../helpers/csrftoken'
 import useChange from '../../../../hooks/useChange'
 
@@ -45,6 +48,8 @@ const CalificateExam = (props) => {
   const [swalProps, setSwalProps] = useState({})
   const [typeModal, setTypeModal] = useState("")
 
+  const { program_id, exam_id } = useParams()
+
   const { data, handleChange, resetData } = useChange(initialScorePrototype)
 
   const normalizeStatusEvaluation = (status) => {
@@ -58,17 +63,17 @@ const CalificateExam = (props) => {
   }
 
   const getAnswers = async () => {
-    const response = await axios.get(url.replace(':exam_id', props.match.params.exam_id))
+    const response = await axios.get(url.replace(':exam_id', exam_id))
     setAnswers(response.data.data)
   }
 
   const getListStudents = async () => {
-    const response = await axios.get(`/panel/professor/courses/${props.match.params.id}/students`)
+    const response = await axios.get(`/panel/professor/courses/${program_id}/students`)
     setStudents(response.data.data)
   }
 
   const getExam = async () => {
-    const response = await axios.get(url_get_exam.replace(':exam_id', props.match.params.exam_id))
+    const response = await axios.get(url_get_exam.replace(':exam_id', exam_id))
     setExam(response.data.exam)
   }
 
@@ -137,7 +142,7 @@ const CalificateExam = (props) => {
 
   // /exams/:exam_id/change_status
   const handleCloseCalifications = async () => {
-    const response = await axios.post(`/panel/professor/exams/${props.match.params.exam_id}/revise_exam`, {})
+    const response = await axios.post(`/panel/professor/exams/${exam_id}/revise_exam`, {})
     // axios.post(`/panel/professor/exams/${exam.id}/revise_exam`, {}).then(response => {
     if (response.data.status === "ok") {
       toast.success(response.data.message, { theme: "dark" })

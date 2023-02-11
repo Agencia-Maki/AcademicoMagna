@@ -35,7 +35,12 @@ class Panel::Student::StudentAnswersController < ApplicationController
     student_answer = current_student.student_answers.find_by(exam_id: params[:exam_id])
     current_exam = Exam.find(params[:exam_id])
     # byebug
-    if student_answer.attempt < current_exam.attempt
+
+    if student_answer.nil?
+      render json: {
+        status: 200,      # si es 200 se puede intentar resolver el examen
+      }
+    elsif (student_answer.attempt < current_exam.attempt)
       render json: {
         status: 200,      # si es 200 se puede intentar resolver el examen
       }

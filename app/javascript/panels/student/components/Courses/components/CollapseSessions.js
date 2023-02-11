@@ -13,13 +13,10 @@ import {
 const CollapseSessions = (props) => {
   const [topics, setTopics] = useState(false)
 
-  const [currentVideo, setCurrentVideo] = useState({})
-
   const [isOpen, setOpen] = useState(false)
   const [videoLink, setVideoLink] = useState('')
 
   const showVideo = (_video) => {
-    setCurrentVideo(_video)
     setVideoLink(youtube_parser(_video.link_video))    
     setOpen(true)
   }

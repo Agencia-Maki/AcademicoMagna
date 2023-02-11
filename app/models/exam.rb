@@ -1,5 +1,6 @@
 class Exam < ApplicationRecord
   before_create :set_initial_status
+  before_create :set_initial_attemps_for_manual_exams
 
   belongs_to :course
   has_many :student_answers, dependent: :destroy    # entregas de estudiantes
@@ -14,6 +15,12 @@ class Exam < ApplicationRecord
   private
     def set_initial_status
       self.status = :on_hold
+    end
+
+    def set_initial_attemps_for_manual_exams
+      if self.type_exam == 'manual'
+        self.attempt = 5
+      end
     end
 
 end
