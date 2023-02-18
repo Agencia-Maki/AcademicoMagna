@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_181016) do
     t.string "cover"
     t.string "magna_class_link"
     t.integer "show_magna_class_link"
+    t.integer "its_free"
     t.string "conference_link"
     t.bigint "professor_id"
     t.bigint "course_category_id", null: false

@@ -34,6 +34,9 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const asideShow = useSelector((state) => state.asideShow)
 
+
+
+
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
@@ -59,13 +62,18 @@ const AppHeader = (props) => {
             />
           </CInputGroup>
         </CForm> */}
-        <CHeaderNav className="ms-auto">
+        <CHeaderNav className="m-auto">
+          <strong>Visita nuestra web &nbsp;<a href="https://magna.edu.pe/" target="_blank" rel="noreferrer">www.magna.edu.pe</a></strong>
           {/* <AppHeaderDropdownNotif />
           <AppHeaderDropdownTasks />
           <AppHeaderDropdownMssg /> */}
         </CHeaderNav>
         <CHeaderNav className="ms-3 me-4">
-          <AppHeaderDropdown 
+          <strong className='mt-2'>
+            {currentUser.gender === "male" ? <small className="text-info">Bienvenido</small> : <small>Bienvenida</small>}
+            <small className="text-info"> {currentUser.first_name} </small>
+          </strong>
+          <AppHeaderDropdown
             currentUser={currentUser}
           />
         </CHeaderNav>

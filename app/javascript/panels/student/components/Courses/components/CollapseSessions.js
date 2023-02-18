@@ -30,8 +30,6 @@ const CollapseSessions = (props) => {
     return url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
   }
 
-
-
   const showLinkVideo = (lesson) => {
     if (lesson.link_video !== '') {
       return (
@@ -51,7 +49,7 @@ const CollapseSessions = (props) => {
           <h6>{session.name}</h6>
           { showLinkVideo(session) }
         </div>
-        <span>{HTMLReactParser(session.topics)}</span>
+        <span className='text-white'>{HTMLReactParser(session.topics)}</span>
       </div>
     ))
     return sessions

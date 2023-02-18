@@ -9,6 +9,7 @@ class CreateCourses < ActiveRecord::Migration[7.0]
       t.string :cover
       t.string :magna_class_link
       t.integer :show_magna_class_link
+      t.integer :its_free
       t.string :conference_link
       t.references :professor, null: :true, foreign_key: true
       t.references :course_category, null: false, foreign_key: true

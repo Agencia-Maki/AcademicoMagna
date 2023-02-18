@@ -23,9 +23,12 @@ import {
   cilDollar
 } from '@coreui/icons'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faHeadset
+} from '@fortawesome/free-solid-svg-icons'
+
 import axios from "axios"
-
-
 
 const AppAside = () => {
   const dispatch = useDispatch()
@@ -126,12 +129,14 @@ const AppAside = () => {
                       <CIcon icon={cilDollar} /> {course.price_dollar}
                     </small>
                     <CTooltip content="Solicitar Información">
-                      <a className='btn btn-primary btn-sm float-end mt-2' href="https://wa.me/51958745005" target="_blank" rel='noreferrer'>Info</a>
+                      <a className='btn btn-primary btn-sm float-end mt-2' href="https://wa.me/51958745005" target="_blank" rel='noreferrer'>
+                        <FontAwesomeIcon icon={faHeadset} inverse/>
+                      </a>
                     </CTooltip>
                   </CListGroupItem>
                 )
               })
-            }  
+            }
           </CListGroup>
 
         </CTabPane>
@@ -216,7 +221,7 @@ const AppAside = () => {
           <h6>Configuración</h6>
           <div>
             <div className="clearfix mt-4">
-              <CFormSwitch size="lg" label="Modo Oscuro" id="DarkMode" defaultChecked />
+              <CFormSwitch size="lg" label="Modo Oscuro" id="DarkMode" defaultUnchecked disabled />
             </div>
             <div>
               <small className="text-medium-emphasis">

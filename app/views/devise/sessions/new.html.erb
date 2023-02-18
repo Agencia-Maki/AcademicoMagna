@@ -97,7 +97,6 @@
 
   .form-control {
     position: relative;
-    margin: 30px 0 30px;
   }
 
   .form-control input {
@@ -107,7 +106,6 @@
     border-bottom: 1px #fff solid;
     display: block;
     width: 100%;
-    padding: 40px 0 0 0;
     font-size: 18px;
   }
 
@@ -217,23 +215,25 @@
     <div class="form-wrapper">
       <div class="form-container">
         <h1> INICIO DE SESIÓN</h1>
+        <% if resource_name.to_s == "professor" %>
+          <span style="color: #1cdaae">Panel de Profesores</span>
+        <% elsif resource_name.to_s == "student" %>
+          <span style="color: #1cdaae">Panel de Alumnos</span>
+        <% elsif resource_name.to_s == "admin" %>
+          <span style="color: #1cdaae">Panel Administrativo</span>
+        <% end %>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="form-control">
-            <% if resource_name.to_s == "professor" %>
-              <span style="color: #1cdaae">Panel de Profesores</span>
-            <% elsif resource_name.to_s == "student" %>
-              <span style="color: #1cdaae">Panel de Alumnos</span>
-            <% elsif resource_name.to_s == "admin" %>
-              <span style="color: #1cdaae">Panel Administrativo</span>
-            <% end %>
+          <div class="form-control">            
             <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "DNI o email o codigo" %>
           </div>
 
+          <br/>
           <div class="form-control">
             <%= f.password_field :password, class: "form-control", placeholder: "Contraseña", autocomplete: "current-password" %>
           </div>
 
+          <br/>
           <div class="actions">
             <%= f.submit "Ingresar", :class => "login-btn" %>
           </div>

@@ -20,7 +20,8 @@ class Course < ApplicationRecord
   validate :check_start_date
   validate :check_end_date
 
-  enum status: [:in_progress, :completed, :on_hold, :cancelled]
+  enum status: [:in_progress, :completed, :on_hold, :closed]
+  enum its_free: [:free, :paid]
   enum show_magna_class_link: [:show, :hide]
 
 
@@ -50,6 +51,15 @@ class Course < ApplicationRecord
       end
     end
 
+    self.save!
+  end
+
+  def close_inscriptions
+    self.status = :closed
+    self.inscriptions.each do |inscription|
+      inscription.status = :inactive
+      inscription.save!
+    end
     self.save!
   end
 

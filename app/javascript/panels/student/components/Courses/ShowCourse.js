@@ -32,6 +32,10 @@ const ShowCourse = () => {
 
   const { program_id } = useParams()
 
+  function youtube_parser(url) {
+    return url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await axios.get('/panel/student/course/' + String(program_id))
@@ -83,29 +87,68 @@ const ShowCourse = () => {
           </CCol>
 
           <CCol size={8}>
-            <CNav variant="tabs" role="tablist">
+            <CNav variant="tabs" role="tablist" style={{ background: "#fff" }}>
               <CNavItem>
                 <CNavLink
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', color: '#1e2133', fontWeight: 'bold' }}
                   active={activeKey === 1}
                   onClick={() => setActiveKey(1)}
                 >
-                  Sesiones
+                  Clase Magna
                 </CNavLink>
               </CNavItem>
               <CNavItem>
                 <CNavLink
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', color: '#1e2133', fontWeight: 'bold' }}
                   active={activeKey === 2}
                   onClick={() => setActiveKey(2)}
+                >
+                  Sesiones
+                </CNavLink>
+              </CNavItem>
+
+              <CNavItem>
+                <CNavLink
+                  style={{ cursor: 'pointer', color: '#1e2133', fontWeight: 'bold' }}
+                  active={activeKey === 3}
+                  onClick={() => setActiveKey(3)}
                 >
                   Material
                 </CNavLink>
               </CNavItem>
             </CNav>
             <CTabContent>
-              <CTabPane role="tabpanel" aria-labelledby="sessions-tab" visible={activeKey === 1}>
-                <CCard className='card-box-shadow'>
+              <CTabPane role="tabpanel" aria-labelledby="magna-class-tab" visible={activeKey === 1} style={{ backgroundColor: "#3c4b64" }}>
+                <CCard className='card-box-shadow' style={{ backgroundColor: "#3c4b64" }}>
+                  <CCardBody>
+                    {course.data.magna_class_link === "null" ? '' :
+                      <div id="ytPlayer">
+                        <p className="text-white">
+                          Es un placer dirigirnos a ustedes en nombre de MAGNA IEP, su plataforma de educación en línea. Nos complace anunciar que hemos creado un producto revolucionario llamado "Clase Magna" para mejorar su experiencia de aprendizaje.
+                        </p>
+                        {/* {`https://www.youtube.com/embed/${youtube_parser(course.data.magna_class_link)}`} */}
+                        <iframe
+                          width="560"
+                          height="315"
+                          src={`https://www.youtube.com/embed/${youtube_parser(course.data.magna_class_link)}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title="Embedded youtube"
+                        />
+                        {/* <iframe id="ytplayer" type="text/html" width="720" height="405"
+                          src={`https://www.youtube.com/watch?v=${youtube_parser(course.data.magna_class_link)}`}
+                          frameborder="0" allowfullscreen></iframe> */}
+
+                        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/u__f_zuZkok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                      </div>
+
+                    }
+                  </CCardBody>
+                </CCard>
+              </CTabPane>
+              <CTabPane role="tabpanel" aria-labelledby="sessions-tab" visible={activeKey === 2} style={{ backgroundColor: "#3c4b64" }}>
+                <CCard className='card-box-shadow' style={{ backgroundColor: "#3c4b64" }} >
                   <CCardBody>
                     {
                       course.chapters && course.chapters.length > 0 ?
@@ -121,8 +164,8 @@ const ShowCourse = () => {
                   </CCardBody>
                 </CCard>
               </CTabPane>
-              <CTabPane role="tabpanel" aria-labelledby="materials-tab" visible={activeKey === 2}>
-                <CCard className='card-box-shadow'>
+              <CTabPane role="tabpanel" aria-labelledby="materials-tab" visible={activeKey === 3} style={{ backgroundColor: "#3c4b64" }}>
+                <CCard className='card-box-shadow' style={{ backgroundColor: "#3c4b64" }} >
                   <CCardBody>
                     {
                       course.chapters && course.chapters.length > 0 ?
@@ -138,6 +181,7 @@ const ShowCourse = () => {
                   </CCardBody>
                 </CCard>
               </CTabPane>
+
             </CTabContent>
           </CCol>
 

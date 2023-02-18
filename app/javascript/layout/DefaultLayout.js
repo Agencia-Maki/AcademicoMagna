@@ -3,6 +3,8 @@ import { AppAside, AppContent, AppSidebar, AppFooter, AppHeader } from '../compo
 
 import { ToastContainer } from 'react-toastify'
 
+import CourseButton from '../components/CourseButton'
+
 const DefaultLayout = (props) => {
   const { routes, navigation } = props
   const currentUser = JSON.parse(localStorage.getItem('current_user'))
@@ -19,6 +21,7 @@ const DefaultLayout = (props) => {
           <AppContent 
             routes={routes}
           />
+          <CourseButton />
         </div>
         <AppFooter />
       </div>

@@ -8,6 +8,7 @@ class Panel::Student::CoursesController < ApplicationController
           id: course.id,
           name: course.name,
           description: course.description,
+          magna_class_link: course.magna_class_link,
           start_date: course.start_date,
           end_date: course.end_date, 
           status: course.status,

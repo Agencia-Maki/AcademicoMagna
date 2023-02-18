@@ -33,7 +33,7 @@ const CollapseMaterials = (props) => {
   const [modalStatus, setModalStatus] = useState(false)
   const [file, setFile] = useState(singleFile)
 
-  const { data, handleChange, handleChangeFile, resetData, setData } = useChange(prototypeMaterial)
+  const { data, handleChange, handleChangeFile} = useChange(prototypeMaterial)
 
   const setToast = (_data) => {
     if (_data.status === 'ok') {
@@ -87,23 +87,11 @@ const CollapseMaterials = (props) => {
     }, 800)
   }
 
-  const deleteMaterial = async (_material) => {
-    await axios.delete(`${url}/${String(_material.id)}`, {}).then(response => {
-      setToast(response.data)
-      setTimeout(() => {
-        location.reload();
-      }, 800)
-    }).catch(error => {
-      console.log(error)
-    })
-  }
-
-
   const getMaterial = (_chapter) => {
     const materials = _chapter.materials.map((material, index) => (
       <div key={index} className="row material-item-container">
         <div className="col-md-10 material-item">
-          <span onClick={() => saveFile(material)} >{material.name}</span>
+          <span className="text-white" onClick={() => saveFile(material)} >{material.name}</span>
         </div>
         <div className="col-md-2">
           <CTooltip content="Descargar material" placement="top-start">
@@ -135,7 +123,7 @@ const CollapseMaterials = (props) => {
         <>
           <div className="row download-material-title">
             <div className="col-md-10 icon-explayed">
-              <FontAwesomeIcon icon={faFolderTree} className="icon-folderl" size='lg' />
+              <FontAwesomeIcon icon={faFolderTree} className="icon-folderl" size='lg' style={{ color: "#03f3bb" }} />
             </div>
           </div>
           {getMaterial(props.chapter)}
