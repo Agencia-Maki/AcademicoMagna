@@ -24,7 +24,6 @@ class Course < ApplicationRecord
   enum its_free: [:free, :paid]
   enum show_magna_class_link: [:show, :hide]
 
-
   def clone_all_data(course_reference_id, name)
     course_reference = Course.find(course_reference_id)
     self.name = name
@@ -38,7 +37,6 @@ class Course < ApplicationRecord
     self.professor_id = course_reference.professor_id
     self.course_category_id = course_reference.course_category_id
     self.conference_link = course_reference.conference_link
-
 
     course_reference.chapters.each do |original_chapter|
       new_chapter = original_chapter.dup
@@ -56,10 +54,7 @@ class Course < ApplicationRecord
 
   def close_inscriptions
     self.status = :closed
-    self.inscriptions.each do |inscription|
-      inscription.status = :inactive
-      inscription.save!
-    end
+    self.inscriptions.update_all(status: :inactive)
     self.save!
   end
 

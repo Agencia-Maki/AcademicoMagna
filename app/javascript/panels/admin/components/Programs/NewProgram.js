@@ -15,7 +15,7 @@ import {
   CCol,
   CRow,
   CButton,
-  CForm, CFormLabel, CFormInput, CFormSelect, CFormText, CFormTextarea
+  CForm, CFormLabel, CFormInput, CFormSelect, CFormText, CFormTextarea, CFormSwitch, CTooltip
 } from '@coreui/react-pro'
 
 const initialState = {
@@ -47,10 +47,16 @@ const NewProgram = () => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [professors, setProfessors] = useState([])
   const [categories, setCategories] = useState([])
+  const [courseFreeStatus, setCourseFreeStatus] = useState(false)
 
 
   const onChangeDate = date => {
     setDate(date);
+  }
+
+  const onChangeSwitch = (e) => {
+    // setCourseFreeStatus(!courseFreeStatus)
+    setCourseFreeStatus(e.target.checked)
   }
 
   const loadData = async () => {
@@ -74,6 +80,7 @@ const NewProgram = () => {
     formData.append('end_date', formatYmd(date[1]))
     formData.append('conference_link', data.conference_link)
     formData.append('magna_class_link', data.magna_class_link)
+    formData.append('its_free', courseFreeStatus ? "free" : "paid")
     formData.append('cover', cover)
 
     await insertModel(formData)
@@ -85,6 +92,7 @@ const NewProgram = () => {
 
   return (
     <div>
+      { console.log(courseFreeStatus) }
       <CRow>
         <CCol lg={12}>
           <CCard>
@@ -148,7 +156,7 @@ const NewProgram = () => {
                         <CFormLabel htmlFor="magna_class_link">Clase Magna</CFormLabel>
                       </CCol>
                       <CCol xs="12" md="9">
-                        <CFormInput id="magna_class_link" name="magna_class_link" placeholder="Link de la clase Magna (gratuita)" className="form-horizontal" value={magna_class_link} onChange={handleChange} />
+                        <CFormInput id="magna_class_link" name="magna_class_link" placeholder="Link de la clase Magna" className="form-horizontal" value={magna_class_link} onChange={handleChange} />
                         <CFormText>Ingresa el link de la clase Magna (Extra).</CFormText>
                       </CCol>
                     </CRow>
@@ -173,6 +181,17 @@ const NewProgram = () => {
                           value={date}
                         />
                         <CFormText>Es necesario ingresar las fechas de Inicio y Fin.</CFormText>
+                      </CCol>
+                    </CRow>
+
+                    <CRow className="mt-3">
+                      <CCol md="3">
+                        <CFormLabel htmlFor="its_free">Curso Gratuito?</CFormLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CTooltip content="El curso gratuito estará disponible para todos los alumnos con al menos una matrícula vigente">
+                          <CFormSwitch label="Marca esta opcion si este curso es gratuito" id="its_free" onChange={(e) => onChangeSwitch(e)}/>
+                        </CTooltip>
                       </CCol>
                     </CRow>
                   </CCol>

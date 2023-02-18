@@ -43,6 +43,7 @@ class Panel::Admin::CoursesController < ApplicationController
     @course.professor_id = params[:professor_id]
     @course.course_category_id = params[:course_category_id]
     @course.conference_link = params[:conference_link]
+    @course.its_free = params[:its_free]
     if @course.save
       render json: {
         message: "Programa registrado con exito",
@@ -116,7 +117,7 @@ class Panel::Admin::CoursesController < ApplicationController
     end
 
     def course_params
-      course_attributes = %i[name description start_date end_date status cover conference_link professor_id course_category_id show_magna_class_link magna_class_link]
+      course_attributes = %i[name description start_date end_date status cover conference_link professor_id course_category_id show_magna_class_link magna_class_link its_free]
       params.require(:course).permit(course_attributes)
     end
 end
