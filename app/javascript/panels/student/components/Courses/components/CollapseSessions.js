@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import HTMLReactParser from 'html-react-parser'
-import ModalVideo from 'react-modal-video'
 import {
   CTooltip,
   CCollapse
@@ -11,14 +10,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 const CollapseSessions = (props) => {
+  const { setShowModalVideo, setCurrentLesson } = props
+
+
   const [topics, setTopics] = useState(false)
 
-  const [isOpen, setOpen] = useState(false)
-  const [videoLink, setVideoLink] = useState('')
-
-  const showVideo = (_video) => {
-    setVideoLink(youtube_parser(_video.link_video))    
-    setOpen(true)
+  const handleOpenVideoModal = (lesson) => {
+    setShowModalVideo(true)
+    setCurrentLesson(lesson)
   }
 
   const showTopics = (e) => {
@@ -26,16 +25,12 @@ const CollapseSessions = (props) => {
     e.preventDefault();
   }
 
-  function youtube_parser(url) {
-    return url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
-  }
-
   const showLinkVideo = (lesson) => {
     if (lesson.link_video !== '') {
       return (
         <CTooltip content="Ver grabacion" placement="top-start">
           <CTooltip content="Ver grabacion" placement="top-start">
-            <FontAwesomeIcon icon={faFilm} className="float-end" size='lg' inverse onClick={() => showVideo(lesson)} />
+            <FontAwesomeIcon icon={faFilm} className="float-end" size='lg' inverse onClick={() => handleOpenVideoModal(lesson)} />
           </CTooltip>
         </CTooltip>
       )
@@ -76,7 +71,6 @@ const CollapseSessions = (props) => {
           { getSessions(props.chapter) }
         </>
       </CCollapse>
-      <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={videoLink} onClose={() => setOpen(false)} />
     </>
   )
 }

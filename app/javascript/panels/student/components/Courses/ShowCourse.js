@@ -26,14 +26,23 @@ import {
 import CollapseSession from './components/CollapseSessions'
 import CollapseMaterials from './components/CollapseMaterials'
 
+import ModalVideo from './components/ModalVideo'
+
 const ShowCourse = () => {
   const [course, setCourse] = useState({})
   const [activeKey, setActiveKey] = useState(1)
 
+  const [showModalVideo, setShowModalVideo] = useState(false)
+  const [currentLesson, setCurrentLesson] = useState({})
+
   const { program_id } = useParams()
 
-  function youtube_parser(url) {
-    return url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
+  const handleOpenVideoModal = () => {    
+    setCurrentLesson({
+      name: "Clase Magna",
+      link_video: course.data.magna_class_link
+    })
+    setShowModalVideo(true)
   }
 
   useEffect(() => {
@@ -121,28 +130,21 @@ const ShowCourse = () => {
               <CTabPane role="tabpanel" aria-labelledby="magna-class-tab" visible={activeKey === 1} style={{ backgroundColor: "#3c4b64" }}>
                 <CCard className='card-box-shadow' style={{ backgroundColor: "#3c4b64" }}>
                   <CCardBody>
-                    {course.data.magna_class_link === "null" ? '' :
+                    {course.data.magna_class_link === null ? '' :
                       <div id="ytPlayer">
-                        <p className="text-white">
-                          Es un placer dirigirnos a ustedes en nombre de MAGNA IEP, su plataforma de educación en línea. Nos complace anunciar que hemos creado un producto revolucionario llamado "Clase Magna" para mejorar su experiencia de aprendizaje.
+                        <p className="text-white text-justify">
+                          Nos complace presentarte nuestra clase MAGNA, una introducción a nuestro programa educativo que te dará un panorama completo de lo que podrás aprender con nosotros. En esta clase, podrás conocer a nuestro equipo de profesionales altamente capacitados y experimentados, quienes te guiarán en el inicio de tu camino hacia el conocimiento y el aprendizaje.
                         </p>
-                        {/* {`https://www.youtube.com/embed/${youtube_parser(course.data.magna_class_link)}`} */}
-                        <iframe
-                          width="560"
-                          height="315"
-                          src={`https://www.youtube.com/embed/${youtube_parser(course.data.magna_class_link)}`}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          title="Embedded youtube"
-                        />
-                        {/* <iframe id="ytplayer" type="text/html" width="720" height="405"
-                          src={`https://www.youtube.com/watch?v=${youtube_parser(course.data.magna_class_link)}`}
-                          frameborder="0" allowfullscreen></iframe> */}
-
-                        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/u__f_zuZkok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                        <p className="text-white text-justify">
+                          La clase magna es una oportunidad para descubrir lo que hace a nuestra institución única y especial, y cómo podemos ayudarte a alcanzar tus metas profesionales. Durante la clase, conocerás nuestra metodología de enseñanza, nuestros recursos educativos, y todo lo que necesitas saber para comenzar a aprovechar al máximo tus estudios con nosotros.
+                        </p>
+                        <br /><br />
+                        <center>
+                          <CButton size='sm' color='primary' onClick={() => handleOpenVideoModal(true)}>
+                            <strong className='text-white'>Ver video</strong>
+                          </CButton>
+                        </center>
                       </div>
-
                     }
                   </CCardBody>
                 </CCard>
@@ -157,6 +159,8 @@ const ShowCourse = () => {
                             key={index}
                             chapter={chapter}
                             index={index}
+                            setShowModalVideo={setShowModalVideo}
+                            setCurrentLesson={setCurrentLesson}
                           >
                           </CollapseSession>
                         )) : ''
@@ -184,9 +188,17 @@ const ShowCourse = () => {
 
             </CTabContent>
           </CCol>
-
-
         </CRow>}
+
+      {
+        showModalVideo &&
+        <ModalVideo
+          showModal={showModalVideo}
+          setShowModal={setShowModalVideo}
+          currentLesson={currentLesson}
+          setCurrentLesson={setCurrentLesson}
+        />
+      }
     </>
   );
 };
