@@ -31,6 +31,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    display: grid;
   }
 
   .form-wrapper {
@@ -176,10 +177,13 @@
   }
 
   .logo_only_small_screen {
-    display: none;
     margin-inline: auto;
-    margin-top: 10vh;
-    margin-bottom: -10vh;
+    /* margin-top: 10vh;
+    margin-bottom: -10vh; */
+    width: 200px;
+    margin-inline: auto;
+    margin-block-start: auto;
+    /* margin-left: 20%%; */
   }
 
   @media screen and (max-width: 600px) {
@@ -194,7 +198,7 @@
     }
     .logo_only_small_screen {
       display: block;
-      width: 80%;
+      width: 200px;
       object-fit: cover;
     }
   }
@@ -202,7 +206,7 @@
 
 <div class="izquierda">
   <div class="cualquiera">
-    <%= image_tag('login_academico_cover.jpeg', :class => "image_cover_login") %>
+    <%= image_tag('login_academico_cover.jpg', :class => "image_cover_login") %>
   </div>
 
   <div class="multiple-items">
