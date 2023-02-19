@@ -13,19 +13,22 @@ const slowPayer = {
   cover: {
     url: 'https://toyotireslatino.com/wp-content/uploads/2020/11/error-no-es-fracaso.jpg'
   },
-  start_date: Date.now(),
-  chapters: []
+  start_date: Date.now()
+  // chapters: []
 }
 
 const Courses = () => {
   const currentUser = JSON.parse(localStorage.getItem('current_user'))
-  const { getModelData: getCourses } = useCrud("")
+  const { getModelData: getPaidCourses, getModelData: getFreeCourses } = useCrud("")
 
   const [courses, setCourses] = useState([])
+  const [freeCourses, setFreeCourses] = useState([])
 
   const loadData = async () => {
-    const coursesData = await getCourses(`/panel/student/${currentUser.id}/courses`)
-    setCourses(coursesData.data)
+    const { data: paidcourses } = await getPaidCourses(`/panel/student/${currentUser.id}/courses`)
+    setCourses(paidcourses)
+    const { data: freecourses } = await getFreeCourses(`/panel/student/${currentUser.id}/free_courses`)
+    setFreeCourses(freecourses)
   }
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Courses = () => {
       {
         currentUser.status !== 'slow_payer' ?
           currentUser && courses.length > 0 ?
-            courses.map((course, index) => (
+            courses.map((course) => (
               <CourseCard
                 key={course.id}
                 course={course}
@@ -46,6 +49,18 @@ const Courses = () => {
 
               </CourseCard>
             )) : '' : <CourseCard course={slowPayer} typeCourse="slow_payer" />
+      }
+
+      <hr />
+
+      {
+        currentUser.status !== 'slow_payer' && freeCourses.length > 0 &&
+          freeCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+            />
+          ))
       }
 
     </CRow>

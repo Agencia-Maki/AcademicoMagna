@@ -46,11 +46,6 @@ const CourseCard = (props) => {
               <CCardText className="text-justify">
                 <small>{course.description.length > 100 ? course.description.slice(0, 150) + '...' : course.description}</small>
               </CCardText>
-              {/* <CListGroup flush>
-                <CListGroupItem># Alumnos: <b> {course.students.length} </b> </CListGroupItem>
-                <CListGroupItem># Módulos: <b> {course.chapters.length} </b> </CListGroupItem>
-                <CListGroupItem># Sesiones: <b> {getLessonsSize(course)} </b> </CListGroupItem>
-              </CListGroup> */}
             </CCardBody>
 
             <CCardFooter>

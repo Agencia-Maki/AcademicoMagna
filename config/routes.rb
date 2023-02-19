@@ -117,6 +117,7 @@ Rails.application.routes.draw do
       namespace :panel do
         namespace :student do
           get '/:student_id/courses', to: 'courses#index'
+          get '/:student_id/free_courses', to: 'courses#index_free_courses'
           get '/course/:id', to: 'courses#show'
           get '/courses/:course_id/exams', to: 'student_answers#index_exams'
           
