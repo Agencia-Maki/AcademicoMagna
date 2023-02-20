@@ -160,7 +160,7 @@
   .item-slick img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: 0.3s;
   }
 
@@ -184,6 +184,10 @@
     margin-inline: auto;
     margin-block-start: auto;
     /* margin-left: 20%%; */
+  }
+
+  .item-slick {
+    width: 250px !important;
   }
 
   @media screen and (max-width: 600px) {
@@ -261,7 +265,6 @@
       var courses = "";
       for (var i = 0; i < data.courses.length; i++) {
         courses += "<div class='item-slick'>" +
-                    // "<h3 class='courseTitle'>" + data.courses[i].name + "</h3>" +
                     "<img class='courseImage' width='100%' src='https://crm.magna.edu.pe" + data.courses[i].cover.url + "' alt='" + data.courses[i].name + "'>" +
                     "</div>";
       }
