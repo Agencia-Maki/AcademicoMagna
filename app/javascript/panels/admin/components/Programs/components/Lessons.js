@@ -10,7 +10,7 @@ import {
   CButton,
   CTooltip,
   CModalHeader, CModalTitle, CModalBody, CModalFooter, CModal,
-  CForm, CFormLabel, CFormInput
+  CForm, CFormLabel, CFormInput, CBadge
 } from '@coreui/react-pro'
 
 import ReactQuill from 'react-quill'
