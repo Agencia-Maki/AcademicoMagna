@@ -88,7 +88,7 @@ const Materials = (props) => {
       <CCol md={12} sm={12} xs={12}>
         <CCard>
           <CCardHeader>
-            <b> MÓDULO: {chapter.name} {chapter.id}</b>
+            <b> MÓDULO: {chapter.name} </b>
             <FontAwesomeIcon icon={faXmark} style={{ cursor: "pointer" }} className="float-end" onClick={() => props.setShowLessons(false)}/>
           </CCardHeader>
           <CCardBody>
