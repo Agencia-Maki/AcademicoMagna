@@ -52,7 +52,7 @@ class Panel::Student::CoursesController < ApplicationController
         start_date: chapter.start_date,
         end_date: chapter.end_date,
         materials: chapter.materials,
-        lessons: chapter.lessons
+        lessons: chapter.lessons.order(id: :asc)
         }
       },
       status: :ok
