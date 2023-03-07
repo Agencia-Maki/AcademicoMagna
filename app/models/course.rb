@@ -44,7 +44,7 @@ class Course < ApplicationRecord
     
       original_chapter.lessons.each do |original_lesson|
         new_lesson = original_lesson.dup
-        new_lesson.link_video = nil
+        new_lesson.link_video = ""
         new_chapter.lessons << new_lesson
       end
     end

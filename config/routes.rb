@@ -73,7 +73,7 @@ Rails.application.routes.draw do
           post '/exams/:exam_id/revise_exam', to: 'exams#revise_exam'
           put '/answers/:answer_id/set_manual_score', to: 'exams#manual_calification_by_student'
         end
-        # match '*', to: 'professors#no_logged', via: :all
+        # match '*path', to: 'pages#main', via: [:get]
       end
     end
   end

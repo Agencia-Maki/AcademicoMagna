@@ -72,7 +72,7 @@ class Panel::Admin::CoursesController < ApplicationController
     curso.name = params[:name]
     curso.description = params[:description]
     curso.start_date = params[:start_date]
-    curso.end_date = params[:end_date]
+    curso.end_date = params[:end_date].to_date - 1.minute
     curso.status = params[:status]
 
     unless params[:cover] == "[object Object]"

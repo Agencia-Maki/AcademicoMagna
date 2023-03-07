@@ -11,6 +11,8 @@ class Panel::Admin::ProfessorsController < ApplicationController
     }, status: :ok
   end
 
+  #############################################################
+
   def get_all
     @professors = Professor.where.not(id: 1)
     render json: @professors, status: :ok
@@ -23,6 +25,7 @@ class Panel::Admin::ProfessorsController < ApplicationController
   def new
     @professor = Professor.new
   end
+  #############################################################
 
   def create
     yearNow = Time.now.year%2000
