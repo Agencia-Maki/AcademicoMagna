@@ -15,8 +15,8 @@ function addHoursToDate(objDate, intHours) {
 export function normalizeDate(date) {
   const aux = new Date(date)
   var numberOfMlSeconds = aux.getTime();
-  var addMlSeconds = 60 * 60000 * 24;
-  var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
+  // var addMlSeconds = 60 * 60000 * 24;
+  var newDateObj = new Date(numberOfMlSeconds);
   var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
   return newDateObj.toLocaleDateString('es-ES', options);
 }

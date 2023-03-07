@@ -12,6 +12,9 @@ module AcademicoMagna
     config.load_defaults 7.0
     config.active_job.queue_adapter = :sidekiq
 
+    # I18n.available_locales = [:en, :es]
+    # config.i18n.default_locale = :en
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

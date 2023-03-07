@@ -142,4 +142,9 @@ Rails.application.routes.draw do
   end
 
   root 'pages#index'
+
+  namespace :api do
+    post '/students/from_crm', to: 'crm#createg'
+  end
+
 end

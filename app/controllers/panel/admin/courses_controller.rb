@@ -31,11 +31,12 @@ class Panel::Admin::CoursesController < ApplicationController
   end
 
   def create
+    byebug
     @course = Course.new
     @course.name = params[:name]
     @course.description = params[:description]
     @course.start_date = params[:start_date]
-    @course.end_date = params[:end_date]
+    @course.end_date = params[:end_date].to_date - 1.minute
     @course.status = params[:status]
     @course.cover = params[:cover]
     @course.show_magna_class_link = params[:show_magna_class_link]
