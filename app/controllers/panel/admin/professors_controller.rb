@@ -2,20 +2,20 @@ class Panel::Admin::ProfessorsController < ApplicationController
   before_action :set_professor, only: [:show, :update, :destroy]
 
   def index
-    @professors = Professor.all.order(created_at: :desc).page(params[:page])
+    professors = Professor.all.order(created_at: :desc).page(params[:page])
     render json: {
-      data: @professors,
-      current_page: @professors.current_page,
-      total_pages: @professors.total_pages,
-      per_pages: @professors.limit_value
+      data: professors,
+      current_page: professors.current_page,
+      total_pages: professors.total_pages,
+      per_pages: professors.limit_value
     }, status: :ok
   end
 
   #############################################################
 
   def get_all
-    @professors = Professor.where.not(id: 1)
-    render json: @professors, status: :ok
+    professors = Professor.where.not(id: 1)
+    render json: professors, status: :ok
   end
 
   def show

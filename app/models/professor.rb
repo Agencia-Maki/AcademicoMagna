@@ -5,7 +5,6 @@ class Professor < ApplicationRecord
          :registerable,
          :recoverable, 
          :rememberable,
-         :timeoutable,
          :validatable,
          authentication_keys: [:login]
 
