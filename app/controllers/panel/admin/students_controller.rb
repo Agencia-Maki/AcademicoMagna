@@ -1,5 +1,5 @@
 class Panel::Admin::StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :update, :destroy]
+  before_action :set_student, only: [:show, :update, :destroy, :send_credentials]
 
   def index
     @students = Student.all.order(created_at: :desc).page(params[:page])
@@ -14,6 +14,13 @@ class Panel::Admin::StudentsController < ApplicationController
   def get_all
     @students = Student.where.not(id: 2)  # tener cuidado con el id:2
     render json: @students, status: :ok
+  end
+
+  def send_credentials
+    StudentMailer.with(@student).welcome_email.deliver_now
+    render json: {
+      message: "Credenciales enviadas al alumno"
+    }, status: :ok
   end
 
   def show
@@ -85,7 +92,6 @@ class Panel::Admin::StudentsController < ApplicationController
         status: :unprocessable_entity
       }
     end
-    
   end
 
   private

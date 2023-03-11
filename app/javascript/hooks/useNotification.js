@@ -10,7 +10,16 @@ const useNotification = () => {
     })
     }
   }
-  return { setToast }
+
+  const successNotification = (_message) => {
+    toast.success(_message, {theme: "dark"})
+  }
+
+  const errorNotification = (_message) => {
+    toast.error(_message, {theme: "dark"})
+  }
+
+  return { setToast, successNotification, errorNotification }
 }
 
 export default useNotification

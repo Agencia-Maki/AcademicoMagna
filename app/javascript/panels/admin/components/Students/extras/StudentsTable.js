@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   CTooltip,
   CSmartTable,
@@ -7,15 +7,27 @@ import {
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faEnvelopesBulk,
   faEye,
   faPen
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeDocumentType } from '../../../../../helpers/auxiliarFuncionts'
-import { normalizeName, normalizeDate } from '../../../../../helpers/normalizes'
+import { normalizeDate } from '../../../../../helpers/normalizes'
+
+import useCrud from '../../../../../hooks/useCrud'
 
 const StudentsTable = (props) => {
   const { data, columns } = props
+  const { insertModelWithConfirmation: sendCredentials } = useCrud("/panel/admin/students/:id")
+
+  const bypassCalling = () => {
+    return null
+  }
+
+  const handleSendCredentials = async(item) => {
+    sendCredentials({}, `/panel/admin/students/${item.id}`, bypassCalling)
+  }
 
   return (
     <>
@@ -44,7 +56,8 @@ const StudentsTable = (props) => {
         paginationProps={{
           'size': 'sm',
           'bordered': 'true',
-          'align': 'end'
+          'align': 'end',
+          style: { cursor: "pointer" }
         }}
 
 
@@ -98,6 +111,12 @@ const StudentsTable = (props) => {
                 >
                   <FontAwesomeIcon icon={faPen} size="lg" inverse />
                 </Link>
+              </CTooltip>
+
+              <CTooltip content="Reenviar Correo de bienvenida" placement="top-start">
+                <CButton size='sm' color='primary' onClick={() => handleSendCredentials(item)} >
+                  <FontAwesomeIcon icon={faEnvelopesBulk} size="lg" inverse />
+                </CButton>
               </CTooltip>
             </td>
           ),

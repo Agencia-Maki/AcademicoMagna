@@ -8,14 +8,27 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEye,
-  faPen
+  faPen,
+  faEnvelopesBulk
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeDocumentType } from '../../../../../helpers/auxiliarFuncionts'
 import { normalizeDate } from '../../../../../helpers/normalizes'
+import useCrud from '../../../../../hooks/useCrud'
 
 const ProfessorsTable = (props) => {
   const { data, columns } = props
+
+  const { insertModelWithConfirmation: sendCredentials } = useCrud("/panel/admin/professors/:id")
+
+  const bypassCalling = () => {
+    return null
+  }
+
+  const handleSendCredentials = async(item) => {
+    sendCredentials({}, `/panel/admin/professors/${item.id}`, bypassCalling)
+  }
+
 
   return (
     <>
@@ -98,6 +111,12 @@ const ProfessorsTable = (props) => {
                 >
                   <FontAwesomeIcon icon={faPen} size="lg" inverse />
                 </Link>
+              </CTooltip>
+
+              <CTooltip content="Reenviar Correo de bienvenida" placement="top-start">
+                <CButton size='sm' color='primary' onClick={() => handleSendCredentials(item)} >
+                  <FontAwesomeIcon icon={faEnvelopesBulk} size="lg" inverse />
+                </CButton>
               </CTooltip>
             </td>
           ),

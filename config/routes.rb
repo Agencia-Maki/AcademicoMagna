@@ -31,9 +31,12 @@ Rails.application.routes.draw do
         namespace :admin do
           resources :students
           get 'all_students', to: 'students#get_all'
+          post '/students/:id', to: 'students#send_credentials'
 
           resources :professors
           get 'all_professors', to: 'professors#get_all'
+          post '/professors/:id', to: 'professors#send_credentials'
+
 
           resources :courses
           resources :course_categories
@@ -56,6 +59,9 @@ Rails.application.routes.draw do
           delete '/inscriptions/course/:course_id/students/:student_id/delete_inscription', to: 'inscriptions#delete_inscription_by_student'  ## CAMBIAR A DELETE
           post '/inscriptions/course/:course_id/in_block', to: 'inscriptions#create_inscriptions_in_block'
           resources :inscriptions
+
+          #######################################################################################################################
+
         end
         
         namespace :admin do

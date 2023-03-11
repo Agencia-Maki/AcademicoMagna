@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import useCrud from '../../../../hooks/useCrud'
 import useChange from '../../../../hooks/useChange'
 
@@ -31,9 +32,17 @@ const documentTypeOptions = [
 ]
 
 const NewStudent = () => {
-  const { insertModel } = useCrud('/panel/admin/students', '/alumnos')
+  const { insertModelWithConfirmation: insertStudent } = useCrud('/panel/admin/students', '/alumnos')
   const { data, handleChange } = useChange(initialState)
   const { first_name, last_name, document_number, document_type, email, phone, gender } = data
+
+  let navigate = useNavigate()
+
+  const layoutCallback = () => {
+    setTimeout(() => {
+      navigate('/alumnos')
+    }, 500)
+  }
 
   return (
     <div>
@@ -124,7 +133,7 @@ const NewStudent = () => {
                 type="submit" 
                 size="sm" 
                 color="success"
-                onClick={()=>insertModel(data)}
+                onClick={()=>insertStudent(data, '/panel/admin/students', layoutCallback)}
               >
                 Registrar
               </CButton>

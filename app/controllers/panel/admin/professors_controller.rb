@@ -1,5 +1,5 @@
 class Panel::Admin::ProfessorsController < ApplicationController
-  before_action :set_professor, only: [:show, :update, :destroy]
+  before_action :set_professor, only: [:show, :update, :destroy, :send_credentials]
 
   def index
     professors = Professor.all.order(created_at: :desc).page(params[:page])
@@ -58,6 +58,13 @@ class Panel::Admin::ProfessorsController < ApplicationController
         status: :unprocessable_entity
       }
     end
+  end
+
+  def send_credentials
+    ProfessorMailer.with(@professor).welcome_email.deliver_now
+    render json: {
+      message: "Credenciales enviadas al profesor"
+    }, status: :ok
   end
 
   def update

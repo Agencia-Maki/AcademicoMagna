@@ -27,7 +27,7 @@ class Professor < ApplicationRecord
   end
 
   def send_welcome_email
-    ProfessorMailer.with(self).welcome_email.deliver_later
+    ProfessorMailer.with(self).welcome_email.deliver_now
   end
 
   private
