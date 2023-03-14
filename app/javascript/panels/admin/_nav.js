@@ -5,7 +5,8 @@ import {  faGaugeHigh,
   faFileSignature, 
   faPersonChalkboard,
   faUserGraduate,
-  faLaptopFile
+  faLaptopFile,
+  faIdCard
   } from '@fortawesome/free-solid-svg-icons'
 
 import { CNavItem, CNavTitle } from '@coreui/react-pro'
@@ -49,16 +50,16 @@ const _nav =  [
     to: '/matriculas',
     icon: <FontAwesomeIcon icon={faFileSignature} inverse className="me-4 ms-1" size='lg'/>,
   },
-  // {
-  //   component: CNavTitle,
-  //   name: 'Area Administrativa',
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Gestionar Administrativos',
-  //   to: '/roles',
-  //   icon: <FontAwesomeIcon icon={faGaugeHigh} inverse className="me-4 ms-1" size='lg'/>,
-  // },
+  {
+    component: CNavTitle,
+    name: 'Area Administrativa',
+  },
+  {
+    component: CNavItem,
+    name: 'Fichas de Alumnos',
+    to: '/fichas-alumnos',
+    icon: <FontAwesomeIcon icon={faIdCard} inverse className="me-4 ms-1" size='lg'/>,
+  },
   // {
   //   component: CNavItem,
   //   name: 'Roles y Permisos',

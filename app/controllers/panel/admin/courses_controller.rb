@@ -22,6 +22,13 @@ class Panel::Admin::CoursesController < ApplicationController
     render json: @courses, status: :ok
   end
 
+  def get_active
+    courses = Course.where.not(status: "closed")
+    render json: {
+      courses: courses
+    }, status: :ok
+  end
+
   def show
     render json: @course.as_json(include: [:professor, :course_category]), status: :ok
   end

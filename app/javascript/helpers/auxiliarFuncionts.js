@@ -62,3 +62,34 @@ export const getBadgeInscriptionStatus = (_inscription_status) => {
     )
   }
 }
+
+export const getBadgeStudentRecord = (_student_record) => {
+  if (_student_record === 'on_hold') {
+    return (
+      <CTooltip content="A espera de asociar a un alumno."> 
+        <span class="badge bg-info-gradient">ESPERA</span> 
+      </CTooltip>
+    )
+  } else if (_student_record === 'enrolled') {
+    return (
+      <CTooltip content="Ficha ya registrada y asociada a un alumno"> 
+        <span class="badge bg-success-gradient">MATRICULADO</span> 
+      </CTooltip>
+    )
+  } else if (_student_record === 'canceled') {
+    return (
+      <CTooltip content="Ficha cancelada, no fue asociada a ningun alumno"> 
+        <span class="badge bg-danger-gradient">CANCELADO</span> 
+      </CTooltip>
+    )
+  } else {
+    return (
+      <CTooltip content="Ficha sin especificar"> 
+        <span class="badge bg-warning-gradient">SIN ESPECIFICAR</span> 
+      </CTooltip>
+    )
+  }
+}
+
+
+

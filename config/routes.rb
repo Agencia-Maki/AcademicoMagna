@@ -37,7 +37,12 @@ Rails.application.routes.draw do
           get 'all_professors', to: 'professors#get_all'
           post '/professors/:id', to: 'professors#send_credentials'
 
+          #######################################################################################################################
+          get '/student_records', to: 'student_records#index'
+          post '/student_records/register_and_enrolled', to: 'student_records#register_and_enrolled'
+          #######################################################################################################################
 
+          get '/courses/active', to: 'courses#get_active'
           resources :courses
           resources :course_categories
 
@@ -147,10 +152,12 @@ Rails.application.routes.draw do
     # get '/test_get_califications', to: 'coordinator_professor#test_get_califications'
   end
 
+  namespace :api do
+    post '/student_records/create', to: 'student_records#create'
+  end
+
   root 'pages#index'
 
-  namespace :api do
-    post '/students/from_crm', to: 'crm#createg'
-  end
+  
 
 end
