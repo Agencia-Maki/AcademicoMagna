@@ -2,7 +2,7 @@ class Panel::Admin::MaterialsController < ApplicationController
   before_action :set_chapter
 
   def index
-    @materials = @chapter.materials
+    @materials = @chapter.materials.order(:id)
     render json: {
       data: @materials.map { |material| {
           id: material.id,

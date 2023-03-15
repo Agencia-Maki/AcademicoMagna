@@ -2,7 +2,7 @@ class Panel::Admin::ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :update, :destroy]
 
   def index_by_course
-    @chapters = Chapter.where(course_id: params[:course_id])
+    @chapters = Chapter.where(course_id: params[:course_id]).order(:id)
     render json: {
       data: @chapters,      
       status: :ok
