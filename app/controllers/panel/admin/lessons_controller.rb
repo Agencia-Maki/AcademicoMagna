@@ -3,7 +3,7 @@ class Panel::Admin::LessonsController < ApplicationController
   before_action :set_lesson, only: [:update, :destroy]
 
   def index
-    @lessons = @chapter.lessons.order(:name)
+    @lessons = @chapter.lessons.order(id: :asc)
     render json: {
       data: @lessons.map { |lesson| {
           id: lesson.id,
