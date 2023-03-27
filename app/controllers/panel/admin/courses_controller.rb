@@ -38,7 +38,7 @@ class Panel::Admin::CoursesController < ApplicationController
   end
 
   def create
-    byebug
+    # byebug
     @course = Course.new
     @course.name = params[:name]
     @course.description = params[:description]
