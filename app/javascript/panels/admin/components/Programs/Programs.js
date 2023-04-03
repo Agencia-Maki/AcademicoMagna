@@ -6,9 +6,7 @@ import {
   CCardHeader,
   CCol,
   CRow,
-  CTooltip,
   CButton,
-  CBadge
 } from '@coreui/react-pro'
 import useCrud from '../../../../hooks/useCrud'
 import { normalizeDate } from '../../../../helpers/normalizes'
@@ -105,6 +103,7 @@ const Programs = () => {
               <TablePrograms 
                 columns={columns}
                 data={courseList}
+                refreshData={loadData}
               />
             </CCardBody>
           </CCard>

@@ -2,18 +2,22 @@ class Panel::Admin::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :update, :destroy]
 
   def index
-    @courses = Course.all.order(created_at: :desc)
+    @courses = Course.includes(:professor, :course_category)
+              .order(status: :asc, end_date: :desc)
+              .map { |course|
+                {
+                  id: course.id,
+                  name: course.name,
+                  professor: "#{course.professor.first_name} #{course.professor.last_name}",
+                  start_date: course.start_date,
+                  end_date: course.end_date,
+                  category: course.course_category.name,
+                  status: course.status,
+                  delete_course: course.inscriptions.count.zero? ? "yes" : "no"
+                }
+              }
     render json: {
-      data: @courses.map { |course| {
-          id: course.id,
-          name: course.name,
-          professor: course.professor.first_name + " " + course.professor.last_name,
-          start_date: course.start_date,
-          end_date: course.end_date,
-          category: course.course_category.name,
-          status: course.status,
-        }
-      }, status: :ok
+      data: @courses, status: :ok
     }
   end
 
@@ -104,11 +108,18 @@ class Panel::Admin::CoursesController < ApplicationController
   end
 
   def destroy
-    @course.destroy
-    render json: { 
-      notice: 'Programa eliminado con exito', 
-      status: :ok
-    }
+    if @course.inscriptions.count == 0
+      @course.destroy
+      render json: { 
+        notice: 'Programa eliminado con exito', 
+        status: :ok
+      }
+    else
+      render json: { 
+        notice: 'El curso tiene alumnos matriculados', 
+        status: :unprocessable_entity
+      }
+    end
   end
 
 

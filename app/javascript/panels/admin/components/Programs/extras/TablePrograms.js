@@ -10,13 +10,24 @@ import {
   faEye,
   faListCheck,
   faPen,
-  faSliders
+  faSliders,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeCourseState } from '../../../../../helpers/auxiliarFuncionts'
 
+import useCrud from '../../../../../hooks/useCrud'
+
 const TablePrograms = (props) => {
-  const { data, columns } = props
+  const { data, columns, refreshData } = props
+
+  const { deleteModelWhitUrl: deleteCourse } = useCrud("/panel/admin/courses")
+
+  const handleDeleteCOurse = async (item) => {
+    await deleteCourse(`/panel/admin/courses/${item.id}`)
+    refreshData()
+  }
+
 
   return (
     <>
@@ -105,6 +116,14 @@ const TablePrograms = (props) => {
                   <FontAwesomeIcon icon={faListCheck} inverse />
                 </Link>
               </CTooltip>
+
+              { item.delete_course === "yes" && 
+                <CTooltip content="Eliminar Programa">
+                  <CButton size='sm' color='danger' onClick={() => handleDeleteCOurse(item)}>
+                    <FontAwesomeIcon icon={faTrash} inverse />
+                  </CButton>
+                </CTooltip>
+              }
             </td>
           )
         }}

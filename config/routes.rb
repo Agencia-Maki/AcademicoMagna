@@ -32,6 +32,7 @@ Rails.application.routes.draw do
           resources :students
           get 'all_students', to: 'students#get_all'
           post '/students/:id', to: 'students#send_credentials'
+          put '/students/:id/reset_password', to: 'students#reset_password'
 
           resources :professors
           get 'all_professors', to: 'professors#get_all'

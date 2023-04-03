@@ -1,5 +1,5 @@
 class Panel::Admin::StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :update, :destroy, :send_credentials]
+  before_action :set_student, only: [:show, :update, :destroy, :send_credentials, :reset_password]
 
   def index
     @students = Student.all.order(created_at: :desc).page(params[:page])
@@ -73,6 +73,22 @@ class Panel::Admin::StudentsController < ApplicationController
         status: :ok
       }
     else 
+      render json: {
+        message: @student.errors.full_messages,
+        status: :unprocessable_entity
+      }
+    end
+  end
+
+  def reset_password
+    @student.password = @student.document_number
+    @student.password_confirmation = @student.document_number
+    if @student.save
+      render json: {
+        message: "Contraseña restablecida con exito",
+        status: :ok
+      }
+    else
       render json: {
         message: @student.errors.full_messages,
         status: :unprocessable_entity

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEnvelopesBulk,
   faEye,
+  faKey,
   faPen
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -19,7 +20,10 @@ import useCrud from '../../../../../hooks/useCrud'
 
 const StudentsTable = (props) => {
   const { data, columns } = props
-  const { insertModelWithConfirmation: sendCredentials } = useCrud("/panel/admin/students/:id")
+  const { 
+        insertModelWithConfirmation: sendCredentials,
+        updateModelWithConfirmation: resetPassword
+        } = useCrud("/panel/admin/students/:id")
 
   const bypassCalling = () => {
     return null
@@ -27,6 +31,10 @@ const StudentsTable = (props) => {
 
   const handleSendCredentials = async(item) => {
     sendCredentials({}, `/panel/admin/students/${item.id}`, bypassCalling)
+  }
+
+  const handleResetPassword = async(item) => {
+    resetPassword({}, `/panel/admin/students/${item.id}/reset_password`, bypassCalling)
   }
 
   return (
@@ -116,6 +124,12 @@ const StudentsTable = (props) => {
               <CTooltip content="Reenviar Correo de bienvenida" placement="top-start">
                 <CButton size='sm' color='primary' onClick={() => handleSendCredentials(item)} >
                   <FontAwesomeIcon icon={faEnvelopesBulk} size="lg" inverse />
+                </CButton>
+              </CTooltip>
+
+              <CTooltip content="Restaurar password de este alumno, (el nuevo password es el mismo al numero de documento)" placement="top-start">
+                <CButton size='sm' color='success' className='m-1' onClick={() => handleResetPassword(item)} >
+                  <FontAwesomeIcon icon={faKey} size="lg" inverse />
                 </CButton>
               </CTooltip>
             </td>
