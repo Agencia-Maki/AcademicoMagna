@@ -3,7 +3,12 @@ class Panel::Admin::CoursesController < ApplicationController
 
   def index
     @courses = Course.includes(:professor, :course_category)
-              .order(status: :asc, end_date: :desc)
+    .order(Arel.sql("CASE courses.status
+                        WHEN '0' THEN 0
+                        WHEN '2' THEN 1
+                        WHEN '1' THEN 2
+                        ELSE 3
+                      END, end_date DESC"))
               .map { |course|
                 {
                   id: course.id,
