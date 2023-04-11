@@ -46,7 +46,7 @@ class Panel::Student::CoursesController < ApplicationController
     course = Course.find(params[:id])
     render json: {
       data: course,
-      chapters: course.chapters.map { |chapter| {   
+      chapters: course.chapters.order(id: :asc).map { |chapter| {   
         id: chapter.id,
         name: chapter.name,
         start_date: chapter.start_date,
