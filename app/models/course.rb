@@ -38,11 +38,28 @@ class Course < ApplicationRecord
     self.course_category_id = course_reference.course_category_id
     self.conference_link = course_reference.conference_link
 
-    course_reference.chapters.each do |original_chapter|
+    course_reference.chapters.order(:id).each do |original_chapter|
       new_chapter = original_chapter.dup
       self.chapters << new_chapter
     
-      original_chapter.lessons.each do |original_lesson|
+      original_chapter.lessons.order(:id).each do |original_lesson|
+        new_lesson = original_lesson.dup
+        new_lesson.link_video = ""
+        new_chapter.lessons << new_lesson
+      end
+    end
+
+    self.save!
+  end
+
+  def import_data(course_from_id)
+    course_from = Course.find(course_from_id)
+    
+    course_from.chapters.order(:id).each do |original_chapter|
+      new_chapter = original_chapter.dup
+      self.chapters << new_chapter
+    
+      original_chapter.lessons.order(:id).each do |original_lesson|
         new_lesson = original_lesson.dup
         new_lesson.link_video = ""
         new_chapter.lessons << new_lesson

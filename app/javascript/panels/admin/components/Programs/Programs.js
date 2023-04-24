@@ -7,6 +7,7 @@ import {
   CCol,
   CRow,
   CButton,
+  CSpinner,
 } from '@coreui/react-pro'
 import useCrud from '../../../../hooks/useCrud'
 import { normalizeDate } from '../../../../helpers/normalizes'
@@ -15,10 +16,11 @@ import CourseCategories from './components/CourseCategories'
 
 import TablePrograms from './extras/TablePrograms'
 import ModalCloneCourse from './extras/ModalCloneCourse'
+import ModalImportCourse from './extras/ModalImportDataCourse'
 
 const columns = [
   { key: 'index', label: '#', filter: false, sorter: false },
-  { key: 'name', label: 'Programa',  _style: { width: '30%' } },
+  { key: 'name', label: 'Programa', _style: { width: '30%' } },
   { key: 'professor', label: 'Docente', _style: { width: '15%' } },
   { key: 'start_date', label: 'Fecha de Inicio', filter: false, sorter: false, _style: { width: '8%' } },
   { key: 'end_date', label: 'Fecha de Fin', filter: false, sorter: false, _style: { width: '8%' } },
@@ -29,32 +31,45 @@ const columns = [
 ]
 
 const Programs = () => {
-  const { 
-          getModelData: getCourses,
-          getModelData: getCategories,
-        } = useCrud("/panel/admin/all_courses")
+  const {
+    getModelData: getCourses,
+    getModelData: getCategories,
+  } = useCrud("/panel/admin/all_courses")
   const [courseList, setCourseList] = useState([])
   const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(false)
   const [showCloneCourseModal, setShowCloneCourseModal] = useState(false)
 
-  const loadData = async() => {
+  const [showImportCourseModal, setShowImportCourseModal] = useState(false)
+
+  const [importCourseData, setImportCourseData] = useState({
+    course_from: 0,
+    course_to: 0,
+    course_name: ""
+  })
+
+  const loadData = async () => {
+    setLoading(true)
     const courseDataQuery = await getCourses("/panel/admin/courses")
     setCourseList(
-      courseDataQuery.data.map ((course, index) => {
+      courseDataQuery.data.map((course, index) => {
         return {
           ...course,
           index: index + 1,
           start_date: normalizeDate(course.start_date),
           end_date: normalizeDate(course.end_date),
           duration_month: `${calculateDuration(course.start_date, course.end_date)} meses`,
+          value: course.id,
+          text: course.name
         }
       })
     )
     const categoriesDataQuery = await getCategories("/panel/admin/course_categories")
     setCategories(categoriesDataQuery)
+    setLoading(false)
   }
 
-  const refreshCategoriesList = async() => {
+  const refreshCategoriesList = async () => {
     const categoriesDataQuery = await getCategories("/panel/admin/course_categories")
     setCategories(categoriesDataQuery)
   }
@@ -75,52 +90,75 @@ const Programs = () => {
     loadData()
   }, [])
 
+
+
   return (
     <>
-      <CRow>
-        <CCol lg={12}>
-          <CCard>
-            <CCardHeader>
-              <strong>Panel de Programas</strong>
-            </CCardHeader>
-            <CCardBody>
-              <Link
-                className="btn btn-sm btn-success mb-3 float-end"
-                to={{ pathname: `/programas/nuevo` }}
-              >                
-                Registrar Nuevo Programa
-              </Link>
+      {
+        loading ? <CSpinner /> :
+          <>
+            <CRow>
+              <CCol lg={12}>
+                <CCard>
+                  <CCardHeader>
+                    <strong>Panel de Programas</strong>
+                  </CCardHeader>
+                  <CCardBody>
+                    <Link
+                      className="btn btn-sm btn-success mb-3 float-end"
+                      to={{ pathname: `/programas/nuevo` }}
+                    >
+                      Registrar Nuevo Programa
+                    </Link>
 
-              <CButton
-                size='sm'
-                color='warning'
-                className='mb-3 float-end me-3'
-                onClick={() => handleCloneCourse()}
-              >                
-                Clonar Programa
-              </CButton>
+                    <CButton
+                      size='sm'
+                      color='warning'
+                      className='mb-3 float-end me-3'
+                      onClick={() => handleCloneCourse()}
+                    >
+                      Clonar Programa
+                    </CButton>
 
-              <TablePrograms 
-                columns={columns}
-                data={courseList}
-                refreshData={loadData}
-              />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      
-      <CourseCategories 
-        categories={categories}
-        refreshCategoriesList={refreshCategoriesList}
-      />
+                    <TablePrograms
+                      columns={columns}
+                      data={courseList}
+                      refreshData={loadData}
+                      setImportCourseData={setImportCourseData}
+                      setShowImportCourseModal={setShowImportCourseModal}
+                    />
+                  </CCardBody>
+                </CCard>
+              </CCol>
+            </CRow>
 
-      <ModalCloneCourse 
-        courses={courseList}
-        setShowModal={setShowCloneCourseModal}
-        showModal={showCloneCourseModal}
-        refreshData={loadData}
-      />
+            <CourseCategories
+              categories={categories}
+              refreshCategoriesList={refreshCategoriesList}
+            />
+          </>
+      }
+
+      {showCloneCourseModal &&
+        <ModalCloneCourse
+          courses={courseList}
+          setShowModal={setShowCloneCourseModal}
+          showModal={showCloneCourseModal}
+          refreshData={loadData}
+        />
+      }
+
+      {
+        showImportCourseModal &&
+        <ModalImportCourse
+          courses={courseList}
+          importCourseData={importCourseData}
+          setImportCourseData={setImportCourseData}
+          setShowModal={setShowImportCourseModal}
+          showModal={showImportCourseModal}
+          refreshData={loadData}
+        />
+      }
     </ >
   )
 }

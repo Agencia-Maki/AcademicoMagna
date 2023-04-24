@@ -2,7 +2,7 @@ class Panel::Admin::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :update, :destroy]
 
   def index
-    @courses = Course.includes(:professor, :course_category)
+    @courses = Course.includes(:professor, :course_category, :inscriptions, :chapters)
     .order(Arel.sql("CASE courses.status
                         WHEN '0' THEN 0
                         WHEN '2' THEN 1
@@ -18,6 +18,7 @@ class Panel::Admin::CoursesController < ApplicationController
                   end_date: course.end_date,
                   category: course.course_category.name,
                   status: course.status,
+                  import_data: course.chapters.count.zero? ? "yes" : "no",
                   delete_course: course.inscriptions.count.zero? ? "yes" : "no"
                 }
               }
@@ -47,7 +48,6 @@ class Panel::Admin::CoursesController < ApplicationController
   end
 
   def create
-    # byebug
     @course = Course.new
     @course.name = params[:name]
     @course.description = params[:description]
@@ -81,6 +81,23 @@ class Panel::Admin::CoursesController < ApplicationController
       message: "Programa clonado con exito",
       status: :ok
     }, status: :ok
+  end
+
+  def import_course_data
+    courseClone = Course.find(params[:course_to])
+
+    if courseClone.import_data(params[:course_from])
+      render json: {
+        message: "Datos importados con exito",
+        status: :ok
+      }, status: :ok
+    else
+      render json: {
+        message: "No se pudo importar los datos",
+        status: :unprocessable_entity
+      }, status: :unprocessable_entity
+    end
+
   end
 
   def update

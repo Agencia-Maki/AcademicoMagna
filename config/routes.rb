@@ -50,6 +50,7 @@ Rails.application.routes.draw do
           get '/all_courses', to: 'courses#get_all'
           get '/courses/:course_id/chapters', to: 'chapters#index_by_course'    #panel/courses/5/chapters/
 
+          post '/courses/import', to: 'courses#import_course_data'
           post '/courses/:course_id/clone', to: 'courses#clone_course'
           
           resources :exams, only: [:create, :show, :update, :destroy]
@@ -155,6 +156,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     post '/student_records/create', to: 'student_records#create'
+    post '/courses/create_from_crm', to: 'crm#create_course'
   end
 
   root 'pages#index'

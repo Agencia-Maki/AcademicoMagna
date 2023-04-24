@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEye,
+  faFileImport,
   faListCheck,
   faPen,
   faSliders,
@@ -19,7 +20,7 @@ import { getBadgeCourseState } from '../../../../../helpers/auxiliarFuncionts'
 import useCrud from '../../../../../hooks/useCrud'
 
 const TablePrograms = (props) => {
-  const { data, columns, refreshData } = props
+  const { data, columns, refreshData, setImportCourseData, setShowImportCourseModal } = props
 
   const { deleteModelWhitUrl: deleteCourse } = useCrud("/panel/admin/courses")
 
@@ -28,6 +29,14 @@ const TablePrograms = (props) => {
     refreshData()
   }
 
+  const handleImportCourseData = (item) => {
+    setShowImportCourseModal(true)
+    setImportCourseData({
+      course_from: 0,
+      course_to: item.id,
+      course_name: item.name
+    })
+  }
 
   return (
     <>
@@ -117,9 +126,17 @@ const TablePrograms = (props) => {
                 </Link>
               </CTooltip>
 
-              { item.delete_course === "yes" && 
+              { item.import_data === "yes" &&
+                <CTooltip content="Importar Contenido">
+                  <CButton size='sm' style={{ backgroundColor: "#bb86fc", borderColor: "#bb86fc" }} className='m-1' onClick={() => handleImportCourseData(item)}>
+                    <FontAwesomeIcon icon={faFileImport} inverse />
+                  </CButton>
+                </CTooltip>
+              }
+
+              {item.delete_course === "yes" &&
                 <CTooltip content="Eliminar Programa">
-                  <CButton size='sm' color='danger' onClick={() => handleDeleteCOurse(item)}>
+                  <CButton size='sm' color='danger' className='m-1' onClick={() => handleDeleteCOurse(item)}>
                     <FontAwesomeIcon icon={faTrash} inverse />
                   </CButton>
                 </CTooltip>
