@@ -14,7 +14,7 @@ class Panel::Admin::ProfessorsController < ApplicationController
   #############################################################
 
   def get_all
-    professors = Professor.where.not(id: 1)
+    professors = Professor.where.not(id: 1).order(:id)
     render json: professors, status: :ok
   end
 
@@ -79,6 +79,12 @@ class Panel::Admin::ProfessorsController < ApplicationController
         status: :unprocessable_entity
       }
     end
+  end
+
+  def set_signature
+    professor = Professor.find(params[:id])
+    professor.signature = params[:signature]
+    professor.save ? (render json: { message: 'Firma guardada con exito', status: :ok }) : (render json: { message: @profesor.errors.full_messages, status: :unprocessable_entity })
   end
 
   def destroy

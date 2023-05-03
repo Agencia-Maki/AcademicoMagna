@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   CCard,
   CCardBody,
@@ -25,6 +25,8 @@ import { normalizeDateWithHour } from '../../../../../helpers/normalizes'
 
 const Table = (props) => {
   const { course, exams } = props
+
+  const { program_id } = useParams()
 
   const [currentExam, setCurrentExam] = useState({})
   const [modalStatus, setModalStatus] = useState(false)
@@ -78,10 +80,10 @@ const Table = (props) => {
       )
     }
   }
-  
+
   return (
     <>
-     {course && exams &&
+      {course && exams &&
         <CRow>
           <CCol lg={12}>
             <CCard>
@@ -101,7 +103,7 @@ const Table = (props) => {
 
                 <CTooltip content="Ver consolidado de notas" placement="top-start">
                   <Link
-                    className="btn btn-sm btn-info float-start mb-3"
+                    className="btn btn-sm btn-info float-end mb-3 me-3"
                     to={{
                       pathname: `/programas/${course.id}/evaluaciones/consolidado_notas`
                     }}
@@ -109,6 +111,10 @@ const Table = (props) => {
                     Ver Consolidado de notas
                   </Link>
                 </CTooltip>
+
+                <Link className="btn btn-danger mb-3 float-start btn-sm text-white" to={`/programas/ver/${program_id}`}>
+                  <strong>Regresar atrás</strong>
+                </Link>
 
                 <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
@@ -235,7 +241,7 @@ const Table = (props) => {
             </CForm>
           </>
         }
-      </CModal> 
+      </CModal>
     </>
   )
 }

@@ -26,6 +26,7 @@ const initialState = {
   status: 'on_hold',
   conference_link: '',
   magna_class_link: '',
+  duration: '',
   cover: {}
 }
 
@@ -55,9 +56,9 @@ const EditProgram = () => {
 
   const { getModel, updateModel, getModelData: getProfessors, getModelData: getCategories } = useCrud('/panel/admin/courses/' + id_program, '/programas')
   const { data, handleChange, handleChangeFile } = useChange(program)
-  const { name, description, start_date, end_date, status, cover, professor_id, course_category_id, conference_link, magna_class_link } = data;
+  const { name, description, start_date, end_date, status, cover, professor_id, course_category_id, conference_link, magna_class_link, duration } = data;
 
-   const loadData = async () => {
+  const loadData = async () => {
     await getModel(setProgram);
     const professorDataQuery = await getProfessors("/panel/admin/all_professors")
     setProfessors(professorDataQuery)
@@ -78,6 +79,7 @@ const EditProgram = () => {
     formData.append('course_category_id', _data.course_category_id)
     formData.append('cover', portada)
     formData.append('conference_link', _data.conference_link)
+    formData.append('duration', data.duration)
     formData.append('magna_class_link', _data.magna_class_link)
     await updateModel(formData);
   }
@@ -120,7 +122,7 @@ const EditProgram = () => {
                     <CFormInput id="conference_link" name="conference_link" placeholder="Link de la conferencia" className="form-horizontal" value={conference_link} onChange={handleChange} />
                     <CFormText>Es necesario el link de la conferencia.</CFormText>
                   </CCol>
-                </CRow>                
+                </CRow>
                 <CRow className="mt-3">
                   <CCol md="3">
                     <CFormLabel htmlFor="magna_class_link">URL de la Clase Magna</CFormLabel>
@@ -137,7 +139,7 @@ const EditProgram = () => {
                   <CCol xs="12" md="9">
                     <CFormSelect custom name="professor_id" id="rol" value={professor_id} onChange={handleChange}>
                       <option value="0">Asignar Docente</option>
-                      { professors ? professors.map((professor) => (
+                      {professors ? professors.map((professor) => (
                         <option key={professor.id} value={professor.id}>{normalizeName(professor.first_name, professor.last_name)}</option>
                       )) : ''
                       }
@@ -150,7 +152,7 @@ const EditProgram = () => {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CFormSelect custom name="course_category_id" id="rol" value={course_category_id} onChange={handleChange}>
-                      { categories ? categories.map((category) => (
+                      {categories ? categories.map((category) => (
                         <option key={category.id} value={category.id} > {category.name} </option>
                       )) : ''
                       }
@@ -196,6 +198,16 @@ const EditProgram = () => {
                     <CFormText>Es necesario ingresar las fechas de Inicio y Fin.</CFormText>
                   </CCol>
                 </CRow>
+
+                <CRow className="mt-3">
+                  <CCol md="3">
+                    <CFormLabel htmlFor="duration">Duración (Horas)</CFormLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <CFormInput id="duration" name="duration" placeholder="Duración del curso" className="form-horizontal" value={duration} onChange={handleChange} />
+                    <CFormText>Ingresa la duración del curso en Horas.</CFormText>
+                  </CCol>
+                </CRow>
               </CForm>
             </CCardBody>
           </CCard>
@@ -206,16 +218,16 @@ const EditProgram = () => {
               Portada
             </CCardHeader>
             <CCardBody style={{ textAlign: 'center' }}>
-              <img src={cover.url} alt={name} style={{ width: "100%" }}/>
+              <img src={cover.url} alt={name} style={{ width: "100%" }} />
               <CRow className="mt-3">
                 <CCol xs="12" md="12">
                   <CFormInput
                     type="file"
-                    id="portada" 
-                    name="portada" 
-                    accept="image/*" 
+                    id="portada"
+                    name="portada"
+                    accept="image/*"
                     multiple={false}
-                    onChange={(e) => handleChangeFile(e, setPortada)} 
+                    onChange={(e) => handleChangeFile(e, setPortada)}
                     onClick={(e) => { e.target.value = null }} />
                   <CFormText>Actualizar portada.</CFormText>
                 </CCol>

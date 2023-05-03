@@ -11,10 +11,11 @@ import {
 
 import useCrud from '../../../../hooks/useCrud'
 import ProfessorsTable from './extras/ProfessorsTable'
+import ModalSignature from './extras/ModalSignature'
 
 const url_ep = '/panel/admin/all_professors'     // url_end_point
 const Professors = () => {
-  const { 
+  const {
     getModelData: getProfessorList
   } = useCrud(url_ep)
 
@@ -22,8 +23,8 @@ const Professors = () => {
   const columns = [
     { key: 'index', label: '#', filter: false, sorter: false },
     { key: 'avatar', label: 'Foto', filter: false, sorter: false },
-    { key: 'full_name', label: 'Nombres Completo'  },
-    { key: 'document_type', label: 'Tipo de Documento', filter: false, sorter: false, _style: { width: '1%' }},
+    { key: 'full_name', label: 'Nombres Completo' },
+    { key: 'document_type', label: 'Tipo de Documento', filter: false, sorter: false, _style: { width: '1%' } },
     { key: 'document_number', label: 'Numero de Documento', _style: { width: '2%' } },
     { key: 'email', label: 'Correo' },
     { key: 'phone', label: 'Telefono', _style: { width: '2%' } },
@@ -32,8 +33,10 @@ const Professors = () => {
 
   const [professorList, setProfessorList] = useState([])
   const [loading, setLoading] = useState(false)
+  const [showSignatureModal, setShowSignatureModal] = useState(false)
+  const [professor, setProfessor] = useState(null)
 
-  const loadData = async() => {
+  const loadData = async () => {
     setLoading(true)
     const data = await getProfessorList()
     setProfessorList(
@@ -54,7 +57,7 @@ const Professors = () => {
 
 
   return (
-    <div>
+    <>
       <CRow>
         <CCol lg={12}>
           <CCard>
@@ -70,13 +73,29 @@ const Professors = () => {
               </Link>
 
               {
-                loading ? <CSpinner /> : <ProfessorsTable data={professorList} columns={columns} />
+                loading ?
+                  <CSpinner /> :
+                  <ProfessorsTable
+                    data={professorList}
+                    columns={columns}
+                    setShowSignatureModal={setShowSignatureModal}
+                    setProfessor={setProfessor}
+                  />
               }
             </CCardBody>
           </CCard>
         </CCol>
       </CRow>
-    </div>
+      {
+        showSignatureModal &&
+        <ModalSignature
+          showModal={showSignatureModal}
+          setShowModal={setShowSignatureModal}
+          professor={professor}
+          setProfessor={setProfessor}
+        />
+      }
+    </>
   )
 }
 

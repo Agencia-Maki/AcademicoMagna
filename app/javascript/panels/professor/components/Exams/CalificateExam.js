@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import SweetAlert2 from 'react-sweetalert2'
 
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { passCsrfToken } from '../../../../helpers/csrftoken'
 import useChange from '../../../../hooks/useChange'
@@ -14,7 +14,7 @@ import {
   CCardBody,
   CCardHeader,
   CModalHeader, CModalTitle, CModalBody, CModalFooter, CModal,
-  CForm, CFormTextarea, CFormInput, CFormLabel,  
+  CForm, CFormTextarea, CFormInput, CFormLabel,
   CCol,
   CRow,
   CTooltip,
@@ -251,7 +251,12 @@ const CalificateExam = (props) => {
             <CCardHeader>
               Entrega de los estudiantes:
             </CCardHeader>
+
             <CCardBody>
+              <Link className="btn btn-danger mb-3 float-start btn-sm text-white" to={`/programas/${program_id}/evaluaciones`}>
+                <strong>Regresar atrás</strong>
+              </Link>
+
               {validateDateNowWithDateExam(exam)}
 
               <table className="table table-hover table-outline mb-0 d-none d-sm-table">

@@ -65,8 +65,8 @@ const NoteList = () => {
               </CButton>
             </CTooltip>}
           </Pdf>
-          <Link className="btn btn-danger mb-3 float-start btn-sm" to={`/programas/${program_id}/evaluaciones`}>
-            Regresar atras
+          <Link className="btn btn-danger mb-3 float-start btn-sm text-white" to={`/programas/${program_id}/evaluaciones`}>
+            <strong>Regresar atrás</strong>
           </Link>
         </CCol>
       </CRow>

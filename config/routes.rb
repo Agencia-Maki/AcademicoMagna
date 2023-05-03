@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
           resources :professors
           get 'all_professors', to: 'professors#get_all'
+          put '/professors/:id/set_signature', to: 'professors#set_signature'
           post '/professors/:id', to: 'professors#send_credentials'
 
           #######################################################################################################################
@@ -52,6 +53,8 @@ Rails.application.routes.draw do
 
           post '/courses/import', to: 'courses#import_course_data'
           post '/courses/:course_id/clone', to: 'courses#clone_course'
+          # GENERAR CERTIFICADOS EN EL MODULO DE CERTIFICAICONES
+          post '/courses/:course_id/generate_certificates', to: 'courses#generate_certificates'
           
           resources :exams, only: [:create, :show, :update, :destroy]
           get '/exams/:id/scores', to: 'exams#show_scores'

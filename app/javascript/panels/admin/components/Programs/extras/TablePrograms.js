@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEye,
   faFileImport,
+  faGraduationCap,
   faListCheck,
   faPen,
   faSliders,
@@ -23,6 +24,7 @@ const TablePrograms = (props) => {
   const { data, columns, refreshData, setImportCourseData, setShowImportCourseModal } = props
 
   const { deleteModelWhitUrl: deleteCourse } = useCrud("/panel/admin/courses")
+  const { insertModelWithConfirmation: generateCertificates } = useCrud("/panel/admin/courses/:course_id/generate_certificates")
 
   const handleDeleteCOurse = async (item) => {
     await deleteCourse(`/panel/admin/courses/${item.id}`)
@@ -36,6 +38,10 @@ const TablePrograms = (props) => {
       course_to: item.id,
       course_name: item.name
     })
+  }
+
+  const handleGenerateCertificates = (item) => {
+    generateCertificates({}, `/panel/admin/courses/${item.id}/generate_certificates`, refreshData)
   }
 
   return (
@@ -126,7 +132,16 @@ const TablePrograms = (props) => {
                 </Link>
               </CTooltip>
 
-              { item.import_data === "yes" &&
+              {
+                item.status === "completed" &&
+                <CTooltip content="Generar Certificados">
+                  <CButton size='sm' style={{ backgroundColor: "#00F6BA", borderColor: "#00F6BA" }} className='m-1' onClick={() => handleGenerateCertificates(item)}>
+                    <FontAwesomeIcon icon={faGraduationCap} />
+                  </CButton>
+                </CTooltip>
+              }
+
+              {item.import_data === "yes" &&
                 <CTooltip content="Importar Contenido">
                   <CButton size='sm' style={{ backgroundColor: "#bb86fc", borderColor: "#bb86fc" }} className='m-1' onClick={() => handleImportCourseData(item)}>
                     <FontAwesomeIcon icon={faFileImport} inverse />

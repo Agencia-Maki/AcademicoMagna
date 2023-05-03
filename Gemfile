@@ -21,11 +21,11 @@ gem "rmagick"
 gem "pundit"
 gem "sidekiq", "~> 6.5.7"
 gem "sidekiq-cron", "~> 1.7.0"
+gem "faraday"
 gem 'redis'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors'
-gem 'httparty'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

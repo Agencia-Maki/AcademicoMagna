@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEye,
   faPen,
-  faEnvelopesBulk
+  faEnvelopesBulk,
+  faSignature
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeDocumentType } from '../../../../../helpers/auxiliarFuncionts'
@@ -17,9 +18,9 @@ import { normalizeDate } from '../../../../../helpers/normalizes'
 import useCrud from '../../../../../hooks/useCrud'
 
 const ProfessorsTable = (props) => {
-  const { data, columns } = props
+  const { data, columns, setShowSignatureModal, setProfessor } = props
 
-  const { insertModelWithConfirmation: sendCredentials } = useCrud("/panel/admin/professors/:id")
+  const { insertModelWithConfirmation: sendCredentials } = useCrud("")
 
   const bypassCalling = () => {
     return null
@@ -29,6 +30,10 @@ const ProfessorsTable = (props) => {
     sendCredentials({}, `/panel/admin/professors/${item.id}`, bypassCalling)
   }
 
+  const handleOpenSignatureModal = (item) => {
+    setProfessor(item)
+    setShowSignatureModal(true)
+  }
 
   return (
     <>
@@ -111,6 +116,12 @@ const ProfessorsTable = (props) => {
                 >
                   <FontAwesomeIcon icon={faPen} size="lg" inverse />
                 </Link>
+              </CTooltip>
+
+              <CTooltip content="Ingresar firma al docente" placement="top-start">
+                <CButton size='sm' color='danger' className='m-1' onClick={() => handleOpenSignatureModal(item)} >
+                  <FontAwesomeIcon icon={faSignature} size="lg" inverse />
+                </CButton>
               </CTooltip>
 
               <CTooltip content="Reenviar Correo de bienvenida" placement="top-start">

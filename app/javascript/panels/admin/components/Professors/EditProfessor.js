@@ -22,7 +22,8 @@ const initialState = {
   email: '',
   gender: 'no_specified',
   phone: '',
-  avatar: {}
+  avatar: {},
+  signature: {}
 }
 
 const documentTypeOptions = [
@@ -37,7 +38,7 @@ const EditProfessor = () => {
 
   const { getModel, updateModel } = useCrud('/panel/admin/professors/' + id_professor, '/profesores')
   const { data, handleChange } = useChange(professor)
-  const { first_name, last_name, document_number, document_type, email, phone, gender, avatar } = data;
+  const { first_name, last_name, document_number, document_type, email, phone, gender, avatar, signature } = data;
 
   const handleSetProfessor = async () => {
     await getModel(setProfessor);
@@ -136,10 +137,13 @@ const EditProfessor = () => {
         <CCol lg={5}>
           <CCard>
             <CCardHeader>
-              Foto
+              Foto / Firma
             </CCardHeader>
             <CCardBody style={{ textAlign: 'center' }}>
               <img src={data.avatar.url} alt={data.first_name} />
+              <br />
+              <br />
+              <img src={ data.signature.url } alt={data.first_name} style={{ width: "40%" }} />
             </CCardBody>
             <CCardFooter>
               <CButton

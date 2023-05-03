@@ -13,6 +13,7 @@ class Professor < ApplicationRecord
   enum gender: %i[male female no_specified]
   enum document_type: %i[dni foreigner_card passport]
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :signature, SignatureUploader
   paginates_per 10
 
   validates :document_number, uniqueness: {message: "%{value} ya registrado, verifique sus registros"}

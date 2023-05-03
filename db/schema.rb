@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_214512) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_193304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_214512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.string "duration"
     t.index ["course_category_id"], name: "index_courses_on_course_category_id"
     t.index ["professor_id"], name: "index_courses_on_professor_id"
   end
@@ -165,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_214512) do
     t.integer "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "signature"
     t.index ["code"], name: "index_professors_on_code", unique: true
     t.index ["document_number"], name: "index_professors_on_document_number", unique: true
     t.index ["email"], name: "index_professors_on_email", unique: true

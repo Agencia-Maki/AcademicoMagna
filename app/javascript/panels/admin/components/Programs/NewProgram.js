@@ -27,6 +27,7 @@ const initialState = {
   end_date: '',
   conference_link: '',
   magna_class_link: '',
+  duration: '',
   show_magna_class_link: "show"
 }
 
@@ -42,7 +43,7 @@ const NewProgram = () => {
     getModelData: getProfessors,
     getModelData: getCategories } = useCrud('/panel/admin/courses', '/programas')
   const { data, handleChange, handleChangeFile } = useChange(initialState)
-  const { professor_id, course_category_id, description, name, conference_link, magna_class_link } = data
+  const { professor_id, course_category_id, description, name, conference_link, magna_class_link, duration } = data
 
   const [date, setDate] = useState([new Date(), new Date()]);
   const [professors, setProfessors] = useState([])
@@ -80,6 +81,7 @@ const NewProgram = () => {
     formData.append('end_date', formatYmd(date[1]))
     formData.append('conference_link', data.conference_link)
     formData.append('magna_class_link', data.magna_class_link)
+    formData.append('duration', data.duration)
     formData.append('its_free', courseFreeStatus ? "free" : "paid")
     formData.append('cover', cover)
 
@@ -92,7 +94,6 @@ const NewProgram = () => {
 
   return (
     <div>
-      { console.log(courseFreeStatus) }
       <CRow>
         <CCol lg={12}>
           <CCard>
@@ -181,6 +182,16 @@ const NewProgram = () => {
                           value={date}
                         />
                         <CFormText>Es necesario ingresar las fechas de Inicio y Fin.</CFormText>
+                      </CCol>
+                    </CRow>
+
+                    <CRow className="mt-3">
+                      <CCol md="3">
+                        <CFormLabel htmlFor="duration">Duración (Horas)</CFormLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CFormInput id="duration" name="duration" placeholder="Duración del curso" className="form-horizontal" value={duration} onChange={handleChange} />
+                        <CFormText>Ingresa la duración del curso en Horas.</CFormText>
                       </CCol>
                     </CRow>
 
