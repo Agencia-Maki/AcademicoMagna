@@ -15,6 +15,7 @@ class Panel::Admin::ChaptersController < ApplicationController
     @chapter.start_date = params[:start_date]
     @chapter.end_date = params[:end_date]
     @chapter.course_id = params[:course_id]
+    @chapter.duration = params[:duration]
     if @chapter.save 
       render json: {
         message: "Módulo registrado con exito",
@@ -56,7 +57,7 @@ class Panel::Admin::ChaptersController < ApplicationController
     end
 
     def chapter_params
-      chapter_params = %i[name start_date end_date course_id]
+      chapter_params = %i[name start_date end_date course_id duration]
       params.require(:chapter).permit(chapter_params)
     end
 end

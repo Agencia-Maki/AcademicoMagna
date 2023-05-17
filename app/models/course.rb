@@ -5,6 +5,8 @@ class Course < ApplicationRecord
   has_many :exams, dependent: :destroy
   has_many :students, through: :inscriptions
 
+  has_many :certificates, dependent: :destroy
+
   has_many :chapters, dependent: :destroy
   accepts_nested_attributes_for :chapters, allow_destroy: true
   
@@ -23,6 +25,7 @@ class Course < ApplicationRecord
   enum status: [:in_progress, :completed, :on_hold, :closed]
   enum its_free: [:free, :paid]
   enum show_magna_class_link: [:show, :hide]
+  enum course_type: %i[course program]
 
   def clone_all_data(course_reference_id, name)
     course_reference = Course.find(course_reference_id)

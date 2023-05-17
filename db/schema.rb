@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_193304) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_163742) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,11 +43,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_193304) do
     t.index ["question_answer_id"], name: "index_answer_options_on_question_answer_id"
   end
 
+  create_table "certificates", force: :cascade do |t|
+    t.string "title"
+    t.integer "tag"
+    t.integer "certificate_type"
+    t.string "hours"
+    t.date "start_at"
+    t.date "end_at"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_certificates_on_course_id"
+  end
+
   create_table "chapters", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "course_id", null: false
+    t.integer "duration"
     t.index ["course_id"], name: "index_chapters_on_course_id"
   end
 
@@ -74,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_193304) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "duration"
+    t.integer "course_type"
     t.index ["course_category_id"], name: "index_courses_on_course_category_id"
     t.index ["professor_id"], name: "index_courses_on_professor_id"
   end
@@ -261,6 +276,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_193304) do
   end
 
   add_foreign_key "answer_options", "question_answers"
+  add_foreign_key "certificates", "courses"
   add_foreign_key "chapters", "courses"
   add_foreign_key "courses", "course_categories"
   add_foreign_key "courses", "professors"

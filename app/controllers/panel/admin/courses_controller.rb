@@ -155,36 +155,45 @@ class Panel::Admin::CoursesController < ApplicationController
 
   def generate_certificates
     course = Course.find(params[:course_id])
-    students = course.students
-    exams = course.exams
 
-    scores = {}
-    students.each do |student|
-      total_score = 0
-      total_percent = 0
-      exams.each do |exam|
-        exam_answer = StudentAnswer.find_by(exam_id: exam.id, student_id: student.id)
-        unless exam_answer.nil?
-          exam_score = exam_answer.score * exam.percent / 100.0
-          total_score += exam_score
-          total_percent += exam.percent
+    if course.certificates.count > 0
+      students = course.students
+      exams = course.exams
+
+      students_scores = []
+      students.each do |student|
+        total_score = 0
+        total_percent = 0
+        exams.each do |exam|
+          exam_answer = StudentAnswer.find_by(exam_id: exam.id, student_id: student.id)
+          unless exam_answer.nil?
+            exam_score = exam_answer.score * exam.percent / 100.0
+            total_score += exam_score
+            total_percent += exam.percent
+          end
         end
+        final_score = total_score / total_percent unless total_percent == 0
+        student_hash = student.as_json
+        student_hash[:score] = final_score * 100 unless final_score.nil?
+        students_scores << student_hash
       end
-      final_score = total_score / total_percent unless total_percent == 0
-      unless final_score.nil?
-        scores[student.document_number] = final_score * 100
-      end
+
+      approved_students = students_scores.select { |student| student[:score] >= 14 }
+      disapproved_students = students_scores.select { |student| student[:score] < 14 }
+    else 
+      return render json: {
+        message: "Error, no se tiene plantillas de certificados registrados para este curso"
+      }, status: :unprocessable_entity
     end
 
-    final_scores = scores.select { |k, v| v >= 14 }
-    final_students = Student.where(document_number: final_scores.keys)
-
     final_data = {
-      course: course.as_json.merge(professor: course.professor.as_json, chapters: course.chapters.as_json),
-      students: final_students.as_json,
-      scores: final_scores.as_json
+      course: course.as_json.merge(chapters: course.chapters.as_json),
+      professors: course.professor.as_json,  # en este apartado modificar luego para  la relacion many to many course.professors
+      approved_students: approved_students.as_json,
+      disapproved_students: disapproved_students.as_json,
+      certificate_templates: course.certificates.as_json
     }
-    
+
     host_certificate = Rails.env.production? ? 'https://certificacion.magna.edu.pe' : 'http://127.0.0.1:9000'
 
     connection = Faraday.new(url: host_certificate) do |conn|

@@ -26,6 +26,7 @@ const prototypeChapter = {
   name: '',
   start_date: '',
   end_date: '',
+  duration: '',
   materials: [],
   course_id: 0 //parseInt(props.id_program)
 }
@@ -150,6 +151,21 @@ const Chapters = () => {
                   type="date"
                   onChange={handleChange}
                   value={_data ? _data.end_date.substr(0, 10) : ''}
+                />
+              </CCol>
+            </CRow>
+
+            <CRow>
+              <CCol xs="12" md="2" className='mt-3'>
+                <CFormLabel htmlFor="hf-email">Horas Lectivas</CFormLabel>
+              </CCol>
+              <CCol xs="12" md="10" className='mt-3'>
+                <CFormInput 
+                  type="text" 
+                  name="duration" 
+                  onChange={handleChange} 
+                  value={ _data ? _data.duration : '' }
+                  placeholder='Horas lectivas del módulo'
                 />
               </CCol>
             </CRow>

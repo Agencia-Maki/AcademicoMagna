@@ -62,7 +62,8 @@ const ProfessorsTable = (props) => {
         paginationProps={{
           'size': 'sm',
           'bordered': 'true',
-          'align': 'end'
+          'align': 'end',
+          style: { cursor: "pointer" }
         }}
 
 

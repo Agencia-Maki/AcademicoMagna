@@ -38,7 +38,6 @@ const ModalImportCourse = (props) => {
 
   return (
     <>
-      { console.log(importCourseData) }
       <CModal
         visible={showModal}
         onClose={() => handleCloseModal()}

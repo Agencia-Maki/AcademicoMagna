@@ -51,6 +51,13 @@ Rails.application.routes.draw do
           get '/all_courses', to: 'courses#get_all'
           get '/courses/:course_id/chapters', to: 'chapters#index_by_course'    #panel/courses/5/chapters/
 
+          #######################################################################################################################
+          #                                                    CERTIFICATES                                                     #
+          get '/courses/:course_id/certificates', to: 'certificates#index'  
+          post '/courses/:course_id/certificates', to: 'certificates#create'
+          put '/certificates/:id_certificate', to: 'certificates#update'
+          delete '/certificates/:id_certificate', to: 'certificates#destroy'
+
           post '/courses/import', to: 'courses#import_course_data'
           post '/courses/:course_id/clone', to: 'courses#clone_course'
           # GENERAR CERTIFICADOS EN EL MODULO DE CERTIFICAICONES

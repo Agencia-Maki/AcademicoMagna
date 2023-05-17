@@ -13,7 +13,9 @@ import {
   faListCheck,
   faPen,
   faSliders,
-  faTrash
+  faTrash,
+  faWandMagicSparkles,
+  faRankingStar
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getBadgeCourseState } from '../../../../../helpers/auxiliarFuncionts'
@@ -99,14 +101,14 @@ const TablePrograms = (props) => {
                 </Link>
               </CTooltip>
 
-              <CTooltip content="Editar Programa">
+              <CTooltip content="Gestionar Programa y Certificaciones del Programa">
                 <Link
                   className="m-1 btn btn-warning btn-sm"
                   to={{
                     pathname: `/programas/editar/${item.id}`
                   }}
                 >
-                  <FontAwesomeIcon icon={faPen} inverse />
+                  <FontAwesomeIcon icon={faWandMagicSparkles} />
                 </Link>
               </CTooltip>
 

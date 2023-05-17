@@ -6,6 +6,7 @@ class Api::CrmController < ApplicationController
       Course.create!(
         name: params[:name],
         slug: params[:code],
+        course_type: params[:course_type],
         description: "Curso enviado desde el CRM no olvidar agregar la descripción, este texto es unicamente para evitar errores y saltar las validaciones",
         start_date: Time.now,
         end_date: Time.now + 60.days,

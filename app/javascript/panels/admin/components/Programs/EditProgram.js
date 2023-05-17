@@ -18,6 +18,8 @@ import {
 import DateRangePicker from "@wojtekmaj/react-daterange-picker"
 import moment from 'moment'
 
+import Certifications from './certifications'
+
 const initialState = {
   name: '',
   description: '',
@@ -101,7 +103,7 @@ const EditProgram = () => {
         <CCol lg={7}>
           <CCard>
             <CCardHeader>
-              Datos del Programa
+              <strong><small>DATOS DEL PROGRAMA</small></strong>
             </CCardHeader>
             <CCardBody>
               <CForm>
@@ -201,11 +203,11 @@ const EditProgram = () => {
 
                 <CRow className="mt-3">
                   <CCol md="3">
-                    <CFormLabel htmlFor="duration">Duración (Horas)</CFormLabel>
+                    <CFormLabel htmlFor="duration">Horas Lectivas</CFormLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CFormInput id="duration" name="duration" placeholder="Duración del curso" className="form-horizontal" value={duration} onChange={handleChange} />
-                    <CFormText>Ingresa la duración del curso en Horas.</CFormText>
+                    <CFormInput id="duration" name="duration" placeholder="Horas Lectivas" className="form-horizontal" value={duration} onChange={handleChange} />
+                    <CFormText>Ingresa la duración del curso en Horas Lectivas.</CFormText>
                   </CCol>
                 </CRow>
               </CForm>
@@ -250,6 +252,10 @@ const EditProgram = () => {
           </CCard>
         </CCol>
       </CRow>
+
+      <Certifications 
+        program={data}
+      />
     </>
   )
 }
