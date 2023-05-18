@@ -10,7 +10,7 @@ class Chapter < ApplicationRecord
   def check_name
     if name.blank?
       errors.add(:base, "El nombre no puede estar vacio") 
-    elsif name.length < 8
+    elsif name.length < 2
       errors.add(:base, "El nombre es demasiado corto") 
     end
   end
