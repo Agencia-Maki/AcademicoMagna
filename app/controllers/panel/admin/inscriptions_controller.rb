@@ -23,8 +23,13 @@ class Panel::Admin::InscriptionsController < ApplicationController
   end
 
   def get_all_by_courses
-    @courses = Course.all.order(created_at: :desc)
-    render json: @courses.map { |course| {
+    @courses = Course.all.order(Arel.sql("CASE courses.status
+              WHEN '0' THEN 0
+              WHEN '2' THEN 1
+              WHEN '1' THEN 2
+              ELSE 3
+            END, end_date DESC"))
+              render json: @courses.map { |course| {
         id: course.id,
         name: course.name,
         professor: course.professor,

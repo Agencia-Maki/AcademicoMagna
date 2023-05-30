@@ -1922,11 +1922,6 @@ react-datetime-picker@^4.2.0:
     react-fit "^1.4.0"
     react-time-picker "^5.2.0"
 
-react-dialog-confirm@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-dialog-confirm/-/react-dialog-confirm-1.1.0.tgz#815c88514ed73aa3316724d28e4addf7c3143d9c"
-  integrity sha512-VWVd5HulPtrc08wq09rS26ReORBEe0Ejn8Fo1lLn0ZBB+Sb8cGZKrhJwSfvHHm5y75L1uSk8w8C905dmvl9yIg==
-
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
