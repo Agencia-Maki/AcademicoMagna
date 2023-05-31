@@ -16,8 +16,11 @@ class Panel::GeneralController < ApplicationController
   end
 
   def get_calification_by_student
-    exam = Exam.find(params[:exam_id])
-    calification = exam.student_answers.where(student_id: params[:student_id]).last
+    # exam = Exam.find(params[:exam_id])
+    # calification = exam.student_answers.where(student_id: params[:student_id]).last
+    # byebug
+    calification = StudentAnswer.find_by(student_id: params[:student_id], exam_id: params[:exam_id])
+    # byebug
     render json: {
       data: {
           id: calification.id,
@@ -27,11 +30,11 @@ class Panel::GeneralController < ApplicationController
           comment: calification.exam_score.nil? ? "" : calification.exam_score.feedback,
           created_at: calification.created_at,
           file: calification.file,
-          type_exam: exam.type_exam,
-          exam_all_data: exam.exam_questions.map { |question| {
+          type_exam: calification.exam.type_exam,
+          exam_all_data: calification.question_answers.map { |question| {
             enunciate: question.enunciate,
-            feedback: question.feedback,
-            options: question.question_options.where(status: "correct")
+            feedback: nil,
+            options: question.answer_options
           }}
         }, status: :ok
     }

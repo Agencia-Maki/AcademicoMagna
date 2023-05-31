@@ -48,6 +48,7 @@ const ShowCalification = (props) => {
 
   return (
     <>
+      {console.log(calification)}
       {calification ? <>
         <CCard>
           <CCardHeader>
@@ -102,17 +103,32 @@ const ShowCalification = (props) => {
                     </CFormLabel>
                     {calification.exam_all_data.map((item, index) => {
                       return <div key={index}>
-                        <h6 style={{color: "#3c4b64"}}><b> Pregunta: </b> {item.enunciate} <br /></h6>
+                        <h6 style={{ color: "#3c4b64" }}><b> Pregunta: </b> {item.enunciate} <br /></h6>
 
-                        <h6 className="text-danger" ><b> Respuesta correcta: </b> </h6>
+                        <h6 className="text-danger" ><b> Respuesta Marcada: </b> </h6>
                         <div className="divider"></div>
-                        {item.options.map(option => {
-                          return <div key={option.id} style={{marginLeft: "4%"}}>
-                            <h6 style={{padding:"4px 0 10px 4px", color: "#3c4b64"}}><b>{option.enunciate}</b></h6>
-                            <h6 style={{padding:"4px 0 10px 4px", color: "#3c4b64"}}><b>Puntaje: {option.score}</b></h6>
-                          </div>
-                        })}
-                        <b> <span className="text-danger" >Retroalimentación : </span> </b> <p style={{color: "#3c4b64"}}>{item.feedback}</p> <br />
+                        {
+                          item.options.filter((obj) => obj.marked === true).map(option => {
+                            return <div key={option.id} style={{ marginLeft: "4%" }}>
+                              <h6 style={{ padding: "4px 0 10px 4px", color: "#3c4b64" }}><b>{option.enunciate}</b></h6>
+                              <h6 style={{ padding: "4px 0 10px 4px", color: "#3c4b64" }}><b>Puntaje Obtenido: {option.score}</b></h6>
+                            </div>
+                          })
+                        }
+                        <b> <span className="text-danger" >Retroalimentación : </span> </b>
+                        <p style={{ color: "#3c4b64" }}>
+                          {/* {item.feedback} */}
+                          {
+                            item.options.filter((obj) => obj.status === 'correct').map(option => {
+                              return <div key={option.id} style={{ marginLeft: "4%" }}>
+                                <strong> <small> La respuesta correcta es: </small> </strong>
+                                <h6 style={{ padding: "4px 0 10px 4px", color: "#3c4b64" }}><b>{option.enunciate}</b></h6>
+                                {/* <h6 style={{ padding: "4px 0 10px 4px", color: "#3c4b64" }}><b>Puntaje: {option.score}</b></h6> */}
+                              </div>
+                            })
+                          }
+                        </p>
+                        <br />
                         <hr />
                       </div>
                     })
