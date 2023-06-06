@@ -103,8 +103,6 @@
 function ekUpload(){
   function Init() {
 
-    console.log("Upload Initialised");
-
     var fileSelect    = document.getElementById('file-upload'),
         fileDrag      = document.getElementById('file-drag'),
         submitButton  = document.getElementById('submit-button');
@@ -153,7 +151,6 @@ function ekUpload(){
 
   function parseFile(file) {
 
-    console.log(file.name);
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );

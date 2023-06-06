@@ -27,6 +27,9 @@ const ShowScores = React.lazy(() => import('./components/Exams/ShowScores'))
 
 const Inscriptions = React.lazy(() => import('./components/Inscriptions/Inscriptions'))
 
+const Certifications = React.lazy(() => import('./components/Certifications/Certifications'))
+
+
 const routes = [
   { path: '/', exact: true, name: 'Dashboard', element: Dashboard },
   { path: '/dashboard', exact: true, name: 'Dashboard', element: Dashboard },
@@ -54,7 +57,8 @@ const routes = [
   { path: '/programas/:id_program/evaluaciones/:exam_id/editar', exact: true, name: 'Editar', element: EditExam },
   { path: '/programas/:course_id/evaluaciones/:exam_id/notas', exact: true, name: 'Notas', element: ShowScores },
 
-  { path: '/matriculas', exact: true, name: 'Matrículas', element: Inscriptions }
+  { path: '/matriculas', exact: true, name: 'Matrículas', element: Inscriptions },
+  { path: '/certificaciones', exact: true, name: 'Certificaciones', element: Certifications }
 
 ];
 

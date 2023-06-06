@@ -48,7 +48,6 @@ const ShowCalification = (props) => {
 
   return (
     <>
-      {console.log(calification)}
       {calification ? <>
         <CCard>
           <CCardHeader>

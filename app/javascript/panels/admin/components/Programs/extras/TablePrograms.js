@@ -134,14 +134,14 @@ const TablePrograms = (props) => {
                 </Link>
               </CTooltip>
 
-              {
+              {/* {
                 item.status === "completed" &&
                 <CTooltip content="Generar Certificados">
                   <CButton size='sm' style={{ backgroundColor: "#00F6BA", borderColor: "#00F6BA" }} className='m-1' onClick={() => handleGenerateCertificates(item)}>
                     <FontAwesomeIcon icon={faGraduationCap} />
                   </CButton>
                 </CTooltip>
-              }
+              } */}
 
               {item.import_data === "yes" &&
                 <CTooltip content="Importar Contenido">

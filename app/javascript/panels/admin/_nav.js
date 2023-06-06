@@ -6,7 +6,8 @@ import {  faGaugeHigh,
   faPersonChalkboard,
   faUserGraduate,
   faLaptopFile,
-  faIdCard
+  faIdCard,
+  faAward
   } from '@fortawesome/free-solid-svg-icons'
 
 import { CNavItem, CNavTitle } from '@coreui/react-pro'
@@ -59,6 +60,12 @@ const _nav =  [
     name: 'Fichas de Alumnos',
     to: '/fichas-alumnos',
     icon: <FontAwesomeIcon icon={faIdCard} inverse className="me-4 ms-1" size='lg'/>,
+  },
+  {
+    component: CNavItem,
+    name: 'Certificaciones',
+    to: '/certificaciones',
+    icon: <FontAwesomeIcon icon={faAward} inverse className="me-4 ms-1" size='lg'/>,
   },
   // {
   //   component: CNavItem,

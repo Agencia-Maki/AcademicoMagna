@@ -96,6 +96,17 @@ Rails.application.routes.draw do
           post '/exams/:exam_id/revise_exam', to: 'exams#revise_exam'
           put '/answers/:answer_id/set_manual_score', to: 'exams#manual_calification_by_student'
         end
+        #######################################################################################################################
+        namespace :admin do
+          namespace :v2 do
+            get '/courses', to: 'courses#index'
+            get '/courses/active', to: 'courses#active_index'
+            get '/courses/inactive', to: 'courses#inactive_index'
+            get '/students/by_course/:course_id', to: 'students#index_by_course'
+
+            post '/certificates', to: 'certificates#generate_certificates'
+          end
+        end
         # match '*path', to: 'pages#main', via: [:get]
       end
     end

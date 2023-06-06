@@ -32,7 +32,6 @@ const AppHeaderDropdown = (props) => {
   
   return (
     <CDropdown variant="nav-item" alignment="end">
-      { console.log(currentRol) }
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         <CAvatar src={currentUser && currentUser.avatar.url} size="md" />
       </CDropdownToggle>
