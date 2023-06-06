@@ -4,7 +4,7 @@ class Inscription < ApplicationRecord
   before_create :set_initial_status
   paginates_per 10
   validates :student_id, uniqueness: {message: "El alumno(a) ya esta matriculado(a) en el curso, verifique sus registros", scope: :course_id}
-  enum status: [:active, :inactive, :completed, :debtor]
+  enum status: [:active, :inactive, :completed, :debtor, :with_certificate]
 
   private
     def set_initial_status
