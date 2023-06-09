@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: AcademicoMagna
+  database: academicoDEV
   host: localhost
   port: 5432
   username: <%= ENV["DATA_BASE_USER_NAME"] %>
