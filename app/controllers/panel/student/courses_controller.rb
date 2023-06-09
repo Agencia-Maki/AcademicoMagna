@@ -2,7 +2,7 @@ class Panel::Student::CoursesController < ApplicationController
   before_action :set_student, only: [:index]
 
   def index
-    inscriptions = @student.inscriptions.where.not(status: : ["debtor", "completed"]).includes(:course)
+    inscriptions = @student.inscriptions.where.not(status: ["debtor", "completed"]).includes(:course)
     render json: {
       data: inscriptions.map { |inscription| {
         id: inscription.course.id,
