@@ -15,10 +15,6 @@ class Api::StudentRecordsController < ApplicationController
     end
   end
 
-
-  
-
-
   private
 
   def student_record_params
