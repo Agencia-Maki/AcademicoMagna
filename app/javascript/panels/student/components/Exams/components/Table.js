@@ -183,6 +183,17 @@ const Table = (props) => {
     }
   }
 
+  const getAnswer = (answer) => {
+    if (answer === null) {
+      return "No se ha realizado ninguna entrega"
+    } else if (answer.file.url === null ){
+      return "No se ha realizado ninguna entrega (*)"
+      
+    } else if (answer.file.url) {
+      return "Si se ha realizado una entrega"
+    }
+  }
+
   return (
     <>
       {props.course && props.exams &&
@@ -202,6 +213,7 @@ const Table = (props) => {
                       <th className="d-none d-xl-table-cell d-sm-table-cell"> Fin </th>
                       <th className="d-none d-xl-table-cell d-sm-table-cell"> Duracion </th>
                       <th className="d-none d-xl-table-cell d-sm-table-cell"> Intentos </th>
+                      <th className="d-none d-xl-table-cell d-sm-table-cell"> Entrega </th>
                       <th className="d-none d-xl-table-cell d-sm-table-cell"> Estado </th>
                       <th className=""> Examen </th>
                       <th className=""> Acciones </th>
@@ -217,7 +229,8 @@ const Table = (props) => {
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {formatDate(exam.end)} </td>
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.duration} </td>
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.type_exam === 'manual' ? 0 : exam.rest_trys} </td>
-                          <td className="d-none d-xl-table-cell d-sm-table-cell"> {setBadgeStatus(exam.status)}</td>
+                          <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.duration} </td>
+                          <td className="d-none d-xl-table-cell d-sm-table-cell"> {getAnswer(exam.answer)} </td>
                           <td className=""> {exam.type_exam === "manual" ?
                             <CTooltip content="Descargar Examen" placement="top-start">
                               <CButton

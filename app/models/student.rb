@@ -13,6 +13,8 @@ class Student < ApplicationRecord
   enum gender: %i[male female no_specified]
   enum status: %i[active inactive slow_payer on_hold]
   enum document_type: %i[dni foreigner_card passport]
+  enum survey_pending: [:filled, :pending]
+
   mount_uploader :avatar, AvatarUploader
   paginates_per 10
   has_many :inscriptions, dependent: :destroy

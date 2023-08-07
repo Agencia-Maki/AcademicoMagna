@@ -21,7 +21,7 @@ const Exams = () => {
 
   const loadData = async () => {
     setLoading(true)
-    const examsDataQuery = await getExams(`/panel/student/courses/${program_id}/all_data_exams`)
+    const examsDataQuery = await getExams(`/panel/student/courses/${program_id}/all_data_exams?current_student_id=${currentUser.id}`)
     setExams(examsDataQuery.data.data)
     const courseDataQuery = await getCourse(`/panel/student/course/${program_id}`)
     setCourse(courseDataQuery.data)

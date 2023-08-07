@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_163742) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_203538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_163742) do
     t.integer "document_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "survey_pending"
     t.index ["document_number"], name: "index_admins_on_document_number", unique: true
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
@@ -182,6 +183,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_163742) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "signature"
+    t.integer "survey_pending"
     t.index ["code"], name: "index_professors_on_code", unique: true
     t.index ["document_number"], name: "index_professors_on_document_number", unique: true
     t.index ["email"], name: "index_professors_on_email", unique: true
@@ -269,6 +271,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_163742) do
     t.integer "document_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "survey_pending"
     t.index ["code"], name: "index_students_on_code", unique: true
     t.index ["document_number"], name: "index_students_on_document_number", unique: true
     t.index ["email"], name: "index_students_on_email", unique: true

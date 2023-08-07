@@ -5,20 +5,23 @@ import { ToastContainer } from 'react-toastify'
 
 import CourseButton from '../components/CourseButton'
 
+import ModalSurvey from './Surveys/ModalSurvey'
+
 const DefaultLayout = (props) => {
   const { routes, navigation } = props
   const currentUser = JSON.parse(localStorage.getItem('current_user'))
   return (
     <>
-      <AppSidebar 
+      {console.log(currentUser, "LOOOL")}
+      <AppSidebar
         navigation={navigation}
       />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light bg-opacity-50 dark:bg-transparent">
-        <AppHeader 
+        <AppHeader
           currentUser={currentUser}
         />
         <div className="body flex-grow-1 px-3">
-          <AppContent 
+          <AppContent
             routes={routes}
           />
           <CourseButton />
@@ -36,6 +39,10 @@ const DefaultLayout = (props) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+      />
+
+      <ModalSurvey
+        current_user={currentUser}
       />
     </>
   )
