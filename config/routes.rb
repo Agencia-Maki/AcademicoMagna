@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       namespace :admins do
         get 'dashboard/index', as: :authenticated_root
         get 'profile', to: 'dashboard#get_current_admin'
+        # post 'import_course', to: 'courses#create_course'
+      
       end
       namespace :panel do
         namespace :admin do
@@ -178,7 +180,14 @@ Rails.application.routes.draw do
   namespace :api do
     post '/student_records/create', to: 'student_records#create'
     post '/courses/create_from_crm', to: 'crm#create_course'
+
+      namespace :admin do
+        post 'import_course', to: 'courses#create_course'
+      end
+
   end
+
+
 
   root 'pages#index'
 
