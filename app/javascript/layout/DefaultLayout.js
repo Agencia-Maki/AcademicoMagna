@@ -12,7 +12,6 @@ const DefaultLayout = (props) => {
   const currentUser = JSON.parse(localStorage.getItem('current_user'))
   return (
     <>
-      {console.log(currentUser, "LOOOL")}
       <AppSidebar
         navigation={navigation}
       />

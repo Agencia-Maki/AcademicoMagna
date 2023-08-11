@@ -45,15 +45,15 @@ class Api::Admin::CoursesController < ApplicationController
 
         new_course.professor = professor_p[0]
         if new_course.save
-                render json: {
-                message: "Curso Created Successfully"
-                }, status: :ok
-            else
-                render json: {
-                message: "Algo salió mal con la asociación del profesor",
-                errors: new_course.errors.full_messages
-                }, status: :unprocessable_entity
-            end
+            render json: {
+            message: "Curso Created Successfully"
+            }, status: :ok
+        else
+            render json: {
+            message: "Algo salió mal con la asociación del profesor",
+            errors: new_course.errors.full_messages
+            }, status: :unprocessable_entity
+        end
             
     end
 

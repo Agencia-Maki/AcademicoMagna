@@ -13,9 +13,11 @@ import {
   CModalHeader, CModalTitle, CModalBody, CModalFooter, CModal
 } from '@coreui/react-pro'
 
+import { CSVLink } from "react-csv"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faPen,
+  faPen, faFileExcel
 } from '@fortawesome/free-solid-svg-icons'
 
 import useCrud from '../../../../hooks/useCrud'
@@ -82,12 +84,28 @@ const ShowScores = () => {
     }
   }
 
+  const header_csv = [
+    { label: "Alumno", key: 'student' },
+    { label: "Estado de Entrega", key: 'status' },
+    { label: "Fecha de Calificacion", key: 'calificated' },
+    { label: "Nota", key: 'score' },
+  ]
+
+  const csvReport = {
+    data: data.data && data.data.scores,
+    headers: header_csv,
+    filename: "Consolidado de Notas.csv",
+    className: "btn btn-success btn-md mx-1 float-end"
+  }
+
   useEffect(() => {
     getModel(setData)
   }, [])
 
   return (
     <>
+      {/* { data.data && console.log(data.data.scores) } */}
+
       {data.data &&
         <CRow>
           <CCol lg={12}>
@@ -96,6 +114,9 @@ const ShowScores = () => {
                 <strong>Listado de Notas:</strong>
               </CCardHeader>
               <CCardBody>
+                <CTooltip content="Descargar Consolidado en EXCEL">
+                  <CSVLink {...csvReport}><FontAwesomeIcon icon={faFileExcel} inverse /></CSVLink>
+                </CTooltip>
                 <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                     <tr>

@@ -1,81 +1,102 @@
-import React, { useEffect, useState, createRef } from 'react'
-import Pdf from "react-to-pdf"
-import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState, createRef } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   CCardBody,
   CCardHeader,
   CButton,
   CTooltip,
   CRow,
-  CCol
-} from '@coreui/react-pro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCloudDownload
-} from '@fortawesome/free-solid-svg-icons'
+  CCol,
+} from '@coreui/react-pro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
+import { CSVLink } from 'react-csv';
 
 const NoteList = () => {
-  const [data, setData] = useState({})
-  const [students, setStudents] = useState([])
-  const { program_id } = useParams()
+  const [data, setData] = useState({});
+  const [students, setStudents] = useState([]);
+  const { program_id } = useParams();
   const ref = createRef();
-  const options = {
-    orientation: 'landscape'
-  };
+
 
   const getData = async () => {
-    await axios.get(`/panel/professor/courses/${program_id}/califications`).then(response => {
-      setData(response.data)
-    }).catch(error => {
-      console.log(error);
-    })
-  }
+    await axios
+      .get(`/panel/professor/courses/${program_id}/califications`)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getListStudents = async () => {
-    const response = await axios.get(`/panel/professor/courses/${program_id}/students`)
-    setStudents(response.data.data)
-  }
+    const response = await axios.get(`/panel/professor/courses/${program_id}/students`);
+    setStudents(response.data.data);
+  };
 
   const makeCalificationsByStudent = (_exams, _student_id) => {
     let result = 0;
     _exams.forEach((exam) => {
       exam.answers.forEach((answer) => {
         if (answer.student_id === _student_id) {
-          result = result + parseInt(answer.total_value)
+          result = result + parseInt(answer.total_value);
         }
-      })
-    })
+      });
+    });
     return result;
-  }
+  };
 
   useEffect(() => {
-    getData()
-    getListStudents()
-  }, [])
+    getData();
+    getListStudents();
+  }, []);
+
+  const csvHeaders = [
+    'Alumno',
+    ...(data.exams ? data.exams.map((exam) => exam.name) : []),
+    'Puntos Acumulados',
+  ];
+
+  const csvData = students.map((student) => {
+    const studentRow = {
+      Alumno: student.student_name,
+    };
+
+    if (data.exams) {
+      data.exams.forEach((exam) => {
+        const answer = exam.answers.find((answer) => answer.student_id === student.student_id);
+        studentRow[exam.name] = answer ? answer.score : '';
+      });
+
+      studentRow['Puntos Acumulados'] = makeCalificationsByStudent(data.exams, student.student_id);
+    }
+
+    return studentRow;
+  });
 
   return (
     <>
       <CRow>
         <CCol>
-          <Pdf targetRef={ref} filename="code-example.pdf" options={options} x={.5} y={.5} scale={0.7}>
-            {({ toPdf }) => <CTooltip content="Descargar consolidado de notas" placement="top-start">
-              <CButton color="primary" className="mb-3 float-end" size="sm" onClick={toPdf}>
-                <FontAwesomeIcon icon={faCloudDownload} size="lg" inverse />
-              </CButton>
-            </CTooltip>}
-          </Pdf>
-          <Link className="btn btn-danger mb-3 float-start btn-sm text-white" to={`/programas/${program_id}/evaluaciones`}>
-            <strong>Regresar atrás</strong>
-          </Link>
+          {data.exams !== undefined && data.exams.length > 0 && (
+            <CTooltip content="Descargar Consolidado de Notas">
+              <CSVLink
+                data={csvData}
+                headers={csvHeaders}
+                filename={'reporte.csv'}
+                className="btn btn-primary float-end"
+              >
+                <FontAwesomeIcon icon={faCloudDownload} inverse />
+              </CSVLink>
+            </CTooltip>
+          )}
         </CCol>
       </CRow>
 
-
-      {<div className='card' ref={ref}>
-        <CCardHeader>
-          CONSOLIDADO DE NOTAS
-        </CCardHeader>
+      <div className="card" ref={ref}>
+        <CCardHeader>CONSOLIDADO DE NOTAS</CCardHeader>
         <CCardBody>
           <table className="table table-hover table-outline mb-0 d-none d-sm-table">
             <thead className="thead-light">
@@ -110,10 +131,9 @@ const NoteList = () => {
             </tbody>
           </table>
         </CCardBody>
-      </div>}
-
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default NoteList
+export default NoteList;
