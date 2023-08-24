@@ -36,6 +36,6 @@ class ExamUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png doc docx xls xlsx xlsm xlt ppt pptx pps pot pdf txt rar zip)
+    %w(jpg jpeg gif png doc docx xls xlsx xlsm xlt ppt pptx pps pot pdf txt rar zip csv)
   end
 end
