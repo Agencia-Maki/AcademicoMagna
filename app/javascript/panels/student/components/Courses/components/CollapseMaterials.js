@@ -59,12 +59,21 @@ const CollapseMaterials = (props) => {
     }
   }
 
+  // const saveFile = (_material) => {
+  //   const file = _material.file.url.split('.')
+  //   saveAs(
+  //     _material.file.url,
+  //     _material.name
+  //   );
+  // }
+
   const saveFile = (_material) => {
+    const file = _material.file.url.split('.')
     saveAs(
       _material.file.url,
-      _material.name
+      _material.name + "." + file[file.length - 1]
     );
-  }
+  };
 
   const insertModel = async (dataModel, url_to) => {
     await axios.post(url_to, dataModel).then(response => {

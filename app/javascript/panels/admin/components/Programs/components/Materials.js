@@ -74,11 +74,20 @@ const Materials = (props) => {
   }
 
   const saveFile = (_material) => {
+    const file = _material.file.url.split('.')
     saveAs(
       _material.file.url,
-      _material.name
+      _material.name + "." + file[file.length - 1]
     );
   };
+
+  // const saveFile = () => {
+  //   const file = props.data.exam.file.url.split('.')
+  //   saveAs(
+  //     props.data.exam.file.url,
+  //     "evaluacion_manual_" + props.data.exam.name + "." + file[file.length - 1]
+  //   );
+  // }
 
   useEffect(() => {
   }, [])
