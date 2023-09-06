@@ -12,6 +12,7 @@ class Panel::Admin::V2::CertificatesController < ApplicationController
         total_score = 0
         total_percent = 0
         exams.each do |exam|
+          debugger
           exam_answer = StudentAnswer.find_by(exam_id: exam.id, student_id: student.id)
           unless exam_answer.nil?
             exam_score = exam_answer.score * exam.percent / 100.0

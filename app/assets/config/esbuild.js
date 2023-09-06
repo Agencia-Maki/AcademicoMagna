@@ -9,7 +9,7 @@ require("esbuild").build({
   outdir: path.join(process.cwd(), "app/assets/builds"),
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
   // watch: !(process.env.NODE_ENV === 'production' || process.env.CI),  // watch only in development
-  // watch: true,   // si no funciona en produccion lo de arriba comentar el watch
+  watch: true,   // si no funciona en produccion lo de arriba comentar el watch
   loader: { '.js': 'jsx', '.png': 'file', '.jpg': 'file', '.jpeg': 'file', '.gif': 'file', '.svg': 'file', '.ttf': 'file', '.woff': 'file', '.woff2': 'file', '.eot': 'file', '.otf': 'file' },
   publicPath: '/assets',
   target: 'es6',
