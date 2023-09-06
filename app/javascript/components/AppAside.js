@@ -134,7 +134,7 @@ const AppAside = () => {
                       S/. {course.price_pen}
                     </small>
                     <CTooltip content="Solicitar Información">
-                      <a className='btn btn-primary btn-sm float-end mt-2' href="https://wa.me/51958745005" target="_blank" rel='noreferrer'>
+                      <a className='btn btn-primary btn-sm float-end mt-2' href="https://wa.link/w9clk8" target="_blank" rel='noreferrer'>
                         <FontAwesomeIcon icon={faHeadset} inverse/>
                       </a>
                     </CTooltip>
