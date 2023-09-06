@@ -17,6 +17,12 @@ const _nav =  [
     name: 'Mis Programas',
     to: '/programas',
     icon: <FontAwesomeIcon icon={faLaptopFile} inverse className="me-4 ms-1" size='lg'/>,
+  },
+  {
+    component: CNavItem,
+    name: 'Mis Programas Bonus',
+    to: '/programas/bonus',
+    icon: <FontAwesomeIcon icon={faLaptopFile} inverse className="me-4 ms-1" size='lg'/>,
   }
 ]
 

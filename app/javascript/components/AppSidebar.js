@@ -73,7 +73,7 @@ const AppSidebar = (props) => {
         <SimpleBar>
           <AppSidebarNav items={navigation} />
           {
-            currentRol === "student" ?
+            currentRol === "student" && (unfoldable === false || unfoldable === undefined) ?
               courses.data && courses.data.map((course, index) => {
                 return (
                   <div key={index} className="mt-5">
