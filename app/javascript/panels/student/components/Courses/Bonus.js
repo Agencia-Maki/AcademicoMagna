@@ -16,18 +16,15 @@ const slowPayer = {
   start_date: Date.now()
 }
 
-const Courses = () => {
+const Bonus = () => {
   const currentUser = JSON.parse(localStorage.getItem('current_user'))
-  const { getModelData: getPaidCourses, getModelData: getFreeCourses } = useCrud("")
+  const { getModelData: getCourses } = useCrud("")
 
   const [courses, setCourses] = useState([])
-  const [freeCourses, setFreeCourses] = useState([])
 
   const loadData = async () => {
-    const { data: paidcourses } = await getPaidCourses(`/panel/student/${currentUser.id}/courses`)
-    setCourses(paidcourses.filter(course => course.bonus_type === "normal"))
-    const { data: freecourses } = await getFreeCourses(`/panel/student/${currentUser.id}/free_courses`)
-    setFreeCourses(freecourses)
+    const { data: paidcourses } = await getCourses(`/panel/student/${currentUser.id}/bonus_courses`)
+    setCourses(paidcourses)
   }
 
   useEffect(() => {
@@ -43,24 +40,13 @@ const Courses = () => {
               <CourseCard
                 key={course.id}
                 course={course}
-              />
+              >
+
+              </CourseCard>
             )) : '' : <CourseCard course={slowPayer} typeCourse="slow_payer" />
       }
-
-      <hr />
-
-      {
-        currentUser.status !== 'slow_payer' && freeCourses.length > 0 &&
-          freeCourses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-            />
-          ))
-      }
-
     </CRow>
   )
 }
 
-export default Courses;
+export default Bonus

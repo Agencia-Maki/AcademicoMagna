@@ -26,6 +26,7 @@ class Course < ApplicationRecord
   enum its_free: [:free, :paid]
   enum show_magna_class_link: [:show, :hide]
   enum course_type: %i[course program]
+  enum bonus_type: %i[bonus normal]
 
   def clone_all_data(course_reference_id, name)
     course_reference = Course.find(course_reference_id)

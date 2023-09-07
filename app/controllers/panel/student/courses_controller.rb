@@ -7,6 +7,7 @@ class Panel::Student::CoursesController < ApplicationController
       data: inscriptions.map { |inscription| {
         id: inscription.course.id,
         name: inscription.course.name,
+        bonus_type: inscription.course.bonus_type,
         description: inscription.course.description,
         magna_class_link: inscription.course.magna_class_link,
         start_date: inscription.course.start_date,
@@ -28,6 +29,22 @@ class Panel::Student::CoursesController < ApplicationController
 
   def index_free_courses
     courses = Course.where.not(status: "closed").where(its_free: "free")
+    render json: {
+      data: courses.map { |course| {
+        id: course.id,
+        name: course.name,
+        description: course.description,
+        magna_class_link: course.magna_class_link,
+        start_date: course.start_date,
+        end_date: course.end_date, 
+        status: course.status,
+        cover: course.cover
+      }}
+    }, status: :ok
+  end
+
+  def index_bonus_courses
+    courses = Course.where.not(status: "closed").where(bonus_type: "bonus")
     render json: {
       data: courses.map { |course| {
         id: course.id,

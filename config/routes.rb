@@ -154,6 +154,7 @@ Rails.application.routes.draw do
         namespace :student do
           get '/:student_id/courses', to: 'courses#index'
           get '/:student_id/free_courses', to: 'courses#index_free_courses'
+          get '/:student_id/bonus_courses', to: 'courses#index_bonus_courses'
           get '/course/:id', to: 'courses#show'
           get '/courses/:course_id/exams', to: 'student_answers#index_exams'
           

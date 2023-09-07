@@ -2,6 +2,7 @@ import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
+  faGift,
   faLaptopFile
   } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,9 +21,9 @@ const _nav =  [
   },
   {
     component: CNavItem,
-    name: 'Mis Programas Bonus',
+    name: 'Cursos Bonus',
     to: '/programas/bonus',
-    icon: <FontAwesomeIcon icon={faLaptopFile} inverse className="me-4 ms-1" size='lg'/>,
+    icon: <FontAwesomeIcon icon={faGift} inverse className="me-4 ms-1" size='lg'/>,
   }
 ]
 
