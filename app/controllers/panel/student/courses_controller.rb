@@ -1,5 +1,5 @@
 class Panel::Student::CoursesController < ApplicationController
-  before_action :set_student, only: [:index]
+  before_action :set_student, only: [:index, :index_bonus_courses]
 
   def index
     inscriptions = @student.inscriptions.where.not(status: ["debtor", "completed"]).includes(:course)
@@ -44,7 +44,8 @@ class Panel::Student::CoursesController < ApplicationController
   end
 
   def index_bonus_courses
-    courses = Course.where.not(status: "closed").where(bonus_type: "bonus")
+    inscriptions = @student.inscriptions.where.not(status: ["debtor", "completed"]).includes(:course)
+    courses = Course.where(id: inscriptions.pluck(:course_id), bonus_type: :bonus)
     render json: {
       data: courses.map { |course| {
         id: course.id,
@@ -57,6 +58,7 @@ class Panel::Student::CoursesController < ApplicationController
         cover: course.cover
       }}
     }, status: :ok
+
   end
 
   def show
