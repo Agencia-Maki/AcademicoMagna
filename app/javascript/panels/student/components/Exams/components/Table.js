@@ -183,14 +183,24 @@ const Table = (props) => {
     }
   }
 
-  const getAnswer = (answer) => {
-    if (answer === null) {
-      return "No se ha realizado ninguna entrega"
-    } else if (answer.file.url === null ){
-      return "No se ha realizado ninguna entrega (*)"
-      
-    } else if (answer.file.url) {
-      return "Si se ha realizado una entrega"
+  const getAnswer = (answer, exam) => {
+    console.log( exam )
+
+    if (exam.type_exam === "automatic") {
+      if (answer === null) {
+        return "No se ha realizado ninguna entrega"
+      } else {
+        return "Ya resolvió el examen 😊"
+      }
+    }else {
+      if (answer === null) {
+        return "No se ha realizado ninguna entrega"
+      } else if (answer.file.url === null ){
+        return "No se ha realizado ninguna entrega (*)"
+        
+      } else if (answer.file.url) {
+        return "Si se ha realizado una entrega"
+      }
     }
   }
 
@@ -230,7 +240,7 @@ const Table = (props) => {
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.duration} </td>
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.type_exam === 'manual' ? 0 : exam.rest_trys} </td>
                           <td className="d-none d-xl-table-cell d-sm-table-cell"> {exam.duration} </td>
-                          <td className="d-none d-xl-table-cell d-sm-table-cell"> {getAnswer(exam.answer)} </td>
+                          <td className="d-none d-xl-table-cell d-sm-table-cell"> {getAnswer(exam.answer, exam)} </td>
                           <td className=""> {exam.type_exam === "manual" ?
                             <CTooltip content="Descargar Examen" placement="top-start">
                               <CButton
