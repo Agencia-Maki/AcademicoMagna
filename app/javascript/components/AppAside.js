@@ -125,14 +125,14 @@ const AppAside = () => {
                     <small className="text-medium-emphasis me-3">
                       <CIcon icon={cilCalendar} /> {course.start}
                     </small>
-                    <br />
+                    {/* <br />
                     <small className="text-medium-emphasis">
                       $ {course.price_dollar}
                     </small>
                     <br />
                     <small className="text-medium-emphasis">
                       S/. {course.price_pen}
-                    </small>
+                    </small> */}
                     <CTooltip content="Solicitar Información">
                       <a className='btn btn-primary btn-sm float-end mt-2' href="https://wa.link/w9clk8" target="_blank" rel='noreferrer'>
                         <FontAwesomeIcon icon={faHeadset} inverse/>
