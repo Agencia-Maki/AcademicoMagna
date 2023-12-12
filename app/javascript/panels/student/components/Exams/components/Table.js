@@ -107,7 +107,7 @@ const Table = (props) => {
   const saveFile = (_material) => {
     saveAs(
       _material.file.url,
-      _material.name
+      _material.file_name
     );
   }
 
