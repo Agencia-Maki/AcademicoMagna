@@ -10,7 +10,7 @@ class Panel::Student::ExamsController < ApplicationController
             id: exam.id,
             name: exam.name,
             file: exam.file,
-            file_name: exam.file != nil? exam.file.identifier : 'sin_archivo.txt',
+            file_name: exam.file != nil? ? exam.file.identifier : 'sin_archivo.txt',
             type_exam: exam.type_exam,
             status: exam.status,
             start: exam.start,
